@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
+<script src="i18n.js"></script>
 <style>
 :root{
   --bg:#06040f;--brand:#5227FE;--brand2:#7d5cff;--brand3:#b9a8ff;--pink:#c24bff;--cyan:#27d8ff;--mint:#3dffb0;
@@ -478,6 +479,7 @@ footer h6{color:#a29dc4;font-size:12.5px;margin:16px 0 8px}
 <div class="toast" id="toast"></div>
 
 <script>
+const T=window.I18N||{lang:'ru',locale:'ru-RU',tr:(s,v)=>v?s.replace(/\{(\w+)\}/g,(m,k)=>k in v?v[k]:m):s,trp:s=>s,num:s=>s,apply(){}};T.apply(document.body);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 
 /* ================= DATA ================= */
@@ -551,7 +553,7 @@ try{S=JSON.parse(localStorage.getItem(KEY))||null}catch(e){S=null}
 if(!S)S={logged:false,reg:false,att:0,prog:{},done:{},won:[]};
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ');
+const fmt=n=>Math.round(n).toLocaleString(T.locale).replace(/ /g,' ');
 
 /* ================= UTIL ================= */
 let toastT;
@@ -560,18 +562,18 @@ function modal(html){$('#modal').innerHTML='<button class="x" onclick="closeModa
 function closeModal(){$('#modalBg').classList.remove('on')}
 $('#modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal()});
 function confetti(){const c=['#9d85ff','#c24bff','#5227FE','#27d8ff','#fff'];for(let i=0;i<70;i++){const e=document.createElement('i');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=c[i%5];e.style.animationDuration=(1.8+Math.random()*2)+'s';e.style.animationDelay=Math.random()*.5+'s';e.style.transform='rotate('+Math.random()*360+'deg)';document.body.appendChild(e);setTimeout(()=>e.remove(),4500)}}
-const prizeCard=(p)=>`<div class="prize"><svg><use href="#${p[2]==='c'?'coinic':'ticket'}"/></svg><div class="v">${p[0]}</div><hr><div class="n">${p[1]}</div></div>`;
+const prizeCard=(p)=>`<div class="prize"><svg><use href="#${p[2]==='c'?'coinic':'ticket'}"/></svg><div class="v">${T.num(p[0])}</div><hr><div class="n">${T.trp(p[1])}</div></div>`;
 
 /* ================= COUNTDOWN ================= */
 function tick(){
   const pre=Date.now()<START_TS;const d=Math.max(0,(pre?START_TS:END_TS)-Date.now());
-  const lb=document.querySelector('.cd-wrap small');if(lb)lb.textContent=pre?'ДО НАЧАЛА СОБЫТИЯ':'ДО ОКОНЧАНИЯ СОБЫТИЯ';
-  const pt=$('#pillTxt');if(pt)pt.textContent=pre?'NoWember · SuperX · старт 1 ноября':'NoWember · SuperX · идёт сейчас';
+  const lb=document.querySelector('.cd-wrap small');if(lb)lb.textContent=T.tr(pre?'ДО НАЧАЛА СОБЫТИЯ':'ДО ОКОНЧАНИЯ СОБЫТИЯ');
+  const pt=$('#pillTxt');if(pt)pt.textContent=T.tr(pre?'NoWember · SuperX · старт 1 ноября':'NoWember · SuperX · идёт сейчас');
   const D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60,Sx=Math.floor(d/1e3)%60;
   const cd=$('#cd');
-  if(!cd.children.length)cd.innerHTML=['дней','часов','минут','секунд'].map(l=>`<div class="cdt"><b>0</b><small>${l}</small></div>`).join('');
+  if(!cd.children.length)cd.innerHTML=['дней','часов','минут','секунд'].map(l=>`<div class="cdt"><b>0</b><small>${T.tr(l)}</small></div>`).join('');
   [D,H,M,Sx].forEach((v,i)=>{const b=cd.children[i].querySelector('b');const t=i?String(v).padStart(2,'0'):String(v);if(b.textContent!==t){b.textContent=t;const p=b.parentNode;p.classList.remove('tick');void p.offsetWidth;p.classList.add('tick')}});
-  const e=$('#soonCd'); if(e){const st=STAGES[curStage].start-Date.now(); if(st>0){const dd=Math.floor(st/864e5),hh=Math.floor(st/36e5)%24,mm=Math.floor(st/6e4)%60,ss=Math.floor(st/1e3)%60;e.textContent=`${dd}д ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`} else renderBoard()}
+  const e=$('#soonCd'); if(e){const st=STAGES[curStage].start-Date.now(); if(st>0){const dd=Math.floor(st/864e5),hh=Math.floor(st/36e5)%24,mm=Math.floor(st/6e4)%60,ss=Math.floor(st/1e3)%60;e.textContent=`${dd}${T.tr('д')} ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`} else renderBoard()}
 }
 setInterval(tick,1000);
 
@@ -581,10 +583,10 @@ $$('.tab').forEach(t=>t.onclick=()=>{$('#tabs').classList.toggle('t2',t.dataset.
 /* ================= TICKER ================= */
 (function(){
   let h='';const arr=[];
-  for(let i=0;i<40;i++)arr.push(`<span>Поздравляем ${NAMES[i%NAMES.length]} с выигрышем <b>${WIN_TYPES[(i*7+3)%WIN_TYPES.length]}</b></span>`);
+  for(let i=0;i<40;i++)arr.push(`<span>${T.tr('Поздравляем {name} с выигрышем {prize}',{name:NAMES[i%NAMES.length],prize:`<b>${T.trp(WIN_TYPES[(i*7+3)%WIN_TYPES.length])}</b>`})}</span>`);
   h=arr.join('');$('#ticker').innerHTML=h+h;
 })();
-function pushWinner(txt){const t=$('#ticker');const s=document.createElement('span');s.innerHTML=`Поздравляем <b style="color:#fff">Вы</b> с выигрышем <b>${txt}</b>`;t.insertBefore(s,t.firstChild)}
+function pushWinner(txt){const t=$('#ticker');const s=document.createElement('span');s.innerHTML=T.tr('Поздравляем {name} с выигрышем {prize}',{name:`<b style="color:#fff">${T.tr('Вы')}</b>`,prize:`<b>${T.trp(txt)}</b>`});t.insertBefore(s,t.firstChild)}
 
 /* ================= REEL / SLOT ================= */
 const reel=$('#reel'),win=$('#reelWin');
@@ -619,51 +621,51 @@ function sparkBurst(){const sp=$('#sparks');for(let i=0;i<26;i++){const e=docume
 
 function updateSpin(){
   const b=$('#spinBtn');
-  if(!S.logged){b.textContent='Войти/регистрация'}
-  else if(!S.reg){b.textContent='Зарегистрироваться'}
-  else if(S.att>0){b.textContent=`Крутить (${S.att})`}
-  else b.textContent='Получить попытки';
+  if(!S.logged){b.textContent=T.tr('Войти/регистрация')}
+  else if(!S.reg){b.textContent=T.tr('Зарегистрироваться')}
+  else if(S.att>0){b.textContent=T.tr('Крутить ({n})',{n:S.att})}
+  else b.textContent=T.tr('Получить попытки');
   const a=$('#att');a.textContent=S.logged?S.att:'--';
-  $('#heroRegTxt').textContent=S.reg?'Вы участвуете ✓':'Зарегистрироваться';
-  $('#hdrUser').textContent=S.logged?'demo_user':'Войти';
+  $('#heroRegTxt').textContent=T.tr(S.reg?'Вы участвуете ✓':'Зарегистрироваться');
+  $('#hdrUser').textContent=S.logged?'demo_user':T.tr('Войти');
   $('#hdrReg').style.display=S.logged?'none':'';
 }
 function bumpAtt(){const a=$('#att');a.classList.remove('bump');void a.offsetWidth;a.classList.add('bump')}
 
 function login(){
-  modal(`<h3>Вход в CoinW</h3><p>Это демо-страница: данные не вводятся и никуда не отправляются.</p><button class="act" id="mLogin">Продолжить как демо-пользователь</button>`);
-  $('#mLogin').onclick=()=>{S.logged=true;save();closeModal();updateSpin();renderTasks();toast('Вы вошли в демо-аккаунт');}
+  modal(`<h3>${T.tr('Вход в CoinW')}</h3><p>${T.tr('Это демо-страница: данные не вводятся и никуда не отправляются.')}</p><button class="act" id="mLogin">${T.tr('Продолжить как демо-пользователь')}</button>`);
+  $('#mLogin').onclick=()=>{S.logged=true;save();closeModal();updateSpin();renderTasks();toast(T.tr('Вы вошли в демо-аккаунт'));}
 }
 function register(){
   if(!S.logged)return login();
-  if(S.reg)return toast('Вы уже участвуете в акции');
+  if(S.reg)return toast(T.tr('Вы уже участвуете в акции'));
   S.reg=true;S.att+=1;save();updateSpin();renderTasks();confetti();bumpAtt();
-  modal(`<h3>Вы в игре! 🎃</h3><p>Регистрация прошла успешно. Вы участвуете в случайном эйрдропе и делите призовой фонд <b style="color:#cbbaff">5 000 000$</b>.<br>Бонус за регистрацию: <b style="color:#cbbaff">+1 попытка</b>.</p><button class="act" onclick="closeModal()">Отлично</button>`);
+  modal(`<h3>${T.tr('Вы в игре! 🎃')}</h3><p>${T.tr('Регистрация прошла успешно. Вы участвуете в случайном эйрдропе и делите призовой фонд {pool}.',{pool:`<b style="color:#cbbaff">${T.lang==='ru'?'5 000 000$':'$'+fmt(5e6)}</b>`})}<br>${T.tr('Бонус за регистрацию: {bonus}.',{bonus:`<b style="color:#cbbaff">${T.tr('+1 попытка')}</b>`})}</p><button class="act" onclick="closeModal()">${T.tr('Отлично')}</button>`);
 }
 $('#heroReg').onclick=register;$('#hdrReg').onclick=login;$('#hdrUser').onclick=()=>{if(!S.logged)login()};
 $('#shareBtn').onclick=()=>{
-  if(!S.reg)return S.logged?toast('Сначала зарегистрируйтесь в акции'):login();
+  if(!S.reg)return S.logged?toast(T.tr('Сначала зарегистрируйтесь в акции')):login();
   const link='https://www.coinw.com/superx?ref=DEMO';
   try{navigator.clipboard.writeText(link)}catch(e){}
-  if(!S.shared){S.shared=true;S.att+=1;save();updateSpin();bumpAtt();toast('Ссылка скопирована · +1 попытка за шеринг')}else toast('Ссылка скопирована');
+  if(!S.shared){S.shared=true;S.att+=1;save();updateSpin();bumpAtt();toast(T.tr('Ссылка скопирована · +1 попытка за шеринг'))}else toast(T.tr('Ссылка скопирована'));
 };
 $('#giftBtn').onclick=()=>{
   if(!S.logged)return login();
-  modal(`<h3>Мои награды</h3><p>${S.won.length?S.won.map(w=>`• ${w}`).join('<br>'):'Пока пусто — крутите розыгрыш!'}</p><button class="act" onclick="closeModal()">Закрыть</button>`);
+  modal(`<h3>${T.tr('Мои награды')}</h3><p>${S.won.length?S.won.map(w=>`• ${T.trp(w)}`).join('<br>'):T.tr('Пока пусто — крутите розыгрыш!')}</p><button class="act" onclick="closeModal()">${T.tr('Закрыть')}</button>`);
 };
 
 $('#spinBtn').onclick=()=>{
   if(spinning)return;
   if(!S.logged)return login();
   if(!S.reg)return register();
-  if(S.att<=0){$('.chips').scrollIntoView({behavior:'smooth',block:'center'});return toast('Попытки закончились — выполняйте задания!')}
+  if(S.att<=0){$('.chips').scrollIntoView({behavior:'smooth',block:'center'});return toast(T.tr('Попытки закончились — выполняйте задания!'))}
   S.att--;save();updateSpin();bumpAtt();
   $('#spinBtn').disabled=true;
   const prize=PRIZES[Math.floor(Math.random()*PRIZES.length)];
   spinTo(prize,()=>{
     $('#spinBtn').disabled=false;sparkBurst();confetti();
     const txt=`${prize[0]} ${prize[1]}`;S.won.push(txt);save();pushWinner(txt);
-    modal(`<h3>Поздравляем! 🎉</h3><div class="big-prize"><svg><use href="#${prize[2]==='c'?'coinic':'ticket'}"/></svg><b>${prize[0]}</b><span>${prize[1]}</span></div><p>Награда уже зачислена на ваш аккаунт. Срок использования — 7 дней.</p><button class="act" onclick="closeModal()">Забрать</button>`);
+    modal(`<h3>${T.tr('Поздравляем! 🎉')}</h3><div class="big-prize"><svg><use href="#${prize[2]==='c'?'coinic':'ticket'}"/></svg><b>${T.num(prize[0])}</b><span>${T.trp(prize[1])}</span></div><p>${T.tr('Награда уже зачислена на ваш аккаунт. Срок использования — 7 дней.')}</p><button class="act" onclick="closeModal()">${T.tr('Забрать')}</button>`);
     setTimeout(()=>{if(!spinning&&!$('#modalBg').classList.contains('on'))buildIdle()},9000);
   });
 };
@@ -673,22 +675,22 @@ const _close=closeModal;closeModal=function(){_close();if(!spinning&&!reel.class
 /* ================= TASKS ================= */
 let filter='all';
 $$('.chip').forEach(c=>c.onclick=()=>{filter=c.dataset.f;$$('.chip').forEach(x=>x.classList.toggle('on',x===c));renderTasks()});
-function award(n,why){S.att+=n;save();updateSpin();bumpAtt();toast(`+${n} ${n===1?'попытка':n<5?'попытки':'попыток'} · ${why}`)}
+function award(n,why){S.att+=n;save();updateSpin();bumpAtt();toast(`+${n} ${T.lang==='ru'?(n===1?'попытка':n<5?'попытки':'попыток'):T.tr(n===1?'попытка':'попыток')} · ${T.tr(why)}`)}
 function doTask(t){
   if(!S.logged)return login();
-  if(!S.reg)return toast('Сначала зарегистрируйтесь в акции');
+  if(!S.reg)return toast(T.tr('Сначала зарегистрируйтесь в акции'));
   if(S.done[t.id])return;
   if(t.type==='once'){S.done[t.id]=1;award(t.att,'задание выполнено (демо)')}
   else if(t.type==='vol'){
     const inc=t.step||t.target;
     const p=Math.min(t.target,(S.prog[t.id]||0)+inc);S.prog[t.id]=p;
-    if(p>=t.target){S.done[t.id]=1;award(t.att,'задание выполнено (демо)');if(t.bonus)S.won.push(t.bonus)}else toast(`Демо: засчитан объём ${fmt(inc)} USDT`);
+    if(p>=t.target){S.done[t.id]=1;award(t.att,'задание выполнено (демо)');if(t.bonus)S.won.push(t.bonus)}else toast(T.tr('Демо: засчитан объём {v} USDT',{v:fmt(inc)}));
   }else{
     const prev=S.prog[t.id]||0;const p=prev+t.step;S.prog[t.id]=p;
     let got=0;t.tiers.forEach(([lim,,a])=>{if(prev<lim&&p>=lim)got+=a});
     const last=t.tiers[t.tiers.length-1][0];
     if(p>=last)S.done[t.id]=1;
-    if(got)award(got,'новый уровень достигнут');else toast(t.invite?'Демо: приглашённый пользователь ещё не совершил сделку':`Демо: засчитан объём ${fmt(t.step)} USDT`);
+    if(got)award(got,'новый уровень достигнут');else toast(t.invite?T.tr('Демо: приглашённый пользователь ещё не совершил сделку'):T.tr('Демо: засчитан объём {v} USDT',{v:fmt(t.step)}));
   }
   save();renderTasks();
 }
@@ -697,10 +699,10 @@ function renderTasks(){
   $('#tasks').innerHTML=list.map((t,i)=>{
     const p=S.prog[t.id]||0,done=S.done[t.id];
     let mid='';
-    if(t.type==='vol')mid=`<div class="prog">Наторговано <b>${fmt(p)}</b> / ${fmt(t.target)} USDT</div><div class="bar"><i style="width:${p/t.target*100}%"></i></div>`;
-    if(t.type==='tiers')mid=`<div class="prog">${t.invite?'Пригласили':'Наторговано'} <b>${fmt(p)}</b> ${t.unit}</div><div class="tiers">${t.tiers.map(([lim,l,a])=>`<div class="tier ${p>=lim?'done':''}"><em>+${a}</em><b>${l}</b></div>`).join('')}<div class="tier"><em>+${t.max} (МАКС.)</em></div></div>`;
-    const rw=t.type==='tiers'?'':`<div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7"/></svg>+${t.att}</div>${t.bonus?`<div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"/></svg><small>${t.bonus}</small></div>`:''}</div>`;
-    return `<div class="task rv" style="transition-delay:${Math.min(i,5)*.06}s"><div><h4>${t.title}</h4><p>${t.desc}</p>${mid}</div>${rw}<button class="act ${done?'done':''}" data-id="${t.id}">${done?'ВЫПОЛНЕНО ✓':t.btn}</button></div>`;
+    if(t.type==='vol')mid=`<div class="prog">${T.tr('Наторговано')} <b>${fmt(p)}</b> / ${fmt(t.target)} USDT</div><div class="bar"><i style="width:${p/t.target*100}%"></i></div>`;
+    if(t.type==='tiers')mid=`<div class="prog">${T.tr(t.invite?'Пригласили':'Наторговано')} <b>${fmt(p)}</b> ${T.tr(t.unit)}</div><div class="tiers">${t.tiers.map(([lim,l,a])=>`<div class="tier ${p>=lim?'done':''}"><em>+${a}</em><b>${l}</b></div>`).join('')}<div class="tier"><em>+${t.max} ${T.tr('(МАКС.)')}</em></div></div>`;
+    const rw=t.type==='tiers'?'':`<div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7"/></svg>+${t.att}</div>${t.bonus?`<div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"/></svg><small>${T.trp(t.bonus)}</small></div>`:''}</div>`;
+    return `<div class="task rv" style="transition-delay:${Math.min(i,5)*.06}s"><div><h4>${T.tr(t.title)}</h4><p>${T.tr(t.desc)}</p>${mid}</div>${rw}<button class="act ${done?'done':''}" data-id="${t.id}">${T.tr(done?'ВЫПОЛНЕНО ✓':t.btn)}</button></div>`;
   }).join('');
   $$('.task .act').forEach(b=>b.onclick=()=>doTask(TASKS.find(t=>t.id===b.dataset.id)));
   $$('.task').forEach(el=>io.observe(el));
@@ -710,21 +712,21 @@ renderTasks();
 /* ================= TOURNAMENT ================= */
 let curStage=0,curR=0;
 function renderStages(){
-  $('#stages').innerHTML=STAGES.map((s,i)=>`<button class="stage ${i===curStage?'on':''}" data-i="${i}">Этап ${s.n}</button>`).join('')+`<span class="stage-time">${Date.now()<STAGES[curStage].start?'Скоро':Date.now()<STAGES[curStage].end?'Идёт':'Завершён'} ${STAGES[curStage].lbl}</span>`;
+  $('#stages').innerHTML=STAGES.map((s,i)=>`<button class="stage ${i===curStage?'on':''}" data-i="${i}">${T.tr('Этап {n}',{n:s.n})}</button>`).join('')+`<span class="stage-time">${T.tr(Date.now()<STAGES[curStage].start?'Скоро':Date.now()<STAGES[curStage].end?'Идёт':'Завершён')} ${STAGES[curStage].lbl}</span>`;
   $$('.stage').forEach(b=>b.onclick=()=>{curStage=+b.dataset.i;renderStages();renderBoard()});
 }
 const RN=['Фьючерсная торговля PK','Доходность на фьючерсах','Новички · Фьючерсная торговля'];
 const medal=`<svg class="medal" viewBox="0 0 26 26"><path d="M13 2l9 4v8c0 5-4 8-9 10C8 22 4 19 4 14V6z" fill="#1f183a" stroke="#a58bff" stroke-width="1.4"/><path d="M9 11l4 4 4-4" stroke="#a58bff" stroke-width="1.6" fill="none"/></svg>`;
 function renderPF(){
-  $('#pf').innerHTML=POOL.map(p=>`<div class="pf ${p.top?'top':''}"><div class="l">${p.top?medal:''}<span>${p.rk}</span></div><div class="r">${p.v}<small>${p.s}</small></div></div>`).join('');
+  $('#pf').innerHTML=POOL.map(p=>`<div class="pf ${p.top?'top':''}"><div class="l">${p.top?medal:''}<span>${p.rk}</span></div><div class="r">${p.v}<small>${T.trp(p.s)}</small></div></div>`).join('');
 }
 function seeded(n){let x=n*9301+49297;return()=>{x=(x*9301+49297)%233280;return x/233280}}
 function renderBoard(){
-  $('#bTitle').textContent=`Этап ${STAGES[curStage].n} · ${RN[curR]}`;
-  $('#thVal').textContent=curR===1?'Доходность (%)':'Объем торгов на фьючерсах (USDT)';
+  $('#bTitle').textContent=`${T.tr('Этап {n}',{n:STAGES[curStage].n})} · ${T.tr(RN[curR])}`;
+  $('#thVal').textContent=T.tr(curR===1?'Доходность (%)':'Объем торгов на фьючерсах (USDT)');
   const st=STAGES[curStage],now=Date.now();
   if(now<st.start){
-    $('#board').innerHTML=`<div class="empty"><svg class="ico" viewBox="0 0 80 70"><path d="M6 20h26l6 8h36v36H6z" fill="#1c1c1f" stroke="#444" stroke-width="2"/><circle cx="34" cy="46" r="14" fill="#101012" stroke="#555" stroke-width="2"/><path d="M28 44h2M38 44h2M30 52q4-3 8 0" stroke="#666" stroke-width="2" fill="none"/></svg><h6>Скоро начнётся</h6><div class="cdn" id="soonCd">--</div><p>Время начала: ${st.startTxt}<br><br>Статистика: объем торгов на фьючерсах = объем торгов на стандартных фьючерсах + объем торгов на бессрочных фьючерсах (учитываются только криптовалютные пары).</p></div>`;
+    $('#board').innerHTML=`<div class="empty"><svg class="ico" viewBox="0 0 80 70"><path d="M6 20h26l6 8h36v36H6z" fill="#1c1c1f" stroke="#444" stroke-width="2"/><circle cx="34" cy="46" r="14" fill="#101012" stroke="#555" stroke-width="2"/><path d="M28 44h2M38 44h2M30 52q4-3 8 0" stroke="#666" stroke-width="2" fill="none"/></svg><h6>${T.tr('Скоро начнётся')}</h6><div class="cdn" id="soonCd">--</div><p>${T.tr('Время начала: {t}',{t:T.tr(st.startTxt)})}<br><br>${T.tr('Статистика: объем торгов на фьючерсах = объем торгов на стандартных фьючерсах + объем торгов на бессрочных фьючерсах (учитываются только криптовалютные пары).')}</p></div>`;
     return;
   }
   const r=seeded(curStage*10+curR+1),q=$('#q').value.trim().toLowerCase();
@@ -737,14 +739,14 @@ function renderBoard(){
     rows.push({i,nm,uid:'U'+(10000000+Math.floor(r()*8e7)),v:base,pz});
   }
   if(q)rows=rows.filter(x=>x.nm.toLowerCase().includes(q)||x.uid.toLowerCase().includes(q));
-  $('#board').innerHTML=rows.slice(0,20).map(x=>`<div class="tr"><span class="rk">${x.i}</span><span>${x.nm}</span><span class="num" style="color:var(--gold2)">${x.pz?x.pz.v.replace(',',' '):'—'}</span><span class="num">${curR===1?x.v.toFixed(2)+'%':fmt(x.v)}</span></div>`).join('')||'<div class="empty"><h6>Ничего не найдено</h6></div>';
+  $('#board').innerHTML=rows.slice(0,20).map(x=>`<div class="tr"><span class="rk">${x.i}</span><span>${x.nm}</span><span class="num" style="color:var(--gold2)">${x.pz?(T.lang==='ru'?x.pz.v.replace(',',' '):x.pz.v):'—'}</span><span class="num">${curR===1?x.v.toFixed(2)+'%':fmt(x.v)}</span></div>`).join('')||`<div class="empty"><h6>${T.tr('Ничего не найдено')}</h6></div>`;
 }
 $$('.rtab').forEach(b=>b.onclick=()=>{curR=+b.dataset.r;$$('.rtab').forEach(x=>x.classList.toggle('on',x===b));renderBoard()});
 $('#q').addEventListener('input',renderBoard);
 renderStages();renderPF();renderBoard();
 
 /* ================= RULES ================= */
-$('#rulesList').innerHTML=RULES.map(r=>`<li><span>${r}</span></li>`).join('');
+$('#rulesList').innerHTML=RULES.map(r=>`<li><span>${T.tr(r)}</span></li>`).join('');
 
 $('#resetDemo').onclick=e=>{e.preventDefault();try{localStorage.removeItem(KEY)}catch(x){};location.reload()};
 updateSpin();tick();
@@ -754,7 +756,7 @@ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 $$('.rv').forEach(el=>io.observe(el));
 /* count-up */
 function countUp(el,to,ms=1800,pre='',suf=''){const t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/ms),e=1-Math.pow(1-p,4);el.textContent=pre+fmt(to*e)+suf;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-countUp($('#prizeNum'),5000000,2200,'','$');
+countUp($('#prizeNum'),5000000,2200,T.lang==='ru'?'':'$',T.lang==='ru'?'$':'');
 const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target;countUp(el,+el.dataset.count,1600,el.dataset.pre||'',el.dataset.suf||'');sio.unobserve(el)}}),{threshold:.5});
 $$('[data-count]').forEach(el=>sio.observe(el));
 /* twinkles on stage */

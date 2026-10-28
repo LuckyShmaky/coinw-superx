@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
+<script src="i18n.js"></script>
 <style>
 :root{
   --bg:#06040f;--brand:#5227FE;--brand2:#7d5cff;--brand3:#b9a8ff;--pink:#c24bff;--cyan:#27d8ff;--mint:#3dffb0;
@@ -587,10 +588,11 @@ footer h6{color:#a29dc4;font-size:12.5px;margin:16px 0 8px}
 <div class="toast" id="toast"></div>
 
 <script>
+const T=window.I18N||{lang:'ru',locale:'ru-RU',tr:(s,v)=>v?s.replace(/\{(\w+)\}/g,(m,k)=>k in v?v[k]:m):s,trp:s=>s,num:s=>s,apply(){}};T.apply(document.body);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ');
-const fmt2=n=>(Math.round(n*100)/100).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/ /g,' ');
+const fmt=n=>Math.round(n).toLocaleString(T.locale).replace(/ /g,' ');
+const fmt2=n=>(Math.round(n*100)/100).toLocaleString(T.locale,{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/ /g,' ');
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ---------- config ---------- */
@@ -642,9 +644,9 @@ const poolAmt=()=>{let a=0;TIERS.forEach(([lim,r])=>{if(totalVol>=lim)a=r});retu
 function tick(){
   const now=Date.now(),pre=now<START_TS,over=now>END_TS;const d=Math.max(0,(pre?START_TS:END_TS)-now);
   const D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60,Sx=Math.floor(d/1e3)%60;
-  const cd=$('#cd');if(!cd.querySelector('.cdt'))cd.innerHTML=['дней','часов','минут','секунд'].map(l=>`<div class="cdt"><b>0</b><small>${l}</small></div>`).join('');
+  const cd=$('#cd');if(!cd.querySelector('.cdt'))cd.innerHTML=['дней','часов','минут','секунд'].map(l=>`<div class="cdt"><b>0</b><small>${T.tr(l)}</small></div>`).join('');
   [D,H,M,Sx].forEach((v,i)=>{const b=cd.children[i].querySelector('b');const t=i?String(v).padStart(2,'0'):String(v);if(b.textContent!==t){b.textContent=t;const p=b.parentNode;p.classList.remove('tick');void p.offsetWidth;p.classList.add('tick')}});
-  $('#cdLabel').textContent=over?'ТУРНИР ЗАВЕРШЁН':pre?'ДО НАЧАЛА ТУРНИРА':'ДО ОКОНЧАНИЯ ТУРНИРА';
+  $('#cdLabel').textContent=T.tr(over?'ТУРНИР ЗАВЕРШЁН':pre?'ДО НАЧАЛА ТУРНИРА':'ДО ОКОНЧАНИЯ ТУРНИРА');
   renderSched(true);
 }
 setInterval(tick,1000);
@@ -657,14 +659,14 @@ function renderSched(soft){
   const pr=c?100:b?50+Math.min(50,(now-START_TS)/(END_TS-START_TS)*50):a?18:0;
   const el=$('#sched');
   if(soft&&el.children.length){[...el.querySelectorAll('.st')].forEach((s,i)=>{s.classList.toggle('on',steps[i][3]);s.classList.toggle('cur',i===(c?2:b?1:0))});el.querySelector('.pr').style.width=`calc((100% - 32%) * ${pr/100})`;return}
-  el.innerHTML=`<div class="pr" style="width:calc((100% - 32%) * ${pr/100})"></div>`+steps.map((s,i)=>`<div class="st ${s[3]?'on':''} ${i===(c?2:b?1:0)?'cur':''}"><i>${s[0]}</i><b>${s[1]}</b><span>${s[2]}</span></div>`).join('');
+  el.innerHTML=`<div class="pr" style="width:calc((100% - 32%) * ${pr/100})"></div>`+steps.map((s,i)=>`<div class="st ${s[3]?'on':''} ${i===(c?2:b?1:0)?'cur':''}"><i>${s[0]}</i><b>${T.tr(s[1])}</b><span>${T.tr(s[2])}</span></div>`).join('');
 }
 
 /* ---------- boards ---------- */
 function rowHtml(k,i,r,me){const rank=i;const g=rank<=3?` g${rank}`:'';
   const reward=k==='fut'?(rank<=3?poolAmt()*SPLIT[rank-1][1]:0):(rank<=3?NEW_PRIZE[rank-1]:0);
   const mark=rank<=3?`<span class="medalc">${rank}</span>`:rank;
-  const nm=me?'Вы (демо)':r.n;
+  const nm=me?T.tr('Вы (демо)'):r.n;
   return `<div class="brow${g}${me?' me-row':''}" data-k="${k}" data-n="${nm}" style="animation-delay:${(i%10)*.035}s"><span class="r">${mark}</span><span class="u"><i>${nm.replace(/[^A-Za-zА-Яа-я]/g,'').charAt(0).toUpperCase()||'U'}</i><span style="overflow:hidden;text-overflow:ellipsis">${nm}</span></span><span class="e">${fmt2(reward)}</span><span class="v">${fmt2(r.v)}</span></div>`}
 function renderBoard(k){
   const rows=[...ROWS[k]].sort((a,b)=>b.v-a.v);
@@ -678,12 +680,12 @@ function renderBoard(k){
 ['Fut','New'].forEach(K=>$('#pag'+K).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const k=K.toLowerCase();PAGE[k]=+b.dataset.p;renderBoard(k)}));
 function renderMe(k){
   const el=$('#me'+(k==='fut'?'Fut':'New')),min=k==='new'?MIN_VOL*.14:MIN_VOL;
-  if(!S.logged){el.innerHTML=`<div><small>UID</small><b>--</b></div><div><small>Рейтинг</small><b>--</b></div><div><small>Объём торгов (USDT)</small><b>--</b></div><button class="act" data-a="login">Войти</button><div class="hint">Вы не вошли. Попадите в рейтинг, достигнув объёма в <em>${fmt(min)} USDT</em></div>`;return}
+  if(!S.logged){el.innerHTML=`<div><small>UID</small><b>--</b></div><div><small>${T.tr('Рейтинг')}</small><b>--</b></div><div><small>${T.tr('Объём торгов (USDT)')}</small><b>--</b></div><button class="act" data-a="login">${T.tr('Войти')}</button><div class="hint">${T.tr('Вы не вошли. Попадите в рейтинг, достигнув объёма в {v}',{v:`<em>${fmt(min)} USDT</em>`})}</div>`;return}
   const r=myRank(k);
-  el.innerHTML=`<div><small>UID</small><b>90417${k==='new'?'28':'35'}</b></div><div><small>Рейтинг</small><b id="myr${k}">${r||'--'}</b></div><div><small>Объём торгов (USDT)</small><b>${fmt2(S.vol)}</b></div><button class="act" data-a="trade">${S.reg?'Торговать (демо) +2 500':'Участвовать'}</button><div class="hint">${r?`Вы на <em>${r}</em> месте${r<=3?' — вы в призовой тройке! 🏆':''}`:`Попадите в рейтинг, достигнув объёма в <em>${fmt(min)} USDT</em>. Осталось <em>${fmt(Math.max(0,min-S.vol))} USDT</em>`}</div>`;
+  el.innerHTML=`<div><small>UID</small><b>90417${k==='new'?'28':'35'}</b></div><div><small>${T.tr('Рейтинг')}</small><b id="myr${k}">${r||'--'}</b></div><div><small>${T.tr('Объём торгов (USDT)')}</small><b>${fmt2(S.vol)}</b></div><button class="act" data-a="trade">${S.reg?T.tr('Торговать (демо) +{v}',{v:fmt(2500)}):T.tr('Участвовать')}</button><div class="hint">${r?`${T.tr('Вы на {r} месте',{r:`<em>${r}</em>`})}${r<=3?T.tr(' — вы в призовой тройке! 🏆'):''}`:T.tr('Попадите в рейтинг, достигнув объёма в {v}. Осталось {left}',{v:`<em>${fmt(min)} USDT</em>`,left:`<em>${fmt(Math.max(0,min-S.vol))} USDT</em>`})}</div>`;
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;if(b.dataset.a==='login')login();if(b.dataset.a==='trade'){if(!S.reg)return register();trade(2500)}});
-function trade(n){const before=[myRank('fut'),myRank('new')];S.vol+=n;save();['fut','new'].forEach(k=>{renderMe(k);renderBoard(k)});toast(`Демо: засчитан объём ${fmt(n)} USDT`);
+function trade(n){const before=[myRank('fut'),myRank('new')];S.vol+=n;save();['fut','new'].forEach(k=>{renderMe(k);renderBoard(k)});toast(T.tr('Демо: засчитан объём {v} USDT',{v:fmt(n)}));
   const after=myRank('fut');if(after&&(!before[0]||after<before[0])){const e=$('#myrfut');e&&e.classList.add('rk-up');if(after<=3){confetti()}}}
 
 /* ---------- pool ---------- */
@@ -698,7 +700,7 @@ function updatePool(initial){
   const pool=poolAmt();
   $('#poolVol').textContent=fmt(totalVol);
   const f=$('#fill');if(f)f.style.width=fillPct(totalVol)*0.96+'%';
-  $$('.node').forEach((n,i)=>{const on=totalVol>=TIERS[i][0];if(on&&!n.classList.contains('on')&&!initial){n.classList.add('pop');confetti();toast(`Новый уровень! Призовой фонд — ${fmt(TIERS[i][1])} USDT`)}n.classList.toggle('on',on)});
+  $$('.node').forEach((n,i)=>{const on=totalVol>=TIERS[i][0];if(on&&!n.classList.contains('on')&&!initial){n.classList.add('pop');confetti();toast(T.tr('Новый уровень! Призовой фонд — {v} USDT',{v:fmt(TIERS[i][1])}))}n.classList.toggle('on',on)});
   if(pool!==lastPool){const from=poolShown;lastPool=pool;const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1200),e=1-Math.pow(1-p,4);poolShown=from+(pool-from)*e;$('#poolNow').textContent=fmt2(poolShown);$$('.dcard b').forEach((b,i)=>b.textContent=fmt2(poolShown*SPLIT[i][1]));if(p<1)requestAnimationFrame(f)})(t0)}
   $$('.dcard .bar2 i').forEach(b=>b.style.width=(pool?b.dataset.w:0)+'%');
 }
@@ -713,12 +715,12 @@ setInterval(()=>{
 },3000);
 
 /* ---------- auth / actions ---------- */
-function login(){modal(`<h3>Вход в CoinW</h3><p>Это демо-страница: данные не вводятся и никуда не отправляются.</p><button class="act" id="mLogin">Продолжить как демо-пользователь</button>`);$('#mLogin').onclick=()=>{S.logged=true;save();closeModal();upd();toast('Вы вошли в демо-аккаунт')}}
-function register(){if(!S.logged)return login();if(S.reg)return toast('Вы уже участвуете в турнире');S.reg=true;save();upd();confetti();
-  modal(`<h3>Вы в турнире! 🏆</h3><p>Регистрация прошла успешно. Торгуйте на фьючерсах от <b style="color:#cbbaff">${fmt(MIN_VOL)} USDT</b>, чтобы попасть в рейтинг, и боритесь за призовой фонд вместе с <b>${PARTNER}</b>.</p><button class="act" onclick="closeModal()">Отлично</button>`)}
-function upd(){$('#heroRegTxt').textContent=S.reg?'Вы участвуете ✓':'Зарегистрироваться';$('#hdrUser').textContent=S.logged?'demo_user':'Войти';$('#hdrReg').style.display=S.logged?'none':'';['fut','new'].forEach(k=>{renderMe(k);renderBoard(k)});renderSched()}
+function login(){modal(`<h3>${T.tr('Вход в CoinW')}</h3><p>${T.tr('Это демо-страница: данные не вводятся и никуда не отправляются.')}</p><button class="act" id="mLogin">${T.tr('Продолжить как демо-пользователь')}</button>`);$('#mLogin').onclick=()=>{S.logged=true;save();closeModal();upd();toast(T.tr('Вы вошли в демо-аккаунт'))}}
+function register(){if(!S.logged)return login();if(S.reg)return toast(T.tr('Вы уже участвуете в турнире'));S.reg=true;save();upd();confetti();
+  modal(`<h3>${T.tr('Вы в турнире! 🏆')}</h3><p>${T.tr('Регистрация прошла успешно. Торгуйте на фьючерсах от {min}, чтобы попасть в рейтинг, и боритесь за призовой фонд вместе с {partner}.',{min:`<b style="color:#cbbaff">${fmt(MIN_VOL)} USDT</b>`,partner:`<b>${T.tr(PARTNER)}</b>`})}</p><button class="act" onclick="closeModal()">${T.tr('Отлично')}</button>`)}
+function upd(){$('#heroRegTxt').textContent=T.tr(S.reg?'Вы участвуете ✓':'Зарегистрироваться');$('#hdrUser').textContent=S.logged?'demo_user':T.tr('Войти');$('#hdrReg').style.display=S.logged?'none':'';['fut','new'].forEach(k=>{renderMe(k);renderBoard(k)});renderSched()}
 $('#heroReg').onclick=register;$('#hdrReg').onclick=login;$('#hdrUser').onclick=()=>{if(!S.logged)login()};
-$('#shareBtn').onclick=()=>{try{navigator.clipboard.writeText('https://www.coinw.com/tournament?ref=DEMO')}catch(e){}toast('Ссылка на турнир скопирована')};
+$('#shareBtn').onclick=()=>{try{navigator.clipboard.writeText('https://www.coinw.com/tournament?ref=DEMO')}catch(e){}toast(T.tr('Ссылка на турнир скопирована'))};
 $('#resetDemo').onclick=e=>{e.preventDefault();try{localStorage.removeItem(KEY)}catch(x){};location.reload()};
 
 /* ---------- tabs ---------- */
@@ -745,7 +747,7 @@ $$('.cta').forEach(b=>{if(reduce)return;b.addEventListener('mousemove',e=>{const
 
 $('#toPool').onclick=()=>{$('.tab[data-t=fut]').click();setTimeout(()=>$('.pool').scrollIntoView({behavior:'smooth',block:'center'}),450)};
 /* ---------- init ---------- */
-$('#rulesList').innerHTML=RULES.map(r=>`<li><span>${r}</span></li>`).join('');
+$('#rulesList').innerHTML=RULES.map(r=>`<li><span>${T.tr(r)}</span></li>`).join('');
 $$('.rv').forEach(el=>io.observe(el));
 buildTrack();renderSched();upd();tick();updatePool(true);
 </script>
