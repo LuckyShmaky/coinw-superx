@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NoWember — CoinW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#06040f;--brand:#5227FE;--brand2:#7d5cff;--brand3:#b9a8ff;--pink:#c24bff;--cyan:#27d8ff;--mint:#3dffb0;
+  --text:#f4f2ff;--mute:#9a95b8;--line:rgba(255,255,255,.08);--glass:rgba(255,255,255,.045);
+  --grad:linear-gradient(120deg,#5227FE 0%,#8a5cff 45%,#c24bff 100%);
+  /* aliases used by the script-generated markup */
+  --gold:#a58bff;--gold2:#cbbaff;--orange:#7a5cff;--cw:#5227FE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{width:min(1200px,100% - 32px);margin:0 auto;position:relative}
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:60;background:rgba(6,4,15,.72);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:28px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;font-size:21px;letter-spacing:-.4px}
+.logo svg{width:32px;height:32px;border-radius:9px;box-shadow:0 0 20px rgba(82,39,254,.7);animation:logoGlow 3s ease-in-out infinite}
+@keyframes logoGlow{50%{box-shadow:0 0 34px rgba(124,92,255,1)}}
+nav{display:flex;gap:22px;font-size:13px;color:#cfcbe8;flex:1}
+nav a{color:inherit;white-space:nowrap;position:relative;padding:4px 0;transition:.2s}
+nav a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--grad);transition:.3s;border-radius:2px}
+nav a:hover{color:#fff}nav a:hover::after{width:100%}
+.hdr-r{display:flex;gap:16px;align-items:center;font-size:13px}
+.btn-reg{background:var(--brand);padding:9px 20px;border-radius:22px;font-weight:700;font-size:13px;position:relative;overflow:hidden;box-shadow:0 0 22px rgba(82,39,254,.6);transition:.25s}
+.btn-reg:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(124,92,255,.9)}
+@media(max-width:960px){nav{display:none}.hdr-r{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;min-height:760px;isolation:isolate}
+.aurora{position:absolute;inset:-20%;z-index:-3;filter:blur(70px);opacity:.9}
+.aurora i{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:drift 18s ease-in-out infinite}
+.aurora i:nth-child(1){width:46vw;height:46vw;left:4%;top:-8%;background:radial-gradient(circle,#5227FE,transparent 65%)}
+.aurora i:nth-child(2){width:38vw;height:38vw;right:0;top:6%;background:radial-gradient(circle,#c24bff,transparent 65%);animation-duration:22s;animation-delay:-6s}
+.aurora i:nth-child(3){width:34vw;height:34vw;left:34%;bottom:-18%;background:radial-gradient(circle,#27d8ff55,transparent 65%);animation-duration:26s;animation-delay:-12s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vw,4vw) scale(1.15)}66%{transform:translate(-4vw,6vw) scale(.9)}}
+.grid-floor{position:absolute;left:-30%;right:-30%;bottom:-10%;height:55%;z-index:-2;transform:perspective(500px) rotateX(62deg);transform-origin:bottom;
+  background-image:linear-gradient(rgba(138,92,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(138,92,255,.5) 1px,transparent 1px);background-size:60px 60px;
+  mask-image:linear-gradient(transparent,#000 70%);animation:gridmove 2.4s linear infinite}
+@keyframes gridmove{to{background-position:0 60px}}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.giant{position:absolute;left:0;right:0;top:46%;z-index:-1;white-space:nowrap;font-weight:900;font-size:clamp(160px,22vw,320px);letter-spacing:-.02em;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(138,92,255,.28);animation:giant 40s linear infinite;user-select:none}
+@keyframes giant{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px;padding:70px 0 40px;min-height:700px}
+.pill{display:inline-flex;gap:10px;align-items:center;padding:8px 16px;border-radius:30px;background:var(--glass);border:1px solid rgba(138,92,255,.4);font-size:12.5px;font-weight:600;color:var(--brand3);backdrop-filter:blur(8px)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(61,255,176,.7);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(61,255,176,0)}100%{box-shadow:0 0 0 0 rgba(61,255,176,0)}}
+.hero h1{white-space:nowrap;font-size:clamp(46px,7.6vw,116px);line-height:.98;font-weight:900;letter-spacing:-.04em;margin-top:22px}
+.hero h1 .gx{color:#fff;display:inline-block}
+@keyframes gx{to{background-position:-250% 0}}
+.hero h1 .w{display:inline-block;color:#5227FE;text-shadow:0 0 40px rgba(82,39,254,.8)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:#d8d3f5;margin-top:22px;max-width:520px}
+.prize-box{margin-top:26px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.prize-box small{font-size:12px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase;font-weight:600;width:100%}
+.prize-num{font-weight:900;font-size:clamp(52px,7vw,104px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap;
+  background:linear-gradient(180deg,#fff 10%,#b9a8ff 60%,#7d5cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(124,92,255,.65));position:relative}
+.cta-row{display:flex;gap:14px;align-items:center;margin-top:30px;position:relative;flex-wrap:wrap}
+.cta{position:relative;padding:20px 36px;border-radius:16px;font-weight:800;font-size:16px;color:#fff;background:var(--brand);overflow:hidden;transition:.25s;box-shadow:0 10px 40px rgba(82,39,254,.6);isolation:isolate}
+.cta::before{content:"";position:absolute;inset:-2px;z-index:-1;background:conic-gradient(from var(--a,0deg),#5227FE,#c24bff,#27d8ff,#5227FE);animation:spinA 3s linear infinite;border-radius:inherit}
+.cta::after{content:"";position:absolute;inset:2px;z-index:-1;background:linear-gradient(180deg,#6a43ff,#4519e6);border-radius:14px}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes spinA{to{--a:360deg}}
+.cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 60px rgba(124,92,255,.9)}
+.cta .tip,.round-btn .tip{position:absolute;top:-14px;left:50%;background:#fff;color:var(--brand);font-size:10px;font-weight:800;padding:3px 9px;border-radius:9px;white-space:nowrap;animation:tipbob 2s ease-in-out infinite;z-index:3}
+@keyframes tipbob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+.cta::selection{background:none}
+.round-btn{position:relative;width:54px;height:54px;border-radius:16px;border:1px solid var(--line);background:var(--glass);display:grid;place-items:center;transition:.25s;backdrop-filter:blur(8px)}
+.round-btn:hover{border-color:var(--brand2);transform:translateY(-3px) rotate(-6deg);box-shadow:0 8px 30px rgba(82,39,254,.5)}
+.round-btn svg{width:22px;height:22px}
+.round-btn .tip{left:auto;right:-6px;top:-36px;transform:none;animation:none}
+.cd-wrap{margin-top:34px}
+.cd-wrap small{display:block;font-size:11px;letter-spacing:.18em;color:var(--mute);margin-bottom:10px;font-weight:600}
+.cd{display:flex;gap:10px}
+.cdt{min-width:74px;padding:12px 10px 10px;text-align:center;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.cdt::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.07)}
+.cdt b{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
+.cdt small{font-size:10px;letter-spacing:.1em;margin:4px 0 0;color:var(--mute);font-weight:600;text-transform:uppercase}
+.cdt.tick b{animation:flip .5s}
+@keyframes flip{0%{transform:translateY(-60%);opacity:0}100%{transform:none;opacity:1}}
+
+/* 3D coin */
+.coin-stage{position:relative;height:620px;display:grid;place-items:center;perspective:1100px}
+.halo{position:absolute;border-radius:50%;border:1.5px dashed rgba(138,92,255,.45);animation:rot 30s linear infinite}
+.halo.h1{width:480px;height:480px}.halo.h2{width:620px;height:620px;border-style:solid;border-color:rgba(138,92,255,.16);animation-direction:reverse;animation-duration:48s}
+.halo.h3{width:360px;height:360px;border-color:rgba(39,216,255,.35);animation-duration:20s}
+@keyframes rot{to{transform:rotate(360deg)}}
+.orbit{position:absolute;width:480px;height:480px;animation:rot 14s linear infinite}
+.orbit.o2{width:620px;height:620px;animation-duration:24s;animation-direction:reverse}
+.orbit .mc{position:absolute;top:-17px;left:50%;margin-left:-17px;width:34px;height:34px;filter:drop-shadow(0 0 12px rgba(138,92,255,.9))}
+.orbit .mc svg{width:100%;height:100%;animation:rot 3s linear infinite reverse}
+.coin-tilt{transform-style:preserve-3d;transform:rotateY(calc(var(--px,0)*18deg)) rotateX(calc(var(--py,0)*-14deg));transition:transform .15s ease-out}
+.coin-float{animation:cfloat 5s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes cfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+.coin3d{width:300px;height:300px;position:relative;transform-style:preserve-3d;animation:cspin 9s cubic-bezier(.45,.05,.55,.95) infinite}
+@keyframes cspin{0%{transform:rotateY(-25deg)}50%{transform:rotateY(155deg)}100%{transform:rotateY(335deg)}}
+.coin3d .face,.coin3d .edge{position:absolute;inset:0;border-radius:50%}
+.coin3d .face{backface-visibility:hidden;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 30% 25%,#9a7bff 0%,#5227FE 45%,#2a0f9e 100%);box-shadow:inset 0 0 0 10px #3b1bd0,inset 0 0 0 13px #8a6bff,inset 0 0 60px rgba(0,0,0,.45)}
+.coin3d .face svg{width:56%;height:56%;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
+.coin3d .face::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 3.6s ease-in-out infinite}
+@keyframes sheen{0%,35%{transform:translateX(-120%)}70%,100%{transform:translateX(120%)}}
+.coin3d .front{transform:translateZ(16px)}.coin3d .back{transform:rotateY(180deg) translateZ(16px)}
+.coin3d .edge{background:#3a17c8;border:1px solid #6a4bff}
+.coin-shadow{position:absolute;bottom:56px;width:260px;height:30px;border-radius:50%;background:radial-gradient(ellipse,rgba(82,39,254,.7),transparent 70%);animation:cshadow 5s ease-in-out infinite;filter:blur(6px)}
+@keyframes cshadow{50%{transform:scale(.75);opacity:.5}}
+.chip3{position:absolute;z-index:5;padding:12px 16px;border-radius:16px;background:rgba(24,16,60,.88);border:1px solid rgba(138,92,255,.45);box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 24px rgba(82,39,254,.25);font-size:12px;color:var(--mute);animation:chipf 6s ease-in-out infinite;display:flex;gap:10px;align-items:center}
+.chip3 b{display:block;font-size:17px;color:#fff;font-weight:800}
+.chip3 .ic{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-weight:900}
+.chip3.c1{left:-2%;top:16%}.chip3.c2{right:-2%;top:30%;animation-delay:-2s}.chip3.c3{left:4%;bottom:12%;animation-delay:-4s}
+@keyframes chipf{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
+.spk{position:absolute;width:10px;height:10px;background:#fff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:tw 2.4s ease-in-out infinite;filter:drop-shadow(0 0 6px #b9a8ff)}
+@keyframes tw{0%,100%{transform:scale(0) rotate(0)}50%{transform:scale(1.4) rotate(90deg)}}
+
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;padding-top:36px}
+  .coin-stage{height:430px;order:-1;transform:scale(.68);margin:-60px 0}
+  .cdt{min-width:62px}.cdt b{font-size:24px}
+}
+
+/* ---------- stats strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-30px;position:relative;z-index:5}
+.stat{padding:22px 24px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);backdrop-filter:blur(14px);position:relative;overflow:hidden;transition:.3s}
+.stat:hover{transform:translateY(-6px);border-color:rgba(138,92,255,.6);box-shadow:0 20px 50px rgba(82,39,254,.3)}
+.stat::before{content:"";position:absolute;width:120px;height:120px;right:-30px;top:-30px;border-radius:50%;background:radial-gradient(circle,rgba(138,92,255,.5),transparent 70%)}
+.stat b{font-size:clamp(24px,2.6vw,36px);font-weight:900;letter-spacing:-.03em;display:block;position:relative}
+.stat span{font-size:12.5px;color:var(--mute);display:block;margin-top:6px;position:relative;line-height:1.4}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr;margin-top:10px}}
+
+/* ---------- tabs ---------- */
+.tabs{margin-top:60px;position:sticky;top:68px;z-index:50;display:grid;grid-template-columns:1fr 1fr;padding:6px;border-radius:20px;background:rgba(14,10,34,.8);border:1px solid var(--line);backdrop-filter:blur(16px);max-width:560px;margin-left:auto;margin-right:auto;width:calc(100% - 32px)}
+.tabs::before{content:"";position:absolute;top:6px;bottom:6px;left:6px;width:calc(50% - 6px);border-radius:15px;background:var(--grad);box-shadow:0 8px 30px rgba(82,39,254,.6);transition:transform .45s cubic-bezier(.5,1.4,.4,1)}
+.tabs.t2::before{transform:translateX(100%)}
+.tab{position:relative;padding:15px 10px;text-align:center;font-weight:700;font-size:15px;color:var(--mute);transition:color .3s;z-index:1}
+.tab.on{color:#fff}
+section.pane{display:none;padding:70px 0 30px}
+section.pane.on{display:block;animation:paneIn .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- lottery ---------- */
+.sec-title{text-align:center;font-size:clamp(36px,4.6vw,64px);font-weight:900;letter-spacing:-.04em}
+.sec-title em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-sub{text-align:center;color:#c9c4ea;font-size:15px;margin-top:14px;line-height:1.7}
+.ticker{margin-top:30px;border:1px solid var(--line);background:var(--glass);border-radius:16px;height:50px;display:flex;align-items:center;overflow:hidden;position:relative;backdrop-filter:blur(10px)}
+.ticker svg{position:absolute;left:16px;width:18px;fill:none;stroke:var(--brand3);z-index:2}
+.ticker::before,.ticker::after{content:"";position:absolute;top:0;bottom:0;width:70px;z-index:1;pointer-events:none}
+.ticker::before{left:0;background:linear-gradient(90deg,#0b0820 45%,transparent)}.ticker::after{right:0;background:linear-gradient(270deg,#0b0820 20%,transparent)}
+.ticker-track{display:flex;white-space:nowrap;animation:marq 80s linear infinite;padding-left:50px;font-size:13px;color:#d4d0ee}
+.ticker-track span{padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,.12)}
+.ticker-track b{color:var(--brand3);font-weight:700}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.machine{position:relative;width:min(860px,100%);margin:50px auto 0;padding:0}
+.m-glow{position:absolute;inset:-60px;background:radial-gradient(ellipse at 50% 50%,rgba(82,39,254,.55),transparent 65%);filter:blur(30px);animation:pulse 3.4s ease-in-out infinite;z-index:0}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.m-frame{position:relative;z-index:1;border-radius:36px;padding:3px;background:conic-gradient(from var(--a,0deg),#5227FE,#c24bff,#27d8ff,#5227FE);animation:spinA 6s linear infinite}
+.machine.spinning .m-frame{animation-duration:1.2s}
+.m-in{border-radius:34px;background:linear-gradient(180deg,#120c2c,#0a0618);padding:34px 34px 38px;position:relative;overflow:hidden}
+.m-in::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(138,92,255,.35),transparent 60%),repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);pointer-events:none}
+.m-top{display:flex;flex-direction:column;align-items:center;gap:16px;position:relative}
+.emblem{width:60px;height:60px;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(82,39,254,.9);animation:emb 4s ease-in-out infinite}
+@keyframes emb{50%{transform:translateY(-6px) rotate(4deg)}}
+.emblem svg{width:100%;height:100%;display:block}
+.attempts{padding:13px 28px;border-radius:40px;font-size:16px;font-weight:600;background:rgba(255,255,255,.05);border:1px solid rgba(138,92,255,.5);white-space:nowrap}
+.attempts b{color:#fff;margin-left:8px;display:inline-block;min-width:24px;font-size:20px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.attempts b.bump{animation:bump .55s}
+@keyframes bump{40%{transform:scale(1.9)}}
+.reel-win{position:relative;margin:28px 0 26px;height:170px;overflow:hidden;border-radius:22px;background:rgba(0,0,0,.45);border:1px solid rgba(138,92,255,.35);box-shadow:inset 0 0 40px rgba(82,39,254,.35);padding:12px 0}
+.reel-win::before,.reel-win::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:3;pointer-events:none}
+.reel-win::before{left:0;background:linear-gradient(90deg,#0a0618,transparent)}.reel-win::after{right:0;background:linear-gradient(270deg,#0a0618,transparent)}
+.ptr{position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(transparent,#fff,transparent);z-index:4;opacity:.55;box-shadow:0 0 18px #8a6dff}
+.ptr::before,.ptr::after{content:"";position:absolute;left:-7px;border:7px solid transparent}
+.ptr::before{top:0;border-top-color:#fff}.ptr::after{bottom:0;border-bottom-color:#fff}
+.reel-win.spinning .ptr{opacity:1;animation:ptrp .3s infinite alternate}
+@keyframes ptrp{to{box-shadow:0 0 34px #c24bff}}
+.reel{display:flex;gap:2.2%;height:100%;will-change:transform}
+.reel.idle{animation:reelIdle 70s linear infinite}
+@keyframes reelIdle{to{transform:translateX(-50%)}}
+.prize{flex:none;width:var(--cw,130px);height:100%;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8px;text-align:center;position:relative}
+.prize svg{width:46px;height:32px}
+.prize .v{font-weight:900;font-size:clamp(15px,1.7vw,20px);margin-top:2px}
+.prize hr{width:60%;border:0;border-top:1px solid rgba(255,255,255,.12);margin:2px 0}
+.prize .n{font-size:clamp(8px,.85vw,10.5px);color:var(--mute);line-height:1.3}
+.prize.hit{border-color:#fff;background:linear-gradient(180deg,rgba(138,92,255,.6),rgba(82,39,254,.3));box-shadow:0 0 40px rgba(138,92,255,.95),inset 0 0 24px rgba(255,255,255,.2);animation:hit .6s ease-in-out 4}
+@keyframes hit{50%{transform:scale(1.12)}}
+.spin-btn{position:relative;display:block;width:100%;max-width:520px;margin:0 auto;height:66px;border-radius:20px;font-weight:900;font-size:18px;color:#fff;letter-spacing:.02em;overflow:hidden;background:var(--grad);box-shadow:0 12px 50px rgba(82,39,254,.8);transition:.2s;animation:btnpulse 2.4s ease-in-out infinite}
+.spin-btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 3s ease-in-out infinite}
+.spin-btn:hover{transform:translateY(-3px) scale(1.02)}
+.spin-btn:disabled{filter:grayscale(.4) brightness(.8);animation:none;cursor:wait}
+@keyframes btnpulse{50%{box-shadow:0 12px 80px rgba(194,75,255,.95)}}
+.fc{position:absolute;z-index:2;width:70px;height:70px;filter:drop-shadow(0 10px 20px rgba(82,39,254,.8));animation:fcf 5s ease-in-out infinite}
+.fc.f1{left:-34px;top:20%}.fc.f2{right:-30px;top:48%;animation-delay:-2s;width:54px;height:54px}.fc.f3{left:6%;bottom:-30px;animation-delay:-3.5s;width:44px;height:44px}
+@keyframes fcf{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(14deg)}}
+.sparks{position:absolute;inset:0;pointer-events:none;z-index:6}
+.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 14px #8a6dff;animation:spk 1.1s ease-out forwards}
+@keyframes spk{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+@media(max-width:640px){.m-in{padding:24px 14px 28px}.reel-win{height:150px}.attempts{font-size:13px;padding:10px 18px}.fc{display:none}}
+
+h3.big{font-size:clamp(26px,3vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1.15;margin:110px 0 26px;max-width:760px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:10px 18px;border-radius:30px;font-size:13px;font-weight:600;color:var(--mute);border:1px solid var(--line);background:var(--glass);transition:.25s}
+.chip:hover{color:#fff;border-color:rgba(138,92,255,.6)}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(82,39,254,.5)}
+.tasks{display:grid;gap:14px;margin-top:22px}
+.task{--mx:50%;--my:50%;position:relative;display:grid;grid-template-columns:1fr auto auto;gap:22px;align-items:center;padding:26px 30px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:border-color .3s,box-shadow .3s,opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.task::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(138,92,255,.22),transparent 60%);opacity:0;transition:.3s;pointer-events:none}
+.task:hover::before{opacity:1}
+.task:hover{border-color:rgba(138,92,255,.55);box-shadow:0 20px 60px rgba(82,39,254,.2)}
+.task>*{position:relative}
+.task h4{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+.task p{font-size:12.5px;color:var(--mute);line-height:1.6;margin-top:9px;max-width:560px}
+.prog{margin-top:14px;font-size:12px;color:var(--mute)}
+.prog b{color:#fff;margin:0 3px}
+.bar{height:6px;border-radius:4px;background:rgba(255,255,255,.08);margin-top:10px;overflow:hidden;max-width:340px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#5227FE,#c24bff,#27d8ff);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1);border-radius:4px;position:relative}
+.bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:bshine 2s linear infinite}
+@keyframes bshine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.reward{display:flex;flex-direction:column;gap:10px;font-size:20px;font-weight:900;min-width:140px}
+.reward .row{display:flex;align-items:center;gap:9px;color:#fff}
+.reward .row:first-child{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.reward .row small{font-size:11px;font-weight:600;color:var(--brand3)}
+.reward svg{width:22px;height:22px;color:var(--brand3)}
+.tiers{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.tier{font-size:11px;color:var(--mute);text-align:center;padding:9px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.tier b{display:block;color:#fff;font-size:12px;margin-top:2px}
+.tier em{font-style:normal;color:var(--brand3);font-weight:800;font-size:14px;display:block}
+.tier.done{background:rgba(82,39,254,.3);border-color:var(--brand2);box-shadow:0 0 20px rgba(82,39,254,.4)}
+.tier.done em{color:#fff}
+.act{padding:15px 28px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(138,92,255,.6);color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:.25s;white-space:nowrap;position:relative;overflow:hidden}
+.act:hover{background:var(--brand);box-shadow:0 0 30px rgba(82,39,254,.8);transform:translateY(-2px)}
+.act.done{opacity:.45;pointer-events:none;border-color:var(--mint);color:var(--mint)}
+@media(max-width:760px){.task{grid-template-columns:1fr;gap:16px;padding:22px}.reward{flex-direction:row;align-items:center;gap:18px}}
+
+/* ---------- tournament ---------- */
+.t-head{text-align:center;margin-bottom:40px}
+.t-head p{color:#d1ccf0;font-size:16px;line-height:1.7;margin-top:16px}
+.t-head a{color:var(--brand3);font-size:13px;text-decoration:none;display:inline-block;margin-top:10px;font-weight:600}
+.stages{display:flex;gap:10px;align-items:center;margin-top:46px;flex-wrap:wrap}
+.stage-t{}
+.stage{padding:11px 22px;font-size:13px;font-weight:700;color:var(--mute);border-radius:30px;border:1px solid var(--line);background:var(--glass);transition:.25s}
+.stage:hover{color:#fff}
+.stage.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(82,39,254,.5)}
+.stage-time{margin-left:auto;font-size:12px;background:var(--glass);border:1px solid var(--line);padding:10px 16px;border-radius:12px;color:#d4d0ee}
+.rtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.rtab{padding:20px;border-radius:18px;background:var(--glass);border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--mute);transition:.3s}
+.rtab:hover{transform:translateY(-3px);color:#fff}
+.rtab.on{background:linear-gradient(135deg,rgba(82,39,254,.55),rgba(194,75,255,.25));border-color:var(--brand2);color:#fff;box-shadow:0 14px 40px rgba(82,39,254,.4)}
+.t-grid{display:grid;grid-template-columns:380px 1fr;gap:20px;margin-top:22px}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:24px;padding:26px}
+.card h5{font-size:19px;font-weight:800}
+.card .sub{font-size:12px;color:var(--mute);line-height:1.5;margin:8px 0 16px}
+.pf{display:flex;align-items:center;justify-content:space-between;padding:15px 14px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;transition:.25s;border-radius:12px}
+.pf:hover{background:rgba(138,92,255,.12);transform:translateX(4px)}
+.pf.top{background:linear-gradient(100deg,rgba(82,39,254,.5),rgba(194,75,255,.15));border:1px solid rgba(138,92,255,.5);margin-bottom:8px;position:relative;overflow:hidden}
+.pf.top::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 4s ease-in-out infinite}
+.pf .r{text-align:right;font-size:16px;font-weight:900}.pf .r small{display:block;font-size:10px;font-weight:500;color:var(--mute);margin-top:2px}
+.pf .l{display:flex;gap:10px;align-items:center}
+.medal{width:26px;height:26px}
+.board-h{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.board-h h5{flex:1}
+.search{display:flex;align-items:center;background:rgba(0,0,0,.4);border:1px solid var(--line);border-radius:12px;padding:0 14px;height:42px;width:250px;transition:.25s}
+.search:focus-within{border-color:var(--brand2);box-shadow:0 0 20px rgba(82,39,254,.4)}
+.search input{background:none;border:0;outline:0;color:#fff;flex:1;font-size:13px}
+.th,.tr{display:grid;grid-template-columns:70px 1fr 120px 170px;gap:8px;padding:13px 12px;font-size:11.5px;color:var(--mute)}
+.tr{font-size:13.5px;color:#eeeaff;border-bottom:1px solid var(--line);animation:fadein .4s both;align-items:center;border-radius:10px;transition:.2s}
+.tr:hover{background:rgba(138,92,255,.12)}
+.tr .rk{font-weight:900;color:var(--brand3)}
+.tr .num,.th .num{text-align:right}
+.empty{text-align:center;padding:70px 20px 40px;color:var(--mute)}
+.empty .ico{width:90px;margin:0 auto 18px;opacity:.85;animation:floaty2 3s ease-in-out infinite}
+@keyframes floaty2{50%{transform:translateY(-10px)}}
+.empty h6{font-size:17px;color:#fff;font-weight:700}
+.empty p{font-size:12px;line-height:1.7;margin-top:14px;max-width:620px;margin-inline:auto}
+.empty .cdn{font-size:30px;font-weight:900;margin-top:14px;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(max-width:960px){.t-grid{grid-template-columns:1fr}.rtabs{grid-template-columns:1fr}.th,.tr{grid-template-columns:44px 1fr 90px 110px}.stage-time{margin-left:0;width:100%}}
+
+/* ---------- rules / footer ---------- */
+.rules{padding:80px 0 40px}
+.rules h2{font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.03em;margin-bottom:34px}
+.rules ol{list-style:none;counter-reset:r;display:grid;gap:14px}
+.rules li{counter-increment:r;display:grid;grid-template-columns:40px 1fr;gap:14px;font-size:13.5px;line-height:1.65;color:#cfcaea;padding:16px 18px;border-radius:16px;background:var(--glass);border:1px solid var(--line);transition:.25s}
+.rules li:hover{border-color:rgba(138,92,255,.5);background:rgba(138,92,255,.08)}
+.rules li::before{content:counter(r);width:32px;height:32px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:13px;font-weight:800;color:#fff}
+footer{border-top:1px solid var(--line);padding:34px 0 90px;color:#7b7696;font-size:11.5px;line-height:1.7}
+footer h6{color:#a29dc4;font-size:12.5px;margin:16px 0 8px}
+.demo-note{font-size:10.5px;color:#6a6585;margin-top:14px}
+
+/* ---------- modal / toast / misc ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(4,2,12,.8);backdrop-filter:blur(8px);z-index:100;display:none;place-items:center;padding:20px}
+.modal-bg.on{display:grid;animation:fadein .25s}
+.modal{width:min(440px,100%);background:linear-gradient(180deg,#1a1240,#0b0720);border:1px solid rgba(138,92,255,.6);border-radius:28px;padding:36px 30px;text-align:center;box-shadow:0 0 90px rgba(82,39,254,.55);position:relative;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.6) rotate(-4deg);opacity:0}}
+.modal h3{font-size:24px;margin-bottom:6px;font-weight:900}
+.modal p{font-size:13.5px;color:#c5c0e6;line-height:1.6;margin:8px 0 20px}
+.modal .big-prize{margin:16px auto;width:190px;aspect-ratio:1;border-radius:28px;background:radial-gradient(circle at 50% 30%,#4a2bd8,#150b3d);border:1px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 0 60px rgba(138,92,255,.8);animation:glowp 1.6s infinite}
+@keyframes glowp{50%{box-shadow:0 0 100px rgba(194,75,255,1)}}
+.modal .big-prize svg{width:70px;height:48px}
+.modal .big-prize b{font-size:32px;font-weight:900}
+.modal .big-prize span{font-size:12px;color:#d6d1f5;padding:0 12px}
+.modal .x{position:absolute;right:16px;top:12px;font-size:24px;color:#8a85a8}
+.modal .act{width:100%;background:var(--grad);border:0;padding:17px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,40px);background:rgba(20,14,48,.92);border:1px solid var(--brand2);color:#fff;padding:14px 22px;border-radius:14px;font-size:13.5px;opacity:0;transition:.35s;z-index:120;pointer-events:none;box-shadow:0 0 40px rgba(82,39,254,.5);max-width:90vw;text-align:center;backdrop-filter:blur(10px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.support{position:fixed;right:22px;bottom:24px;width:50px;height:50px;border-radius:16px;background:var(--brand);display:grid;place-items:center;z-index:60;box-shadow:0 8px 30px rgba(82,39,254,.7);animation:emb 4s ease-in-out infinite}
+.confetti{position:fixed;top:-20px;width:9px;height:14px;z-index:130;pointer-events:none;animation:fall linear forwards;border-radius:2px}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a7bff"/><stop offset="1" stop-color="#5227FE"/></linearGradient>
+    <symbol id="ticket" viewBox="0 0 44 30"><path d="M3 3h38v7a5 5 0 0 0 0 10v7H3v-7a5 5 0 0 0 0-10z" fill="url(#vg)" stroke="#d9ceff" stroke-width="1.2"/><text x="22" y="21" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Inter">$</text></symbol>
+    <symbol id="coinic" viewBox="0 0 44 30"><circle cx="22" cy="15" r="13" fill="url(#vg)" stroke="#d9ceff" stroke-width="1.2"/><circle cx="22" cy="15" r="9.5" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"/><path transform="translate(2.28 -4.96) scale(.025)" fill="#fff" d="M710 352H1158V638H710Z M420 638H710V900Q710 953 770 953H1158V1245H770C560 1245 420 1100 420 900Z"/></symbol>
+    <symbol id="cmark" viewBox="0 0 1600 1600"><path fill="#fff" d="M710 352H1158V638H710Z M420 638H710V900Q710 953 770 953H1158V1245H770C560 1245 420 1100 420 900Z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><svg viewBox="0 0 1600 1600"><rect width="1600" height="1600" fill="#5227FE"/><use href="#cmark"/></svg><span>CoinW</span></a>
+    <nav><a>Купить крипту</a><a>Рынки</a><a>Спот</a><a>Фьючерсы</a><a>TradFi</a><a>Боты</a><a>Копи-трейдинг</a><a>Earn</a></nav>
+    <div class="hdr-r"><span id="hdrUser" style="cursor:pointer">Войти</span><button class="btn-reg" id="hdrReg">Регистрация</button></div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero" id="hero">
+  <div class="aurora"><i></i><i></i><i></i></div>
+  <div class="grid-floor"></div>
+  <div class="giant">NOWEMBER · NOWEMBER · NOWEMBER · NOWEMBER ·&nbsp;</div>
+  <canvas id="fx"></canvas>
+
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><i></i><span id="pillTxt">NoWember · SuperX · 1–30 ноября</span></span>
+      <h1><span class="gx">No<span class="w">W</span>ember</span></h1>
+      <p class="lead">Зарегистрируйтесь для участия в случайном эйрдропе и разделите призовой фонд!</p>
+      <div class="prize-box"><small>Призовой фонд</small><div class="prize-num" id="prizeNum">5 000 000$</div></div>
+      <div class="cta-row">
+        <button class="cta" id="heroReg"><span class="tip">Зарегистрируйтесь и выиграйте</span><span id="heroRegTxt">Зарегистрироваться</span></button>
+        <button class="round-btn" id="shareBtn" title="Поделиться"><span class="tip">Поделитесь, чтобы получить $15</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4M8.6 13.4l6.8 4"/></svg></button>
+        <button class="round-btn" id="giftBtn" title="Мои награды">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 6h18v3H3zM12 6v14M12 6c-3-4-6-2-4 0M12 6c3-4 6-2 4 0"/></svg></button>
+      </div>
+      <div class="cd-wrap"><small>ДО НАЧАЛА СОБЫТИЯ</small><div class="cd" id="cd"><!--S:cd--><div class="cdt tick"><b>15</b><small>дней</small></div><div class="cdt tick"><b>14</b><small>часов</small></div><div class="cdt tick"><b>37</b><small>минут</small></div><div class="cdt tick"><b>48</b><small>секунд</small></div><!--E:cd--></div></div>
+    </div>
+
+    <div class="coin-stage" id="stage">
+      <div class="halo h2"></div><div class="halo h1"></div><div class="halo h3"></div>
+      <div class="orbit"><div class="mc"><svg viewBox="0 0 44 30"><use href="#coinic"/></svg></div></div>
+      <div class="orbit o2"><div class="mc"><svg viewBox="0 0 44 30"><use href="#coinic"/></svg></div></div>
+      <div class="coin-shadow"></div>
+      <div class="coin-tilt"><div class="coin-float"><div class="coin3d" id="coin3d"><div class="edge" style="transform:translateZ(-14px)"></div><div class="edge" style="transform:translateZ(-12px)"></div><div class="edge" style="transform:translateZ(-10px)"></div><div class="edge" style="transform:translateZ(-8px)"></div><div class="edge" style="transform:translateZ(-6px)"></div><div class="edge" style="transform:translateZ(-4px)"></div><div class="edge" style="transform:translateZ(-2px)"></div><div class="edge" style="transform:translateZ(0px)"></div><div class="edge" style="transform:translateZ(2px)"></div><div class="edge" style="transform:translateZ(4px)"></div><div class="edge" style="transform:translateZ(6px)"></div><div class="edge" style="transform:translateZ(8px)"></div><div class="edge" style="transform:translateZ(10px)"></div><div class="edge" style="transform:translateZ(12px)"></div><div class="edge" style="transform:translateZ(14px)"></div>
+        <div class="face front"><svg viewBox="0 0 1600 1600"><use href="#cmark"/></svg></div>
+        <div class="face back"><svg viewBox="0 0 1600 1600"><use href="#cmark"/></svg></div>
+      </div></div></div>
+      <div class="chip3 c1"><span class="ic">1</span><div>Место в турнире<b>$100 000</b></div></div>
+      <div class="chip3 c2"><span class="ic">⚡</span><div>Каждая попытка<b>побеждает</b></div></div>
+      <div class="chip3 c3"><span class="ic">$</span><div>Эйрдроп за регистрацию<b>+ $15</b></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat rv"><b data-count="5000000" data-suf="$">5 000 000$</b><span>призовой фонд акции</span></div>
+    <div class="stat rv" style="transition-delay:.08s"><b data-count="300000" data-pre="до $">до $300 000</b><span>максимальный выигрыш на человека в турнире</span></div>
+    <div class="stat rv" style="transition-delay:.16s"><b data-count="100">100</b><span>призовых мест в каждом из 3 этапов</span></div>
+    <div class="stat rv" style="transition-delay:.24s"><b data-count="100" data-suf="%">100%</b><span>каждая попытка в розыгрыше приносит приз</span></div>
+  </div>
+</div>
+
+<!-- ============ TABS ============ -->
+<div class="tabs" id="tabs">
+  <button class="tab on" data-t="lot">🎰 Лотерея</button>
+  <button class="tab" data-t="tour">🏆 Торговый турнир</button>
+</div>
+
+<!-- ============ LOTTERY ============ -->
+<section class="pane on" id="lot">
+  <div class="wrap">
+    <h2 class="sec-title rv">Розыгрыш <em>призов</em></h2>
+    <p class="sec-sub rv">С 01.11.2026, 10:00 до 30.11.2026, 23:59 (UTC+8)<br>Выполняйте задания, чтобы получать попытки в розыгрыше. Каждая попытка приносит приз!</p>
+
+    <div class="ticker rv"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M3 9v6h4l5 4V5L7 9zM16 8a5 5 0 0 1 0 8M18.5 5.5a9 9 0 0 1 0 13"/></svg><div class="ticker-track" id="ticker"><!--S:ticker--><span>Поздравляем ma***o@gmail.com с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем manzyy с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем ed***o@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем Mayu888 с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем 26***3@gmail.com с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем Akimoto777 с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем Gold_T100 с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем sa***1@gmail.com с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем Wo***7@gmail.com с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем pi***5@bk.ru с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем fi***i@gmail.com с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем sparkyfarky с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем b3***7@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем banhbo с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем DOOOLT с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем ki***1@gmail.com с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем ba***r@gmail.com с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем Monster.. с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем gaa88 с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем dy***6@gmail.com с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем *******217 с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем Stana312 с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем in***5@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем sa***h@yandex.ru с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем an***0@gmail.com с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем de***8@gmail.com с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем T2P newbie с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем CryptoBear с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем vl***v@mail.ru с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем kr***9@yandex.ru с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем ma***o@gmail.com с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем manzyy с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем ed***o@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем Mayu888 с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем 26***3@gmail.com с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем Akimoto777 с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем Gold_T100 с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем sa***1@gmail.com с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем Wo***7@gmail.com с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем pi***5@bk.ru с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем ma***o@gmail.com с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем manzyy с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем ed***o@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем Mayu888 с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем 26***3@gmail.com с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем Akimoto777 с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем Gold_T100 с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем sa***1@gmail.com с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем Wo***7@gmail.com с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем pi***5@bk.ru с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем fi***i@gmail.com с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем sparkyfarky с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем b3***7@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем banhbo с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем DOOOLT с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем ki***1@gmail.com с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем ba***r@gmail.com с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем Monster.. с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем gaa88 с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем dy***6@gmail.com с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем *******217 с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем Stana312 с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем in***5@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем sa***h@yandex.ru с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем an***0@gmail.com с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем de***8@gmail.com с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем T2P newbie с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем CryptoBear с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем vl***v@mail.ru с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем kr***9@yandex.ru с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><span>Поздравляем ma***o@gmail.com с выигрышем <b>5% APR усилитель для Earn</b></span><span>Поздравляем manzyy с выигрышем <b>15% APR усилитель для Earn</b></span><span>Поздравляем ed***o@gmail.com с выигрышем <b>200 USDT Ваучер на позицию</b></span><span>Поздравляем Mayu888 с выигрышем <b>30% APR усилитель для Earn</b></span><span>Поздравляем 26***3@gmail.com с выигрышем <b>10% APR усилитель для Earn</b></span><span>Поздравляем Akimoto777 с выигрышем <b>150 USDT Ваучер на позицию</b></span><span>Поздравляем Gold_T100 с выигрышем <b>50% APR усилитель для Earn</b></span><span>Поздравляем sa***1@gmail.com с выигрышем <b>20% APR усилитель для Earn</b></span><span>Поздравляем Wo***7@gmail.com с выигрышем <b>100 USDT Ваучер на позицию</b></span><span>Поздравляем pi***5@bk.ru с выигрышем <b>100 USDT Субсидия на сеточную торговлю</b></span><!--E:ticker--></div></div>
+
+    <div class="machine rv" id="machine">
+      <div class="m-glow"></div>
+      <svg class="fc f1" viewBox="0 0 44 30"><use href="#coinic"/></svg>
+      <svg class="fc f2" viewBox="0 0 44 30"><use href="#coinic"/></svg>
+      <svg class="fc f3" viewBox="0 0 44 30"><use href="#coinic"/></svg>
+      <div class="m-frame"><div class="m-in">
+        <div class="m-top">
+          <div class="emblem"><svg viewBox="0 0 1600 1600"><rect width="1600" height="1600" fill="#5227FE"/><use href="#cmark"/></svg></div>
+          <div class="attempts">Осталось попыток: <b id="att">--</b></div>
+        </div>
+        <div class="reel-win" id="reelWin"><div class="reel idle" id="reel"><!--S:reel--><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">30</div><hr><div class="n">DOGE Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">1</div><hr><div class="n">XRP Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$500</div><hr><div class="n">APR усилитель для Earn</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$20</div><hr><div class="n">Ваучер на кешбэк</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$10</div><hr><div class="n">Ваучер на пробные средства</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">0,5</div><hr><div class="n">HYPE Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">100</div><hr><div class="n">PUMP Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$80</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$25</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">20</div><hr><div class="n">REAL Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$15</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">1</div><hr><div class="n">SOL Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">20</div><hr><div class="n">ADA Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">10</div><hr><div class="n">TRX Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$50</div><hr><div class="n">Субсидия для ботов</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">0,3</div><hr><div class="n">SOL Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$20</div><hr><div class="n">Субсидия для ботов</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">1</div><hr><div class="n">ETH Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">20</div><hr><div class="n">ENA Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$30</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$20</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">50</div><hr><div class="n">RAINPROTOCOL Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">30</div><hr><div class="n">DOGE Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">1</div><hr><div class="n">XRP Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$500</div><hr><div class="n">APR усилитель для Earn</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$20</div><hr><div class="n">Ваучер на кешбэк</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$10</div><hr><div class="n">Ваучер на пробные средства</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">0,5</div><hr><div class="n">HYPE Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">100</div><hr><div class="n">PUMP Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$80</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$25</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">20</div><hr><div class="n">REAL Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$15</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">1</div><hr><div class="n">SOL Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">20</div><hr><div class="n">ADA Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">10</div><hr><div class="n">TRX Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$50</div><hr><div class="n">Субсидия для ботов</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">0,3</div><hr><div class="n">SOL Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$20</div><hr><div class="n">Субсидия для ботов</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">1</div><hr><div class="n">ETH Ваучер на монету</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">20</div><hr><div class="n">ENA Ваучер на монету</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$30</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#ticket"></use></svg><div class="v">$20</div><hr><div class="n">Ваучер на позицию</div></div><div class="prize"><svg><use href="#coinic"></use></svg><div class="v">50</div><hr><div class="n">RAINPROTOCOL Ваучер на монету</div></div><!--E:reel--></div><span class="ptr"></span></div>
+        <button class="spin-btn" id="spinBtn">Войти/регистрация</button>
+      </div></div>
+      <div class="sparks" id="sparks"></div>
+    </div>
+
+    <h3 class="big rv">Выполняйте задания, и получайте попытки розыгрыша. Каждая попытка побеждает!</h3>
+    <div class="chips rv" id="chips">
+      <button class="chip on" data-f="all">Все</button><button class="chip" data-f="first">Первое использование</button><button class="chip" data-f="trade">Торговать/депозит</button><button class="chip" data-f="invite">Пригласить друзей</button>
+    </div>
+    <div class="tasks" id="tasks"><!--S:tasks--><div class="task rv" style="transition-delay:0s"><div><h4>🔥Первая сделка на фьючерсах ≥50 USDT</h4><p>Совершите первую сделку на фьючерсах и получите попытку розыгрыша и Ваучер на позицию на $15 — оба бонуса включены!</p><div class="prog">Наторговано <b>0</b> / 50 USDT</div><div class="bar"><i style="width:0%"></i></div></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+2</div><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"></path></svg><small>15 USDT ВАУЧЕР НА ПОЗИЦИЮ</small></div></div><button class="act " data-id="t1">ТОРГОВАТЬ</button></div><div class="task rv" style="transition-delay:0.06s"><div><h4>Первая спот сделка 50 USDT</h4><p>В течение периода выполнения задания выполните задание (первый объем торгов ≥ 50 USDT; охват торгов: Спот торговля) «Первая спот сделка 50 USDT», чтобы получить Попытки + 1.</p><div class="prog">Наторговано <b>0</b> / 50 USDT</div><div class="bar"><i style="width:0%"></i></div></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+1</div></div><button class="act " data-id="t2">ТОРГОВАТЬ</button></div><div class="task rv" style="transition-delay:0.12s"><div><h4>Первый копи-трейдинг ордер</h4><p>Выполните задание (Объем копи-трейдинга ≥ 50 USDT; Тип копи-трейдинга: Спот копи-трейдинг, Копи-трейдинг стандартных фьючерсов, Копи-трейдинг бессрочных фьючерсов; Копи-трейдинг стандартных фьючерсов включает: Криптовалюта; Копи-трейдинг бессрочных фьючерсов включает: Криптовалюта, TradFi) в рамках «Первый копи-трейдинг ордер», прежде чем оно закончится, чтобы получить Попытки + 1.</p></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+1</div></div><button class="act " data-id="t3">ПЕРЕЙТИ К КОПИ-ТРЕЙДИНГУ</button></div><div class="task rv" style="transition-delay:0.18s"><div><h4>Первый сеточный ордер</h4><p>Выполните задание «Первый сеточный ордер», прежде чем оно закончится, чтобы получить Попытки + 1.</p></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+1</div></div><button class="act " data-id="t4">СОЗДАТЬ СЕТКУ</button></div><div class="task rv" style="transition-delay:0.24s"><div><h4>Первое повышение до VIP 1+</h4><p>После регистрации на событие, вы заработаете Попытки + 2, если получите VIP 1 и выше через торговлю на фьючерсах, споте или за счет стоимости активов.</p></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+2</div></div><button class="act " data-id="t5">ПОВЫСИТЬ</button></div><div class="task rv" style="transition-delay:0.3s"><div><h4>👑 Только для VIP: получайте популярные токены напрямую!</h4><p>Накопите указанный объём фьючерсной торговли криптовалютами и получите попытку розыгрыша и популярные токены.</p><div class="prog">Наторговано <b>0</b> / 15 000 000 USDT</div><div class="bar"><i style="width:0%"></i></div></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+8</div><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"></path></svg><small>100 USDT</small></div></div><button class="act " data-id="t6">ТОРГОВАТЬ</button></div><div class="task rv" style="transition-delay:0.3s"><div><h4>👑 Только для VIP: получайте популярные токены напрямую!</h4><p>Накопите указанный объём фьючерсной торговли криптовалютами и получите попытку розыгрыша и популярные токены.</p><div class="prog">Наторговано <b>0</b> / 50 000 000 USDT</div><div class="bar"><i style="width:0%"></i></div></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+10</div><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"></path></svg><small>300 USDT</small></div></div><button class="act " data-id="t7">ТОРГОВАТЬ</button></div><div class="task rv" style="transition-delay:0.3s"><div><h4>👑 Только для VIP: получайте популярные токены напрямую!</h4><p>Накопите указанный объём фьючерсной торговли криптовалютами и получите попытку розыгрыша и популярные токены.</p><div class="prog">Наторговано <b>0</b> / 300 000 000 USDT</div><div class="bar"><i style="width:0%"></i></div></div><div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-5 4-7 8-7s8 2 8 7"></path></svg>+20</div><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"></path></svg><small>800 USDT</small></div></div><button class="act " data-id="t8">ТОРГОВАТЬ</button></div><div class="task rv" style="transition-delay:0.3s"><div><h4>Торговля фьючерсами на TradFi</h4><p>Достигните указанного объема торгов фьючерсами на TradFi и получите соответствующее количество лотерейных билетов!</p><div class="prog">Наторговано <b>0</b> USDT</div><div class="tiers"><div class="tier "><em>+1</em><b>50K</b></div><div class="tier "><em>+2</em><b>100K</b></div><div class="tier "><em>+2</em><b>250K</b></div><div class="tier "><em>+3</em><b>500K</b></div><div class="tier "><em>+3</em><b>750K</b></div><div class="tier "><em>+5</em><b>1M</b></div><div class="tier"><em>+16 (МАКС.)</em></div></div></div><button class="act " data-id="t9">ТОРГОВАТЬ</button></div><div class="task rv" style="transition-delay:0.3s"><div><h4>Пригласите 5 пользователей</h4><p>После регистрации на событие, пригласите 5 пользователя(ей) зарегистрироваться (общий объем торгов на фьючерсах ≥ 50 USDT или общий объем торгов на споте ≥ 50 USDT) и получите Попытки + 8</p><div class="prog">Пригласили <b>0</b> Пользователь(и)</div><div class="tiers"><div class="tier "><em>+2</em><b>1</b></div><div class="tier "><em>+5</em><b>3</b></div><div class="tier "><em>+8</em><b>5</b></div><div class="tier"><em>+15 (МАКС.)</em></div></div></div><button class="act " data-id="t10">ПРИГЛАСИТЬ</button></div><!--E:tasks--></div>
+  </div>
+</section>
+
+<!-- ============ TOURNAMENT ============ -->
+<section class="pane" id="tour">
+  <div class="wrap">
+    <div class="t-head">
+      <h2 class="sec-title">Индивидуальный <em>турнир</em></h2>
+      <p>Три раунда по 10 дней каждый.<br>Поднимайтесь во всех трех рейтингах и получайте награды — до $300,000! на человека.</p>
+      <a href="#rules">Подробнее »</a>
+    </div>
+    <div class="stages" id="stages"><!--S:stages--><button class="stage on" data-i="0">Этап 1</button><button class="stage " data-i="1">Этап 2</button><button class="stage " data-i="2">Этап 3</button><span class="stage-time">Скоро 2026.11.01 05:00 - 2026.11.10 13:00</span><!--E:stages--></div>
+    <div class="rtabs" id="rtabs">
+      <button class="rtab on" data-r="0">Объем торгов на фьючерсах</button>
+      <button class="rtab" data-r="1">Доходность на фьючерсах</button>
+      <button class="rtab" data-r="2">Объем торгов на фьючерсах среди новичков</button>
+    </div>
+    <div class="t-grid">
+      <div class="card">
+        <h5>Призовой фонд</h5>
+        <div class="sub">Расчет по итогам каждого этапа. Топ-100 получают награды.</div>
+        <div id="pf"><!--S:pf--><div class="pf top"><div class="l"><svg class="medal" viewBox="0 0 26 26"><path d="M13 2l9 4v8c0 5-4 8-9 10C8 22 4 19 4 14V6z" fill="#1f183a" stroke="#a58bff" stroke-width="1.4"></path><path d="M9 11l4 4 4-4" stroke="#a58bff" stroke-width="1.6" fill="none"></path></svg><span>#1</span></div><div class="r">$100,000<small>USDT</small></div></div><div class="pf top"><div class="l"><svg class="medal" viewBox="0 0 26 26"><path d="M13 2l9 4v8c0 5-4 8-9 10C8 22 4 19 4 14V6z" fill="#1f183a" stroke="#a58bff" stroke-width="1.4"></path><path d="M9 11l4 4 4-4" stroke="#a58bff" stroke-width="1.6" fill="none"></path></svg><span>#2</span></div><div class="r">$75,000<small>USDT</small></div></div><div class="pf top"><div class="l"><svg class="medal" viewBox="0 0 26 26"><path d="M13 2l9 4v8c0 5-4 8-9 10C8 22 4 19 4 14V6z" fill="#1f183a" stroke="#a58bff" stroke-width="1.4"></path><path d="M9 11l4 4 4-4" stroke="#a58bff" stroke-width="1.6" fill="none"></path></svg><span>#3</span></div><div class="r">$50,000<small>USDT</small></div></div><div class="pf "><div class="l"><span>#4-5</span></div><div class="r">$25,000<small>USDT</small></div></div><div class="pf "><div class="l"><span>#6-7</span></div><div class="r">$10,000<small>USDT</small></div></div><div class="pf "><div class="l"><span>#8-10</span></div><div class="r">$7,000<small>Ваучер на пробные средства</small></div></div><div class="pf "><div class="l"><span>#11-20</span></div><div class="r">$2,000<small>Ваучер на пробные средства</small></div></div><div class="pf "><div class="l"><span>#21-50</span></div><div class="r">$1,500<small>Ваучер на позицию</small></div></div><div class="pf "><div class="l"><span>#51-100</span></div><div class="r">$1,000<small>Ваучер на позицию</small></div></div><!--E:pf--></div>
+      </div>
+      <div class="card">
+        <div class="board-h"><h5 id="bTitle">Этап 1 · Фьючерсная торговля PK</h5>
+          <div class="search"><input id="q" placeholder="Введите UID/никнейм"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div></div>
+        <div class="sub">Данные обновляются каждые 10 минут. <a href="#rules" style="color:var(--brand3);text-decoration:none">Правила статистики</a></div>
+        <div class="th"><span>Место</span><span>Участники</span><span class="num">Ожид. награда</span><span class="num" id="thVal">Объем торгов на фьючерсах (USDT)</span></div>
+        <div id="board"><!--S:board--><div class="empty"><svg class="ico" viewBox="0 0 80 70"><path d="M6 20h26l6 8h36v36H6z" fill="#1c1c1f" stroke="#444" stroke-width="2"></path><circle cx="34" cy="46" r="14" fill="#101012" stroke="#555" stroke-width="2"></circle><path d="M28 44h2M38 44h2M30 52q4-3 8 0" stroke="#666" stroke-width="2" fill="none"></path></svg><h6>Скоро начнётся</h6><div class="cdn" id="soonCd">15д 14:37:48</div><p>Время начала: 1 ноября, 10:00 (UTC+8)<br><br>Статистика: объем торгов на фьючерсах = объем торгов на стандартных фьючерсах + объем торгов на бессрочных фьючерсах (учитываются только криптовалютные пары).</p></div><!--E:board--></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RULES ============ -->
+<section class="rules" id="rules"><div class="wrap">
+  <h2 class="rv">Правила события</h2>
+  <ol id="rulesList"><!--S:rules--><li><span>К участию приглашаются все новые и зарегистрированные ранее пользователи из всех регионов, в которых предоставляются услуги CoinW.</span></li><li><span>Регистрация: для участия в акции необходимо в ней зарегистрироваться. Войдите в аккаунт и нажмите на кнопку регистрации.</span></li><li><span>Сроки проведения акции: с 05:00 01.11.2026 по 18:59 30.11.2026 (UTC+3).</span></li><li><span>Первый раунд индивидуального турнира: с 05:00 01.11.2026 по 13:00 10.11.2026 (UTC+3). Второй раунд: с 05:00 11.11.2026 по 13:00 20.11.2026 (UTC+3). Третий раунд: с 05:00 21.11.2026 по 13:00 30.11.2026 (UTC+3).</span></li><li><span>Список актуальных заданий отображается на странице акции. Задания для разных пользователей могут отличаться. Задания не зависят друг от друга. Награды за выполнение разных заданий суммируются.</span></li><li><span>Сбор статистики ведется с момента назначения задания до 18:59 30.11.2026 (UTC+3).</span></li><li><span>Объем торгов фьючерсами: объем торгов фьючерсами = объем торгов стандартными фьючерсами + объем торгов бессрочными фьючерсами (учитываются только сделки с парами, указанными в описании задания).</span></li><li><span>Объем первой сеточной сделки = сумма первой фактической сделки купли или продажи, совершенной с помощью спот сетки, фьючерсной сетки или спот сетки Infinity после активации сетки.</span></li><li><span>Объем копи-трейдинга = объем спот копи-трейдинга + объем копи-трейдинга фьючерсами.</span></li><li><span>Суммарный депозит: депозиты через сеть + депозиты через Р2Р + депозиты через сторонние платформы + депозиты с банковских карт + фиатные депозиты (внутренние переводы и криптоподарки не учитываются).</span></li><li><span>Пригласите друзей: приглашайте новых пользователей напрямую. Новый пользователь засчитывается, если совершает первую сделку в требуемом объёме.</span></li><li><span>Награды лотереи: ваучеры на монету, ваучеры на позицию (1x–10x), ваучеры на бонус (1x–5x), ваучеры на пробные средства (50% зачёта), ваучеры на кешбэк, ваучеры на усилитель APR (для продуктов с гибким и фиксированным сроком), субсидии на фьючерсную сетку, субсидии на копи-трейдинг, пробный VIP доступ и другое.</span></li><li><span>Выдача наград: награды лотереи и награды за регистрацию начисляются сразу. Награды турнира выдаются в течение 7 рабочих дней с момента завершения акции.</span></li><li><span>Информация о наградах: награды за регистрацию, награды за выполнение заданий / награды лотереи и награды индивидуального турнира не зависят друг от друга и суммируются. Если в течение одного раунда индивидуального турнира участник занимает призовые места сразу в нескольких рейтингах, ему выдается только одна награда — награда наибольшей стоимости. Менее ценные награды за места в других рейтингах этого раунда не выплачиваются. Награды раундов суммируются. Срок получения и использования наград — 7 дней.</span></li><li><span>При составлении рейтинга новичков на основе объёма фьючерсной торговли учитывается только статистика пользователей, зарегистрировавшихся на платформе в период проведения акции.</span></li><li><span>Данные на странице акции могут отображаться с небольшой задержкой. Обновите страницу, чтобы увидеть актуальные данные.</span></li><li><span>В рамках SuperX награды за регистрацию, награды за выполнение заданий / награды лотереи и награды индивидуального турнира суммируются. Награды рейтингов индивидуального турнира за один раунд не суммируются. При участии сразу в нескольких акциях платформы, не относящихся к SuperX, любое действие (торговля, депозит, реферальная программа и т. д.) учитывается как основание для выдачи награды только в одной акции, награды в других акциях за это же действие не выдаются.</span></li><li><span>Учитываются только ордера, позиции по которым удерживались более минуты. Ордера, совершённые с использованием привилегий платформы, таких как пробные средства и ваучеры на бонус, а также сделки, совершенные на субаккаунтах, не учитываются в данных акции.</span></li><li><span>Окончательное решение о выдаче наград принимается после проведения проверки департаментами контроля рисков и данных CoinW. Информация об акции представлена только для справки.</span></li><li><span>CoinW оставляет за собой право дисквалифицировать пользователей, причастных к таким нарушениям, как противозаконная деятельность, мошенничество или умышленное манипулирование объемами торгов. В серьезных случаях торговля будет запрещена. CoinW также оставляет за собой право в любой момент изменить условия данной акции без предварительного уведомления и право окончательного толкования условий акции.</span></li><!--E:rules--></ol>
+</div></section>
+
+<footer><div class="wrap">
+  © 2018-2026 CoinW. All rights reserved.
+  <h6>Предупреждение о риске</h6>
+  Криптовалюты и производные от них инструменты — это инновационные финансовые продукты с большой волатильностью и высокими инвестиционными рисками.<br>
+  CoinW стремится предоставлять пользователям простые в использовании торговые инструменты, однако сама торговля по-прежнему требует определенных навыков. Торговля цифровыми активами и их производными инструментами является высокорискованной деятельностью и может привести к частичной или полной потере средств. Вы должны тщательно оценить свое финансовое положение и вышеупомянутые риски перед тем как использовать услуги CoinW. Вы несете ответственность за возможные убытки. Если необходимо, пожалуйста, проконсультируйтесь с соответствующими специалистами, прежде чем инвестировать свои средства.<br><br>
+  Торговля путем следования или копирования сделок других трейдеров сопряжена с высоким уровнем риска, даже если вы следуете или копируете лучших трейдеров. Прошлые результаты членов сообщества CoinW не являются надежным показателем их будущих результатов. Контент на торговой платформе CoinW создается членами ее сообщества и не содержит советов или рекомендаций от имени CoinW.
+  <p class="demo-note">Прототип страницы. Данные и розыгрыш — демо. <a href="#" id="resetDemo" style="color:#9a85ff">Сбросить демо-состояние</a></p>
+</div></footer>
+
+<button class="support" aria-label="Поддержка"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="12" width="4" height="6" rx="1.5"/><rect x="17" y="12" width="4" height="6" rx="1.5"/><path d="M19 18c0 2-3 3-6 3"/></svg></button>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+
+/* ================= DATA ================= */
+const START_TS = Date.UTC(2026,10,1,2,0,0);             // 01.11.2026 10:00 UTC+8
+const END_TS = Date.UTC(2026,10,30,15,59,0);            // 30.11.2026 23:59 UTC+8
+const STAGES = [
+  {n:1,start:Date.UTC(2026,10,1,2,0,0),end:Date.UTC(2026,10,10,10,0,0),lbl:'2026.11.01 05:00 - 2026.11.10 13:00',startTxt:'1 ноября, 10:00 (UTC+8)'},
+  {n:2,start:Date.UTC(2026,10,11,2,0,0),end:Date.UTC(2026,10,20,10,0,0),lbl:'2026.11.11 05:00 - 2026.11.20 13:00',startTxt:'11 ноября, 10:00 (UTC+8)'},
+  {n:3,start:Date.UTC(2026,10,21,2,0,0),end:Date.UTC(2026,10,30,10,0,0),lbl:'2026.11.21 05:00 - 2026.11.30 13:00',startTxt:'21 ноября, 10:00 (UTC+8)'},
+];
+const PRIZES = [
+  ['30','DOGE Ваучер на монету','c'],['1','XRP Ваучер на монету','c'],['$500','APR усилитель для Earn','t'],['$20','Ваучер на кешбэк','t'],['$10','Ваучер на пробные средства','t'],
+  ['0,5','HYPE Ваучер на монету','c'],['100','PUMP Ваучер на монету','c'],['$80','Ваучер на позицию','t'],['$25','Ваучер на позицию','t'],['20','REAL Ваучер на монету','c'],
+  ['$15','Ваучер на позицию','t'],['1','SOL Ваучер на монету','c'],['20','ADA Ваучер на монету','c'],['10','TRX Ваучер на монету','c'],['$50','Субсидия для ботов','t'],
+  ['0,3','SOL Ваучер на монету','c'],['$20','Субсидия для ботов','t'],['1','ETH Ваучер на монету','c'],['20','ENA Ваучер на монету','c'],['$30','Ваучер на позицию','t'],
+  ['$20','Ваучер на позицию','t'],['50','RAINPROTOCOL Ваучер на монету','c'],['$10','Ваучер на кешбэк','t'],['$100','Ваучер на позицию','t'],['$50','Ваучер на позицию','t'],
+  ['0,25','HYPE Ваучер на монету','c'],['$15','Субсидия для ботов','t'],['$200','Ваучер на позицию','t'],['3','TRX Ваучер на монету','c'],['10','SUI Ваучер на монету','c'],
+  ['$100','Ваучер на позицию','t'],['2','SUI Ваучер на монету','c'],['3 000','PEPE Ваучер на монету','c'],['$20','Ваучер на пробные средства','t'],['$35','Ваучер на позицию','t'],
+  ['0,1','SOL Ваучер на монету','c'],['$5','Ваучер на кешбэк','t'],['2 000','PEPE Ваучер на монету','c'],['$150','Ваучер на позицию','t'],['$25','Субсидия для ботов','t'],
+  ['0,2','HYPE Ваучер на монету','c'],['100 000','PEPE Ваучер на монету','c'],['$100','Субсидия для ботов','t'],['$70','Ваучер на позицию','t']
+];
+const WIN_TYPES = ['15% APR усилитель для Earn','10% APR усилитель для Earn','20% APR усилитель для Earn','5% APR усилитель для Earn','30% APR усилитель для Earn','50% APR усилитель для Earn','100 USDT Субсидия на сеточную торговлю','200 USDT Ваучер на позицию','150 USDT Ваучер на позицию','100 USDT Ваучер на позицию'];
+const NAMES = ['ma***o@gmail.com','manzyy','ed***o@gmail.com','Mayu888','26***3@gmail.com','Akimoto777','Gold_T100','sa***1@gmail.com','Wo***7@gmail.com','pi***5@bk.ru','fi***i@gmail.com','sparkyfarky','b3***7@gmail.com','banhbo','DOOOLT','ki***1@gmail.com','ba***r@gmail.com','Monster..','gaa88','dy***6@gmail.com','*******217','Stana312','in***5@gmail.com','sa***h@yandex.ru','an***0@gmail.com','de***8@gmail.com','T2P newbie','CryptoBear','vl***v@mail.ru','kr***9@yandex.ru'];
+
+const TASKS = [
+  {id:'t1',cat:['first','trade'],title:'🔥Первая сделка на фьючерсах ≥50 USDT',desc:'Совершите первую сделку на фьючерсах и получите попытку розыгрыша и Ваучер на позицию на $15 — оба бонуса включены!',target:50,att:2,bonus:'15 USDT ВАУЧЕР НА ПОЗИЦИЮ',btn:'ТОРГОВАТЬ',type:'vol'},
+  {id:'t2',cat:['first','trade'],title:'Первая спот сделка 50 USDT',desc:'В течение периода выполнения задания выполните задание (первый объем торгов ≥ 50 USDT; охват торгов: Спот торговля) «Первая спот сделка 50 USDT», чтобы получить Попытки + 1.',target:50,att:1,btn:'ТОРГОВАТЬ',type:'vol'},
+  {id:'t3',cat:['first'],title:'Первый копи-трейдинг ордер',desc:'Выполните задание (Объем копи-трейдинга ≥ 50 USDT; Тип копи-трейдинга: Спот копи-трейдинг, Копи-трейдинг стандартных фьючерсов, Копи-трейдинг бессрочных фьючерсов; Копи-трейдинг стандартных фьючерсов включает: Криптовалюта; Копи-трейдинг бессрочных фьючерсов включает: Криптовалюта, TradFi) в рамках «Первый копи-трейдинг ордер», прежде чем оно закончится, чтобы получить Попытки + 1.',att:1,btn:'ПЕРЕЙТИ К КОПИ-ТРЕЙДИНГУ',type:'once'},
+  {id:'t4',cat:['first'],title:'Первый сеточный ордер',desc:'Выполните задание «Первый сеточный ордер», прежде чем оно закончится, чтобы получить Попытки + 1.',att:1,btn:'СОЗДАТЬ СЕТКУ',type:'once'},
+  {id:'t5',cat:['first'],title:'Первое повышение до VIP 1+',desc:'После регистрации на событие, вы заработаете Попытки + 2, если получите VIP 1 и выше через торговлю на фьючерсах, споте или за счет стоимости активов.',att:2,btn:'ПОВЫСИТЬ',type:'once'},
+  {id:'t6',cat:['trade'],title:'👑 Только для VIP: получайте популярные токены напрямую!',desc:'Накопите указанный объём фьючерсной торговли криптовалютами и получите попытку розыгрыша и популярные токены.',target:15e6,att:8,bonus:'100 USDT',btn:'ТОРГОВАТЬ',type:'vol',step:3e6},
+  {id:'t7',cat:['trade'],title:'👑 Только для VIP: получайте популярные токены напрямую!',desc:'Накопите указанный объём фьючерсной торговли криптовалютами и получите попытку розыгрыша и популярные токены.',target:50e6,att:10,bonus:'300 USDT',btn:'ТОРГОВАТЬ',type:'vol',step:8e6},
+  {id:'t8',cat:['trade'],title:'👑 Только для VIP: получайте популярные токены напрямую!',desc:'Накопите указанный объём фьючерсной торговли криптовалютами и получите попытку розыгрыша и популярные токены.',target:300e6,att:20,bonus:'800 USDT',btn:'ТОРГОВАТЬ',type:'vol',step:40e6},
+  {id:'t9',cat:['trade'],title:'Торговля фьючерсами на TradFi',desc:'Достигните указанного объема торгов фьючерсами на TradFi и получите соответствующее количество лотерейных билетов!',btn:'ТОРГОВАТЬ',type:'tiers',unit:'USDT',tiers:[[5e4,'50K',1],[1e5,'100K',2],[25e4,'250K',2],[5e5,'500K',3],[75e4,'750K',3],[1e6,'1M',5]],step:6e4,max:16},
+  {id:'t10',cat:['invite'],title:'Пригласите 5 пользователей',desc:'После регистрации на событие, пригласите 5 пользователя(ей) зарегистрироваться (общий объем торгов на фьючерсах ≥ 50 USDT или общий объем торгов на споте ≥ 50 USDT) и получите Попытки + 8',btn:'ПРИГЛАСИТЬ',type:'tiers',unit:'Пользователь(и)',tiers:[[1,'1',2],[3,'3',5],[5,'5',8]],step:1,max:15,invite:true},
+];
+
+const RULES = [
+ 'К участию приглашаются все новые и зарегистрированные ранее пользователи из всех регионов, в которых предоставляются услуги CoinW.',
+ 'Регистрация: для участия в акции необходимо в ней зарегистрироваться. Войдите в аккаунт и нажмите на кнопку регистрации.',
+ 'Сроки проведения акции: с 05:00 01.11.2026 по 18:59 30.11.2026 (UTC+3).',
+ 'Первый раунд индивидуального турнира: с 05:00 01.11.2026 по 13:00 10.11.2026 (UTC+3). Второй раунд: с 05:00 11.11.2026 по 13:00 20.11.2026 (UTC+3). Третий раунд: с 05:00 21.11.2026 по 13:00 30.11.2026 (UTC+3).',
+ 'Список актуальных заданий отображается на странице акции. Задания для разных пользователей могут отличаться. Задания не зависят друг от друга. Награды за выполнение разных заданий суммируются.',
+ 'Сбор статистики ведется с момента назначения задания до 18:59 30.11.2026 (UTC+3).',
+ 'Объем торгов фьючерсами: объем торгов фьючерсами = объем торгов стандартными фьючерсами + объем торгов бессрочными фьючерсами (учитываются только сделки с парами, указанными в описании задания).',
+ 'Объем первой сеточной сделки = сумма первой фактической сделки купли или продажи, совершенной с помощью спот сетки, фьючерсной сетки или спот сетки Infinity после активации сетки.',
+ 'Объем копи-трейдинга = объем спот копи-трейдинга + объем копи-трейдинга фьючерсами.',
+ 'Суммарный депозит: депозиты через сеть + депозиты через Р2Р + депозиты через сторонние платформы + депозиты с банковских карт + фиатные депозиты (внутренние переводы и криптоподарки не учитываются).',
+ 'Пригласите друзей: приглашайте новых пользователей напрямую. Новый пользователь засчитывается, если совершает первую сделку в требуемом объёме.',
+ 'Награды лотереи: ваучеры на монету, ваучеры на позицию (1x–10x), ваучеры на бонус (1x–5x), ваучеры на пробные средства (50% зачёта), ваучеры на кешбэк, ваучеры на усилитель APR (для продуктов с гибким и фиксированным сроком), субсидии на фьючерсную сетку, субсидии на копи-трейдинг, пробный VIP доступ и другое.',
+ 'Выдача наград: награды лотереи и награды за регистрацию начисляются сразу. Награды турнира выдаются в течение 7 рабочих дней с момента завершения акции.',
+ 'Информация о наградах: награды за регистрацию, награды за выполнение заданий / награды лотереи и награды индивидуального турнира не зависят друг от друга и суммируются. Если в течение одного раунда индивидуального турнира участник занимает призовые места сразу в нескольких рейтингах, ему выдается только одна награда — награда наибольшей стоимости. Менее ценные награды за места в других рейтингах этого раунда не выплачиваются. Награды раундов суммируются. Срок получения и использования наград — 7 дней.',
+ 'При составлении рейтинга новичков на основе объёма фьючерсной торговли учитывается только статистика пользователей, зарегистрировавшихся на платформе в период проведения акции.',
+ 'Данные на странице акции могут отображаться с небольшой задержкой. Обновите страницу, чтобы увидеть актуальные данные.',
+ 'В рамках SuperX награды за регистрацию, награды за выполнение заданий / награды лотереи и награды индивидуального турнира суммируются. Награды рейтингов индивидуального турнира за один раунд не суммируются. При участии сразу в нескольких акциях платформы, не относящихся к SuperX, любое действие (торговля, депозит, реферальная программа и т. д.) учитывается как основание для выдачи награды только в одной акции, награды в других акциях за это же действие не выдаются.',
+ 'Учитываются только ордера, позиции по которым удерживались более минуты. Ордера, совершённые с использованием привилегий платформы, таких как пробные средства и ваучеры на бонус, а также сделки, совершенные на субаккаунтах, не учитываются в данных акции.',
+ 'Окончательное решение о выдаче наград принимается после проведения проверки департаментами контроля рисков и данных CoinW. Информация об акции представлена только для справки.',
+ 'CoinW оставляет за собой право дисквалифицировать пользователей, причастных к таким нарушениям, как противозаконная деятельность, мошенничество или умышленное манипулирование объемами торгов. В серьезных случаях торговля будет запрещена. CoinW также оставляет за собой право в любой момент изменить условия данной акции без предварительного уведомления и право окончательного толкования условий акции.'
+];
+
+const POOL = [
+  {rk:'#1',v:'$100,000',s:'USDT',top:1},{rk:'#2',v:'$75,000',s:'USDT',top:1},{rk:'#3',v:'$50,000',s:'USDT',top:1},
+  {rk:'#4-5',v:'$25,000',s:'USDT'},{rk:'#6-7',v:'$10,000',s:'USDT'},{rk:'#8-10',v:'$7,000',s:'Ваучер на пробные средства'},
+  {rk:'#11-20',v:'$2,000',s:'Ваучер на пробные средства'},{rk:'#21-50',v:'$1,500',s:'Ваучер на позицию'},{rk:'#51-100',v:'$1,000',s:'Ваучер на позицию'}
+];
+
+/* ================= STATE ================= */
+const KEY='cw_superx_demo_v1';
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))||null}catch(e){S=null}
+if(!S)S={logged:false,reg:false,att:0,prog:{},done:{},won:[]};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ');
+
+/* ================= UTIL ================= */
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),3200)}
+function modal(html){$('#modal').innerHTML='<button class="x" onclick="closeModal()">×</button>'+html;$('#modalBg').classList.add('on')}
+function closeModal(){$('#modalBg').classList.remove('on')}
+$('#modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal()});
+function confetti(){const c=['#9d85ff','#c24bff','#5227FE','#27d8ff','#fff'];for(let i=0;i<70;i++){const e=document.createElement('i');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=c[i%5];e.style.animationDuration=(1.8+Math.random()*2)+'s';e.style.animationDelay=Math.random()*.5+'s';e.style.transform='rotate('+Math.random()*360+'deg)';document.body.appendChild(e);setTimeout(()=>e.remove(),4500)}}
+const prizeCard=(p)=>`<div class="prize"><svg><use href="#${p[2]==='c'?'coinic':'ticket'}"/></svg><div class="v">${p[0]}</div><hr><div class="n">${p[1]}</div></div>`;
+
+/* ================= COUNTDOWN ================= */
+function tick(){
+  const pre=Date.now()<START_TS;const d=Math.max(0,(pre?START_TS:END_TS)-Date.now());
+  const lb=document.querySelector('.cd-wrap small');if(lb)lb.textContent=pre?'ДО НАЧАЛА СОБЫТИЯ':'ДО ОКОНЧАНИЯ СОБЫТИЯ';
+  const pt=$('#pillTxt');if(pt)pt.textContent=pre?'NoWember · SuperX · старт 1 ноября':'NoWember · SuperX · идёт сейчас';
+  const D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60,Sx=Math.floor(d/1e3)%60;
+  const cd=$('#cd');
+  if(!cd.children.length)cd.innerHTML=['дней','часов','минут','секунд'].map(l=>`<div class="cdt"><b>0</b><small>${l}</small></div>`).join('');
+  [D,H,M,Sx].forEach((v,i)=>{const b=cd.children[i].querySelector('b');const t=i?String(v).padStart(2,'0'):String(v);if(b.textContent!==t){b.textContent=t;const p=b.parentNode;p.classList.remove('tick');void p.offsetWidth;p.classList.add('tick')}});
+  const e=$('#soonCd'); if(e){const st=STAGES[curStage].start-Date.now(); if(st>0){const dd=Math.floor(st/864e5),hh=Math.floor(st/36e5)%24,mm=Math.floor(st/6e4)%60,ss=Math.floor(st/1e3)%60;e.textContent=`${dd}д ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`} else renderBoard()}
+}
+setInterval(tick,1000);
+
+/* ================= TABS ================= */
+$$('.tab').forEach(t=>t.onclick=()=>{$('#tabs').classList.toggle('t2',t.dataset.t==='tour');$$('.tab').forEach(x=>x.classList.toggle('on',x===t));$$('section.pane').forEach(p=>p.classList.toggle('on',p.id===t.dataset.t));window.scrollTo({top:$('#tabs').offsetTop-56,behavior:'smooth'})});
+
+/* ================= TICKER ================= */
+(function(){
+  let h='';const arr=[];
+  for(let i=0;i<40;i++)arr.push(`<span>Поздравляем ${NAMES[i%NAMES.length]} с выигрышем <b>${WIN_TYPES[(i*7+3)%WIN_TYPES.length]}</b></span>`);
+  h=arr.join('');$('#ticker').innerHTML=h+h;
+})();
+function pushWinner(txt){const t=$('#ticker');const s=document.createElement('span');s.innerHTML=`Поздравляем <b style="color:#fff">Вы</b> с выигрышем <b>${txt}</b>`;t.insertBefore(s,t.firstChild)}
+
+/* ================= REEL / SLOT ================= */
+const reel=$('#reel'),win=$('#reelWin');
+function cardW(){return Math.max(win.clientWidth/4.6,104)}
+function setCardW(){win.style.setProperty('--cw',cardW()+'px')}
+function buildIdle(){
+  setCardW();
+  const base=PRIZES.slice(0,22);const h=base.map(prizeCard).join('');
+  reel.className='reel idle';reel.style.transition='none';reel.style.transform='';reel.innerHTML=h+h;
+  reel.style.animationDuration='80s';
+}
+buildIdle();addEventListener('resize',()=>{if(!spinning)buildIdle()});
+let spinning=false;
+function spinTo(prize,cb){
+  spinning=true;setCardW();
+  const N=64,hit=52,gap=win.clientWidth*.022,w=cardW()+gap;
+  const arr=[];for(let i=0;i<N;i++)arr.push(PRIZES[Math.floor(Math.random()*PRIZES.length)]);
+  arr[hit]=prize;
+  reel.className='reel';reel.style.animation='none';reel.style.transition='none';reel.style.transform='translateX(0)';
+  reel.innerHTML=arr.map(prizeCard).join('');
+  win.classList.add('spinning');$('#machine').classList.add('spinning');
+  const center=win.clientWidth/2-cardW()/2;
+  const jitter=(Math.random()-.5)*cardW()*.5;
+  void reel.offsetWidth;
+  reel.style.transition='transform 5.2s cubic-bezier(.12,.65,.1,1)';
+  reel.style.transform=`translateX(${-(hit*w)+center+jitter}px)`;
+  let ticks=0;
+  setTimeout(()=>{reel.style.transition='transform .4s ease';reel.style.transform=`translateX(${-(hit*w)+center}px)`},5300);
+  setTimeout(()=>{win.classList.remove('spinning');$('#machine').classList.remove('spinning');reel.children[hit].classList.add('hit');cb&&cb();spinning=false;},5800);
+}
+function sparkBurst(){const sp=$('#sparks');for(let i=0;i<26;i++){const e=document.createElement('i');e.className='spark';e.style.left='50%';e.style.top='48%';e.style.setProperty('--dx',(Math.random()-.5)*620+'px');e.style.setProperty('--dy',(Math.random()-.8)*360+'px');sp.appendChild(e);setTimeout(()=>e.remove(),1200)}}
+
+function updateSpin(){
+  const b=$('#spinBtn');
+  if(!S.logged){b.textContent='Войти/регистрация'}
+  else if(!S.reg){b.textContent='Зарегистрироваться'}
+  else if(S.att>0){b.textContent=`Крутить (${S.att})`}
+  else b.textContent='Получить попытки';
+  const a=$('#att');a.textContent=S.logged?S.att:'--';
+  $('#heroRegTxt').textContent=S.reg?'Вы участвуете ✓':'Зарегистрироваться';
+  $('#hdrUser').textContent=S.logged?'demo_user':'Войти';
+  $('#hdrReg').style.display=S.logged?'none':'';
+}
+function bumpAtt(){const a=$('#att');a.classList.remove('bump');void a.offsetWidth;a.classList.add('bump')}
+
+function login(){
+  modal(`<h3>Вход в CoinW</h3><p>Это демо-страница: данные не вводятся и никуда не отправляются.</p><button class="act" id="mLogin">Продолжить как демо-пользователь</button>`);
+  $('#mLogin').onclick=()=>{S.logged=true;save();closeModal();updateSpin();renderTasks();toast('Вы вошли в демо-аккаунт');}
+}
+function register(){
+  if(!S.logged)return login();
+  if(S.reg)return toast('Вы уже участвуете в акции');
+  S.reg=true;S.att+=1;save();updateSpin();renderTasks();confetti();bumpAtt();
+  modal(`<h3>Вы в игре! 🎃</h3><p>Регистрация прошла успешно. Вы участвуете в случайном эйрдропе и делите призовой фонд <b style="color:#cbbaff">5 000 000$</b>.<br>Бонус за регистрацию: <b style="color:#cbbaff">+1 попытка</b>.</p><button class="act" onclick="closeModal()">Отлично</button>`);
+}
+$('#heroReg').onclick=register;$('#hdrReg').onclick=login;$('#hdrUser').onclick=()=>{if(!S.logged)login()};
+$('#shareBtn').onclick=()=>{
+  if(!S.reg)return S.logged?toast('Сначала зарегистрируйтесь в акции'):login();
+  const link='https://www.coinw.com/superx?ref=DEMO';
+  try{navigator.clipboard.writeText(link)}catch(e){}
+  if(!S.shared){S.shared=true;S.att+=1;save();updateSpin();bumpAtt();toast('Ссылка скопирована · +1 попытка за шеринг')}else toast('Ссылка скопирована');
+};
+$('#giftBtn').onclick=()=>{
+  if(!S.logged)return login();
+  modal(`<h3>Мои награды</h3><p>${S.won.length?S.won.map(w=>`• ${w}`).join('<br>'):'Пока пусто — крутите розыгрыш!'}</p><button class="act" onclick="closeModal()">Закрыть</button>`);
+};
+
+$('#spinBtn').onclick=()=>{
+  if(spinning)return;
+  if(!S.logged)return login();
+  if(!S.reg)return register();
+  if(S.att<=0){$('.chips').scrollIntoView({behavior:'smooth',block:'center'});return toast('Попытки закончились — выполняйте задания!')}
+  S.att--;save();updateSpin();bumpAtt();
+  $('#spinBtn').disabled=true;
+  const prize=PRIZES[Math.floor(Math.random()*PRIZES.length)];
+  spinTo(prize,()=>{
+    $('#spinBtn').disabled=false;sparkBurst();confetti();
+    const txt=`${prize[0]} ${prize[1]}`;S.won.push(txt);save();pushWinner(txt);
+    modal(`<h3>Поздравляем! 🎉</h3><div class="big-prize"><svg><use href="#${prize[2]==='c'?'coinic':'ticket'}"/></svg><b>${prize[0]}</b><span>${prize[1]}</span></div><p>Награда уже зачислена на ваш аккаунт. Срок использования — 7 дней.</p><button class="act" onclick="closeModal()">Забрать</button>`);
+    setTimeout(()=>{if(!spinning&&!$('#modalBg').classList.contains('on'))buildIdle()},9000);
+  });
+};
+$('#modalBg').addEventListener('transitionend',()=>{});
+const _close=closeModal;closeModal=function(){_close();if(!spinning&&!reel.classList.contains('idle'))setTimeout(buildIdle,350)};
+
+/* ================= TASKS ================= */
+let filter='all';
+$$('.chip').forEach(c=>c.onclick=()=>{filter=c.dataset.f;$$('.chip').forEach(x=>x.classList.toggle('on',x===c));renderTasks()});
+function award(n,why){S.att+=n;save();updateSpin();bumpAtt();toast(`+${n} ${n===1?'попытка':n<5?'попытки':'попыток'} · ${why}`)}
+function doTask(t){
+  if(!S.logged)return login();
+  if(!S.reg)return toast('Сначала зарегистрируйтесь в акции');
+  if(S.done[t.id])return;
+  if(t.type==='once'){S.done[t.id]=1;award(t.att,'задание выполнено (демо)')}
+  else if(t.type==='vol'){
+    const inc=t.step||t.target;
+    const p=Math.min(t.target,(S.prog[t.id]||0)+inc);S.prog[t.id]=p;
+    if(p>=t.target){S.done[t.id]=1;award(t.att,'задание выполнено (демо)');if(t.bonus)S.won.push(t.bonus)}else toast(`Демо: засчитан объём ${fmt(inc)} USDT`);
+  }else{
+    const prev=S.prog[t.id]||0;const p=prev+t.step;S.prog[t.id]=p;
+    let got=0;t.tiers.forEach(([lim,,a])=>{if(prev<lim&&p>=lim)got+=a});
+    const last=t.tiers[t.tiers.length-1][0];
+    if(p>=last)S.done[t.id]=1;
+    if(got)award(got,'новый уровень достигнут');else toast(t.invite?'Демо: приглашённый пользователь ещё не совершил сделку':`Демо: засчитан объём ${fmt(t.step)} USDT`);
+  }
+  save();renderTasks();
+}
+function renderTasks(){
+  const list=TASKS.filter(t=>filter==='all'||t.cat.includes(filter));
+  $('#tasks').innerHTML=list.map((t,i)=>{
+    const p=S.prog[t.id]||0,done=S.done[t.id];
+    let mid='';
+    if(t.type==='vol')mid=`<div class="prog">Наторговано <b>${fmt(p)}</b> / ${fmt(t.target)} USDT</div><div class="bar"><i style="width:${p/t.target*100}%"></i></div>`;
+    if(t.type==='tiers')mid=`<div class="prog">${t.invite?'Пригласили':'Наторговано'} <b>${fmt(p)}</b> ${t.unit}</div><div class="tiers">${t.tiers.map(([lim,l,a])=>`<div class="tier ${p>=lim?'done':''}"><em>+${a}</em><b>${l}</b></div>`).join('')}<div class="tier"><em>+${t.max} (МАКС.)</em></div></div>`;
+    const rw=t.type==='tiers'?'':`<div class="reward"><div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7"/></svg>+${t.att}</div>${t.bonus?`<div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 6-8 12L4 9z"/></svg><small>${t.bonus}</small></div>`:''}</div>`;
+    return `<div class="task rv" style="transition-delay:${Math.min(i,5)*.06}s"><div><h4>${t.title}</h4><p>${t.desc}</p>${mid}</div>${rw}<button class="act ${done?'done':''}" data-id="${t.id}">${done?'ВЫПОЛНЕНО ✓':t.btn}</button></div>`;
+  }).join('');
+  $$('.task .act').forEach(b=>b.onclick=()=>doTask(TASKS.find(t=>t.id===b.dataset.id)));
+  $$('.task').forEach(el=>io.observe(el));
+}
+renderTasks();
+
+/* ================= TOURNAMENT ================= */
+let curStage=0,curR=0;
+function renderStages(){
+  $('#stages').innerHTML=STAGES.map((s,i)=>`<button class="stage ${i===curStage?'on':''}" data-i="${i}">Этап ${s.n}</button>`).join('')+`<span class="stage-time">${Date.now()<STAGES[curStage].start?'Скоро':Date.now()<STAGES[curStage].end?'Идёт':'Завершён'} ${STAGES[curStage].lbl}</span>`;
+  $$('.stage').forEach(b=>b.onclick=()=>{curStage=+b.dataset.i;renderStages();renderBoard()});
+}
+const RN=['Фьючерсная торговля PK','Доходность на фьючерсах','Новички · Фьючерсная торговля'];
+const medal=`<svg class="medal" viewBox="0 0 26 26"><path d="M13 2l9 4v8c0 5-4 8-9 10C8 22 4 19 4 14V6z" fill="#1f183a" stroke="#a58bff" stroke-width="1.4"/><path d="M9 11l4 4 4-4" stroke="#a58bff" stroke-width="1.6" fill="none"/></svg>`;
+function renderPF(){
+  $('#pf').innerHTML=POOL.map(p=>`<div class="pf ${p.top?'top':''}"><div class="l">${p.top?medal:''}<span>${p.rk}</span></div><div class="r">${p.v}<small>${p.s}</small></div></div>`).join('');
+}
+function seeded(n){let x=n*9301+49297;return()=>{x=(x*9301+49297)%233280;return x/233280}}
+function renderBoard(){
+  $('#bTitle').textContent=`Этап ${STAGES[curStage].n} · ${RN[curR]}`;
+  $('#thVal').textContent=curR===1?'Доходность (%)':'Объем торгов на фьючерсах (USDT)';
+  const st=STAGES[curStage],now=Date.now();
+  if(now<st.start){
+    $('#board').innerHTML=`<div class="empty"><svg class="ico" viewBox="0 0 80 70"><path d="M6 20h26l6 8h36v36H6z" fill="#1c1c1f" stroke="#444" stroke-width="2"/><circle cx="34" cy="46" r="14" fill="#101012" stroke="#555" stroke-width="2"/><path d="M28 44h2M38 44h2M30 52q4-3 8 0" stroke="#666" stroke-width="2" fill="none"/></svg><h6>Скоро начнётся</h6><div class="cdn" id="soonCd">--</div><p>Время начала: ${st.startTxt}<br><br>Статистика: объем торгов на фьючерсах = объем торгов на стандартных фьючерсах + объем торгов на бессрочных фьючерсах (учитываются только криптовалютные пары).</p></div>`;
+    return;
+  }
+  const r=seeded(curStage*10+curR+1),q=$('#q').value.trim().toLowerCase();
+  const prog=Math.min(1,(now-st.start)/(st.end-st.start));
+  let rows=[];
+  for(let i=1;i<=100;i++){
+    const base=(curR===1?95:curR===2?4e6:2e7)*Math.pow(.93,i-1)*(.5+.5*prog)*(.9+r()*.2);
+    const nm=NAMES[Math.floor(r()*NAMES.length)].replace('***','***')+(i%7===0?'':'');
+    const pz=POOL.find(p=>{const m=p.rk.replace('#','').split('-').map(Number);return i>=m[0]&&i<=(m[1]||m[0])});
+    rows.push({i,nm,uid:'U'+(10000000+Math.floor(r()*8e7)),v:base,pz});
+  }
+  if(q)rows=rows.filter(x=>x.nm.toLowerCase().includes(q)||x.uid.toLowerCase().includes(q));
+  $('#board').innerHTML=rows.slice(0,20).map(x=>`<div class="tr"><span class="rk">${x.i}</span><span>${x.nm}</span><span class="num" style="color:var(--gold2)">${x.pz?x.pz.v.replace(',',' '):'—'}</span><span class="num">${curR===1?x.v.toFixed(2)+'%':fmt(x.v)}</span></div>`).join('')||'<div class="empty"><h6>Ничего не найдено</h6></div>';
+}
+$$('.rtab').forEach(b=>b.onclick=()=>{curR=+b.dataset.r;$$('.rtab').forEach(x=>x.classList.toggle('on',x===b));renderBoard()});
+$('#q').addEventListener('input',renderBoard);
+renderStages();renderPF();renderBoard();
+
+/* ================= RULES ================= */
+$('#rulesList').innerHTML=RULES.map(r=>`<li><span>${r}</span></li>`).join('');
+
+$('#resetDemo').onclick=e=>{e.preventDefault();try{localStorage.removeItem(KEY)}catch(x){};location.reload()};
+updateSpin();tick();
+
+/* ================= NEW: motion layer ================= */
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+$$('.rv').forEach(el=>io.observe(el));
+/* count-up */
+function countUp(el,to,ms=1800,pre='',suf=''){const t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/ms),e=1-Math.pow(1-p,4);el.textContent=pre+fmt(to*e)+suf;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+countUp($('#prizeNum'),5000000,2200,'','$');
+const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target;countUp(el,+el.dataset.count,1600,el.dataset.pre||'',el.dataset.suf||'');sio.unobserve(el)}}),{threshold:.5});
+$$('[data-count]').forEach(el=>sio.observe(el));
+/* twinkles on stage */
+(function(){const st=$('#stage');for(let i=0;i<14;i++){const s=document.createElement('i');s.className='spk';s.style.left=(8+Math.random()*84)+'%';s.style.top=(8+Math.random()*84)+'%';s.style.animationDelay=(-Math.random()*2.4)+'s';s.style.transform='scale(0)';const k=.6+Math.random()*1.1;s.style.width=s.style.height=(10*k)+'px';st.appendChild(s)}})();
+/* parallax */
+(function(){const h=$('#hero'),t=$('.coin-tilt');if(reduce)return;h.addEventListener('mousemove',e=>{const r=h.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.setProperty('--px',x*2);t.style.setProperty('--py',y*2);h.style.setProperty('--mx',x);h.style.setProperty('--my',y);
+ $$('.chip3').forEach((c,i)=>c.style.translate=`${x*(i+1)*-14}px ${y*(i+1)*-10}px`)});h.addEventListener('mouseleave',()=>{t.style.setProperty('--px',0);t.style.setProperty('--py',0)})})();
+/* particles */
+(function(){if(reduce)return;const cv=$('#fx'),h=$('#hero'),x=cv.getContext('2d');let W,H,P=[],mx=-999,my=-999;
+ function size(){W=cv.width=h.clientWidth;H=cv.height=h.clientHeight}size();addEventListener('resize',size);
+ h.addEventListener('mousemove',e=>{const r=h.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+ const cols=['184,168,255','255,255,255','194,75,255','39,216,255','124,92,255'];
+ for(let i=0;i<90;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:.6+Math.random()*2.2,v:.15+Math.random()*.6,c:cols[i%5],a:.2+Math.random()*.6,ph:Math.random()*6});
+ (function loop(t){x.clearRect(0,0,W,H);for(const p of P){p.y-=p.v;p.x+=Math.sin(t/1400+p.ph)*.25;const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d<110){p.x+=dx/d*2.2;p.y+=dy/d*2.2}
+  if(p.y<-8){p.y=H+8;p.x=Math.random()*W}x.beginPath();x.fillStyle=`rgba(${p.c},${p.a*(.6+.4*Math.sin(t/700+p.ph))})`;x.shadowColor=`rgb(${p.c})`;x.shadowBlur=10;x.arc(p.x,p.y,p.r,0,7);x.fill()}
+  requestAnimationFrame(loop)})(0)})();
+/* task spotlight */
+$('#tasks').addEventListener('mousemove',e=>{const c=e.target.closest('.task');if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+/* magnetic CTA */
+$$('.cta,.spin-btn').forEach(b=>{if(reduce)return;b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.translate=`${(e.clientX-r.left-r.width/2)*.08}px ${(e.clientY-r.top-r.height/2)*.18}px`});b.addEventListener('mouseleave',()=>b.style.translate='')});
+
+</script>
+</body>
+</html>

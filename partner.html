@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Турнир для подписчиков Партнёр — CoinW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#06040f;--brand:#5227FE;--brand2:#7d5cff;--brand3:#b9a8ff;--pink:#c24bff;--cyan:#27d8ff;--mint:#3dffb0;
+  --text:#f4f2ff;--mute:#9a95b8;--line:rgba(255,255,255,.08);--glass:rgba(255,255,255,.045);
+  --grad:linear-gradient(120deg,#5227FE 0%,#8a5cff 45%,#c24bff 100%);
+  /* aliases used by the script-generated markup */
+  --gold:#a58bff;--gold2:#cbbaff;--orange:#7a5cff;--cw:#5227FE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{width:min(1200px,100% - 32px);margin:0 auto;position:relative}
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:60;background:rgba(6,4,15,.72);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:28px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;font-size:21px;letter-spacing:-.4px}
+.logo svg{width:32px;height:32px;border-radius:9px;box-shadow:0 0 20px rgba(82,39,254,.7);animation:logoGlow 3s ease-in-out infinite}
+@keyframes logoGlow{50%{box-shadow:0 0 34px rgba(124,92,255,1)}}
+nav{display:flex;gap:22px;font-size:13px;color:#cfcbe8;flex:1}
+nav a{color:inherit;white-space:nowrap;position:relative;padding:4px 0;transition:.2s}
+nav a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--grad);transition:.3s;border-radius:2px}
+nav a:hover{color:#fff}nav a:hover::after{width:100%}
+.hdr-r{display:flex;gap:16px;align-items:center;font-size:13px}
+.btn-reg{background:var(--brand);padding:9px 20px;border-radius:22px;font-weight:700;font-size:13px;position:relative;overflow:hidden;box-shadow:0 0 22px rgba(82,39,254,.6);transition:.25s}
+.btn-reg:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(124,92,255,.9)}
+@media(max-width:960px){nav{display:none}.hdr-r{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;min-height:760px;isolation:isolate}
+.aurora{position:absolute;inset:-20%;z-index:-3;filter:blur(70px);opacity:.9}
+.aurora i{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:drift 18s ease-in-out infinite}
+.aurora i:nth-child(1){width:46vw;height:46vw;left:4%;top:-8%;background:radial-gradient(circle,#5227FE,transparent 65%)}
+.aurora i:nth-child(2){width:38vw;height:38vw;right:0;top:6%;background:radial-gradient(circle,#c24bff,transparent 65%);animation-duration:22s;animation-delay:-6s}
+.aurora i:nth-child(3){width:34vw;height:34vw;left:34%;bottom:-18%;background:radial-gradient(circle,#27d8ff55,transparent 65%);animation-duration:26s;animation-delay:-12s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vw,4vw) scale(1.15)}66%{transform:translate(-4vw,6vw) scale(.9)}}
+.grid-floor{position:absolute;left:-30%;right:-30%;bottom:-10%;height:55%;z-index:-2;transform:perspective(500px) rotateX(62deg);transform-origin:bottom;
+  background-image:linear-gradient(rgba(138,92,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(138,92,255,.5) 1px,transparent 1px);background-size:60px 60px;
+  mask-image:linear-gradient(transparent,#000 70%);animation:gridmove 2.4s linear infinite}
+@keyframes gridmove{to{background-position:0 60px}}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.giant{position:absolute;left:0;right:0;top:46%;z-index:-1;white-space:nowrap;font-weight:900;font-size:clamp(160px,22vw,320px);letter-spacing:-.02em;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(138,92,255,.28);animation:giant 40s linear infinite;user-select:none}
+@keyframes giant{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px;padding:70px 0 40px;min-height:700px}
+.pill{display:inline-flex;gap:10px;align-items:center;padding:8px 16px;border-radius:30px;background:var(--glass);border:1px solid rgba(138,92,255,.4);font-size:12.5px;font-weight:600;color:var(--brand3);backdrop-filter:blur(8px)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(61,255,176,.7);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(61,255,176,0)}100%{box-shadow:0 0 0 0 rgba(61,255,176,0)}}
+.hero h1{white-space:nowrap;font-size:clamp(46px,7.6vw,116px);line-height:.98;font-weight:900;letter-spacing:-.04em;margin-top:22px}
+.hero h1 .gx{color:#fff;display:inline-block}
+@keyframes gx{to{background-position:-250% 0}}
+.hero h1 .w{display:inline-block;color:#5227FE;text-shadow:0 0 40px rgba(82,39,254,.8)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:#d8d3f5;margin-top:22px;max-width:520px}
+.prize-box{margin-top:26px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.prize-box small{font-size:12px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase;font-weight:600;width:100%}
+.prize-num{font-weight:900;font-size:clamp(52px,7vw,104px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap;
+  background:linear-gradient(180deg,#fff 10%,#b9a8ff 60%,#7d5cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(124,92,255,.65));position:relative}
+.cta-row{display:flex;gap:14px;align-items:center;margin-top:30px;position:relative;flex-wrap:wrap}
+.cta{position:relative;padding:20px 36px;border-radius:16px;font-weight:800;font-size:16px;color:#fff;background:var(--brand);overflow:hidden;transition:.25s;box-shadow:0 10px 40px rgba(82,39,254,.6);isolation:isolate}
+.cta::before{content:"";position:absolute;inset:-2px;z-index:-1;background:conic-gradient(from var(--a,0deg),#5227FE,#c24bff,#27d8ff,#5227FE);animation:spinA 3s linear infinite;border-radius:inherit}
+.cta::after{content:"";position:absolute;inset:2px;z-index:-1;background:linear-gradient(180deg,#6a43ff,#4519e6);border-radius:14px}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes spinA{to{--a:360deg}}
+.cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 60px rgba(124,92,255,.9)}
+.cta .tip,.round-btn .tip{position:absolute;top:-14px;left:50%;background:#fff;color:var(--brand);font-size:10px;font-weight:800;padding:3px 9px;border-radius:9px;white-space:nowrap;animation:tipbob 2s ease-in-out infinite;z-index:3}
+@keyframes tipbob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+.cta::selection{background:none}
+.round-btn{position:relative;width:54px;height:54px;border-radius:16px;border:1px solid var(--line);background:var(--glass);display:grid;place-items:center;transition:.25s;backdrop-filter:blur(8px)}
+.round-btn:hover{border-color:var(--brand2);transform:translateY(-3px) rotate(-6deg);box-shadow:0 8px 30px rgba(82,39,254,.5)}
+.round-btn svg{width:22px;height:22px}
+.round-btn .tip{left:auto;right:-6px;top:-36px;transform:none;animation:none}
+.cd-wrap{margin-top:34px}
+.cd-wrap small{display:block;font-size:11px;letter-spacing:.18em;color:var(--mute);margin-bottom:10px;font-weight:600}
+.cd{display:flex;gap:10px}
+.cdt{min-width:74px;padding:12px 10px 10px;text-align:center;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.cdt::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.07)}
+.cdt b{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
+.cdt small{font-size:10px;letter-spacing:.1em;margin:4px 0 0;color:var(--mute);font-weight:600;text-transform:uppercase}
+.cdt.tick b{animation:flip .5s}
+@keyframes flip{0%{transform:translateY(-60%);opacity:0}100%{transform:none;opacity:1}}
+
+/* 3D coin */
+.coin-stage{position:relative;height:620px;display:grid;place-items:center;perspective:1100px}
+.halo{position:absolute;border-radius:50%;border:1.5px dashed rgba(138,92,255,.45);animation:rot 30s linear infinite}
+.halo.h1{width:480px;height:480px}.halo.h2{width:620px;height:620px;border-style:solid;border-color:rgba(138,92,255,.16);animation-direction:reverse;animation-duration:48s}
+.halo.h3{width:360px;height:360px;border-color:rgba(39,216,255,.35);animation-duration:20s}
+@keyframes rot{to{transform:rotate(360deg)}}
+.orbit{position:absolute;width:480px;height:480px;animation:rot 14s linear infinite}
+.orbit.o2{width:620px;height:620px;animation-duration:24s;animation-direction:reverse}
+.orbit .mc{position:absolute;top:-17px;left:50%;margin-left:-17px;width:34px;height:34px;filter:drop-shadow(0 0 12px rgba(138,92,255,.9))}
+.orbit .mc svg{width:100%;height:100%;animation:rot 3s linear infinite reverse}
+.coin-tilt{transform-style:preserve-3d;transform:rotateY(calc(var(--px,0)*18deg)) rotateX(calc(var(--py,0)*-14deg));transition:transform .15s ease-out}
+.coin-float{animation:cfloat 5s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes cfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+.coin3d{width:300px;height:300px;position:relative;transform-style:preserve-3d;animation:cspin 9s cubic-bezier(.45,.05,.55,.95) infinite}
+@keyframes cspin{0%{transform:rotateY(-25deg)}50%{transform:rotateY(155deg)}100%{transform:rotateY(335deg)}}
+.coin3d .face,.coin3d .edge{position:absolute;inset:0;border-radius:50%}
+.coin3d .face{backface-visibility:hidden;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 30% 25%,#9a7bff 0%,#5227FE 45%,#2a0f9e 100%);box-shadow:inset 0 0 0 10px #3b1bd0,inset 0 0 0 13px #8a6bff,inset 0 0 60px rgba(0,0,0,.45)}
+.coin3d .face svg{width:56%;height:56%;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
+.coin3d .face::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 3.6s ease-in-out infinite}
+@keyframes sheen{0%,35%{transform:translateX(-120%)}70%,100%{transform:translateX(120%)}}
+.coin3d .front{transform:translateZ(16px)}.coin3d .back{transform:rotateY(180deg) translateZ(16px)}
+.coin3d .edge{background:#3a17c8;border:1px solid #6a4bff}
+.coin-shadow{position:absolute;bottom:56px;width:260px;height:30px;border-radius:50%;background:radial-gradient(ellipse,rgba(82,39,254,.7),transparent 70%);animation:cshadow 5s ease-in-out infinite;filter:blur(6px)}
+@keyframes cshadow{50%{transform:scale(.75);opacity:.5}}
+.chip3{position:absolute;z-index:5;padding:12px 16px;border-radius:16px;background:rgba(24,16,60,.88);border:1px solid rgba(138,92,255,.45);box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 24px rgba(82,39,254,.25);font-size:12px;color:var(--mute);animation:chipf 6s ease-in-out infinite;display:flex;gap:10px;align-items:center}
+.chip3 b{display:block;font-size:17px;color:#fff;font-weight:800}
+.chip3 .ic{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-weight:900}
+.chip3.c1{left:-2%;top:16%}.chip3.c2{right:-2%;top:30%;animation-delay:-2s}.chip3.c3{left:4%;bottom:12%;animation-delay:-4s}
+@keyframes chipf{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
+.spk{position:absolute;width:10px;height:10px;background:#fff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:tw 2.4s ease-in-out infinite;filter:drop-shadow(0 0 6px #b9a8ff)}
+@keyframes tw{0%,100%{transform:scale(0) rotate(0)}50%{transform:scale(1.4) rotate(90deg)}}
+
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;padding-top:36px}
+  .coin-stage{height:430px;order:-1;transform:scale(.68);margin:-60px 0}
+  .cdt{min-width:62px}.cdt b{font-size:24px}
+}
+
+/* ---------- stats strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-30px;position:relative;z-index:5}
+.stat{padding:22px 24px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);backdrop-filter:blur(14px);position:relative;overflow:hidden;transition:.3s}
+.stat:hover{transform:translateY(-6px);border-color:rgba(138,92,255,.6);box-shadow:0 20px 50px rgba(82,39,254,.3)}
+.stat::before{content:"";position:absolute;width:120px;height:120px;right:-30px;top:-30px;border-radius:50%;background:radial-gradient(circle,rgba(138,92,255,.5),transparent 70%)}
+.stat b{font-size:clamp(24px,2.6vw,36px);font-weight:900;letter-spacing:-.03em;display:block;position:relative}
+.stat span{font-size:12.5px;color:var(--mute);display:block;margin-top:6px;position:relative;line-height:1.4}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr;margin-top:10px}}
+
+/* ---------- tabs ---------- */
+.tabs{margin-top:60px;position:sticky;top:68px;z-index:50;display:grid;grid-template-columns:1fr 1fr;padding:6px;border-radius:20px;background:rgba(14,10,34,.8);border:1px solid var(--line);backdrop-filter:blur(16px);max-width:560px;margin-left:auto;margin-right:auto;width:calc(100% - 32px)}
+.tabs::before{content:"";position:absolute;top:6px;bottom:6px;left:6px;width:calc(50% - 6px);border-radius:15px;background:var(--grad);box-shadow:0 8px 30px rgba(82,39,254,.6);transition:transform .45s cubic-bezier(.5,1.4,.4,1)}
+.tabs.t2::before{transform:translateX(100%)}
+.tab{position:relative;padding:15px 10px;text-align:center;font-weight:700;font-size:15px;color:var(--mute);transition:color .3s;z-index:1}
+.tab.on{color:#fff}
+section.pane{display:none;padding:70px 0 30px}
+section.pane.on{display:block;animation:paneIn .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- lottery ---------- */
+.sec-title{text-align:center;font-size:clamp(36px,4.6vw,64px);font-weight:900;letter-spacing:-.04em}
+.sec-title em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-sub{text-align:center;color:#c9c4ea;font-size:15px;margin-top:14px;line-height:1.7}
+.ticker{margin-top:30px;border:1px solid var(--line);background:var(--glass);border-radius:16px;height:50px;display:flex;align-items:center;overflow:hidden;position:relative;backdrop-filter:blur(10px)}
+.ticker svg{position:absolute;left:16px;width:18px;fill:none;stroke:var(--brand3);z-index:2}
+.ticker::before,.ticker::after{content:"";position:absolute;top:0;bottom:0;width:70px;z-index:1;pointer-events:none}
+.ticker::before{left:0;background:linear-gradient(90deg,#0b0820 45%,transparent)}.ticker::after{right:0;background:linear-gradient(270deg,#0b0820 20%,transparent)}
+.ticker-track{display:flex;white-space:nowrap;animation:marq 80s linear infinite;padding-left:50px;font-size:13px;color:#d4d0ee}
+.ticker-track span{padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,.12)}
+.ticker-track b{color:var(--brand3);font-weight:700}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.machine{position:relative;width:min(860px,100%);margin:50px auto 0;padding:0}
+.m-glow{position:absolute;inset:-60px;background:radial-gradient(ellipse at 50% 50%,rgba(82,39,254,.55),transparent 65%);filter:blur(30px);animation:pulse 3.4s ease-in-out infinite;z-index:0}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.m-frame{position:relative;z-index:1;border-radius:36px;padding:3px;background:conic-gradient(from var(--a,0deg),#5227FE,#c24bff,#27d8ff,#5227FE);animation:spinA 6s linear infinite}
+.machine.spinning .m-frame{animation-duration:1.2s}
+.m-in{border-radius:34px;background:linear-gradient(180deg,#120c2c,#0a0618);padding:34px 34px 38px;position:relative;overflow:hidden}
+.m-in::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(138,92,255,.35),transparent 60%),repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);pointer-events:none}
+.m-top{display:flex;flex-direction:column;align-items:center;gap:16px;position:relative}
+.emblem{width:60px;height:60px;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(82,39,254,.9);animation:emb 4s ease-in-out infinite}
+@keyframes emb{50%{transform:translateY(-6px) rotate(4deg)}}
+.emblem svg{width:100%;height:100%;display:block}
+.attempts{padding:13px 28px;border-radius:40px;font-size:16px;font-weight:600;background:rgba(255,255,255,.05);border:1px solid rgba(138,92,255,.5);white-space:nowrap}
+.attempts b{color:#fff;margin-left:8px;display:inline-block;min-width:24px;font-size:20px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.attempts b.bump{animation:bump .55s}
+@keyframes bump{40%{transform:scale(1.9)}}
+.reel-win{position:relative;margin:28px 0 26px;height:170px;overflow:hidden;border-radius:22px;background:rgba(0,0,0,.45);border:1px solid rgba(138,92,255,.35);box-shadow:inset 0 0 40px rgba(82,39,254,.35);padding:12px 0}
+.reel-win::before,.reel-win::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:3;pointer-events:none}
+.reel-win::before{left:0;background:linear-gradient(90deg,#0a0618,transparent)}.reel-win::after{right:0;background:linear-gradient(270deg,#0a0618,transparent)}
+.ptr{position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(transparent,#fff,transparent);z-index:4;opacity:.55;box-shadow:0 0 18px #8a6dff}
+.ptr::before,.ptr::after{content:"";position:absolute;left:-7px;border:7px solid transparent}
+.ptr::before{top:0;border-top-color:#fff}.ptr::after{bottom:0;border-bottom-color:#fff}
+.reel-win.spinning .ptr{opacity:1;animation:ptrp .3s infinite alternate}
+@keyframes ptrp{to{box-shadow:0 0 34px #c24bff}}
+.reel{display:flex;gap:2.2%;height:100%;will-change:transform}
+.reel.idle{animation:reelIdle 70s linear infinite}
+@keyframes reelIdle{to{transform:translateX(-50%)}}
+.prize{flex:none;width:var(--cw,130px);height:100%;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8px;text-align:center;position:relative}
+.prize svg{width:46px;height:32px}
+.prize .v{font-weight:900;font-size:clamp(15px,1.7vw,20px);margin-top:2px}
+.prize hr{width:60%;border:0;border-top:1px solid rgba(255,255,255,.12);margin:2px 0}
+.prize .n{font-size:clamp(8px,.85vw,10.5px);color:var(--mute);line-height:1.3}
+.prize.hit{border-color:#fff;background:linear-gradient(180deg,rgba(138,92,255,.6),rgba(82,39,254,.3));box-shadow:0 0 40px rgba(138,92,255,.95),inset 0 0 24px rgba(255,255,255,.2);animation:hit .6s ease-in-out 4}
+@keyframes hit{50%{transform:scale(1.12)}}
+.spin-btn{position:relative;display:block;width:100%;max-width:520px;margin:0 auto;height:66px;border-radius:20px;font-weight:900;font-size:18px;color:#fff;letter-spacing:.02em;overflow:hidden;background:var(--grad);box-shadow:0 12px 50px rgba(82,39,254,.8);transition:.2s;animation:btnpulse 2.4s ease-in-out infinite}
+.spin-btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 3s ease-in-out infinite}
+.spin-btn:hover{transform:translateY(-3px) scale(1.02)}
+.spin-btn:disabled{filter:grayscale(.4) brightness(.8);animation:none;cursor:wait}
+@keyframes btnpulse{50%{box-shadow:0 12px 80px rgba(194,75,255,.95)}}
+.fc{position:absolute;z-index:2;width:70px;height:70px;filter:drop-shadow(0 10px 20px rgba(82,39,254,.8));animation:fcf 5s ease-in-out infinite}
+.fc.f1{left:-34px;top:20%}.fc.f2{right:-30px;top:48%;animation-delay:-2s;width:54px;height:54px}.fc.f3{left:6%;bottom:-30px;animation-delay:-3.5s;width:44px;height:44px}
+@keyframes fcf{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(14deg)}}
+.sparks{position:absolute;inset:0;pointer-events:none;z-index:6}
+.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 14px #8a6dff;animation:spk 1.1s ease-out forwards}
+@keyframes spk{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+@media(max-width:640px){.m-in{padding:24px 14px 28px}.reel-win{height:150px}.attempts{font-size:13px;padding:10px 18px}.fc{display:none}}
+
+h3.big{font-size:clamp(26px,3vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1.15;margin:110px 0 26px;max-width:760px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:10px 18px;border-radius:30px;font-size:13px;font-weight:600;color:var(--mute);border:1px solid var(--line);background:var(--glass);transition:.25s}
+.chip:hover{color:#fff;border-color:rgba(138,92,255,.6)}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(82,39,254,.5)}
+.tasks{display:grid;gap:14px;margin-top:22px}
+.task{--mx:50%;--my:50%;position:relative;display:grid;grid-template-columns:1fr auto auto;gap:22px;align-items:center;padding:26px 30px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:border-color .3s,box-shadow .3s,opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.task::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(138,92,255,.22),transparent 60%);opacity:0;transition:.3s;pointer-events:none}
+.task:hover::before{opacity:1}
+.task:hover{border-color:rgba(138,92,255,.55);box-shadow:0 20px 60px rgba(82,39,254,.2)}
+.task>*{position:relative}
+.task h4{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+.task p{font-size:12.5px;color:var(--mute);line-height:1.6;margin-top:9px;max-width:560px}
+.prog{margin-top:14px;font-size:12px;color:var(--mute)}
+.prog b{color:#fff;margin:0 3px}
+.bar{height:6px;border-radius:4px;background:rgba(255,255,255,.08);margin-top:10px;overflow:hidden;max-width:340px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#5227FE,#c24bff,#27d8ff);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1);border-radius:4px;position:relative}
+.bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:bshine 2s linear infinite}
+@keyframes bshine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.reward{display:flex;flex-direction:column;gap:10px;font-size:20px;font-weight:900;min-width:140px}
+.reward .row{display:flex;align-items:center;gap:9px;color:#fff}
+.reward .row:first-child{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.reward .row small{font-size:11px;font-weight:600;color:var(--brand3)}
+.reward svg{width:22px;height:22px;color:var(--brand3)}
+.tiers{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.tier{font-size:11px;color:var(--mute);text-align:center;padding:9px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.tier b{display:block;color:#fff;font-size:12px;margin-top:2px}
+.tier em{font-style:normal;color:var(--brand3);font-weight:800;font-size:14px;display:block}
+.tier.done{background:rgba(82,39,254,.3);border-color:var(--brand2);box-shadow:0 0 20px rgba(82,39,254,.4)}
+.tier.done em{color:#fff}
+.act{padding:15px 28px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(138,92,255,.6);color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:.25s;white-space:nowrap;position:relative;overflow:hidden}
+.act:hover{background:var(--brand);box-shadow:0 0 30px rgba(82,39,254,.8);transform:translateY(-2px)}
+.act.done{opacity:.45;pointer-events:none;border-color:var(--mint);color:var(--mint)}
+@media(max-width:760px){.task{grid-template-columns:1fr;gap:16px;padding:22px}.reward{flex-direction:row;align-items:center;gap:18px}}
+
+/* ---------- tournament ---------- */
+.t-head{text-align:center;margin-bottom:40px}
+.t-head p{color:#d1ccf0;font-size:16px;line-height:1.7;margin-top:16px}
+.t-head a{color:var(--brand3);font-size:13px;text-decoration:none;display:inline-block;margin-top:10px;font-weight:600}
+.stages{display:flex;gap:10px;align-items:center;margin-top:46px;flex-wrap:wrap}
+.stage-t{}
+.stage{padding:11px 22px;font-size:13px;font-weight:700;color:var(--mute);border-radius:30px;border:1px solid var(--line);background:var(--glass);transition:.25s}
+.stage:hover{color:#fff}
+.stage.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(82,39,254,.5)}
+.stage-time{margin-left:auto;font-size:12px;background:var(--glass);border:1px solid var(--line);padding:10px 16px;border-radius:12px;color:#d4d0ee}
+.rtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.rtab{padding:20px;border-radius:18px;background:var(--glass);border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--mute);transition:.3s}
+.rtab:hover{transform:translateY(-3px);color:#fff}
+.rtab.on{background:linear-gradient(135deg,rgba(82,39,254,.55),rgba(194,75,255,.25));border-color:var(--brand2);color:#fff;box-shadow:0 14px 40px rgba(82,39,254,.4)}
+.t-grid{display:grid;grid-template-columns:380px 1fr;gap:20px;margin-top:22px}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:24px;padding:26px}
+.card h5{font-size:19px;font-weight:800}
+.card .sub{font-size:12px;color:var(--mute);line-height:1.5;margin:8px 0 16px}
+.pf{display:flex;align-items:center;justify-content:space-between;padding:15px 14px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;transition:.25s;border-radius:12px}
+.pf:hover{background:rgba(138,92,255,.12);transform:translateX(4px)}
+.pf.top{background:linear-gradient(100deg,rgba(82,39,254,.5),rgba(194,75,255,.15));border:1px solid rgba(138,92,255,.5);margin-bottom:8px;position:relative;overflow:hidden}
+.pf.top::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 4s ease-in-out infinite}
+.pf .r{text-align:right;font-size:16px;font-weight:900}.pf .r small{display:block;font-size:10px;font-weight:500;color:var(--mute);margin-top:2px}
+.pf .l{display:flex;gap:10px;align-items:center}
+.medal{width:26px;height:26px}
+.board-h{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.board-h h5{flex:1}
+.search{display:flex;align-items:center;background:rgba(0,0,0,.4);border:1px solid var(--line);border-radius:12px;padding:0 14px;height:42px;width:250px;transition:.25s}
+.search:focus-within{border-color:var(--brand2);box-shadow:0 0 20px rgba(82,39,254,.4)}
+.search input{background:none;border:0;outline:0;color:#fff;flex:1;font-size:13px}
+.th,.tr{display:grid;grid-template-columns:70px 1fr 120px 170px;gap:8px;padding:13px 12px;font-size:11.5px;color:var(--mute)}
+.tr{font-size:13.5px;color:#eeeaff;border-bottom:1px solid var(--line);animation:fadein .4s both;align-items:center;border-radius:10px;transition:.2s}
+.tr:hover{background:rgba(138,92,255,.12)}
+.tr .rk{font-weight:900;color:var(--brand3)}
+.tr .num,.th .num{text-align:right}
+.empty{text-align:center;padding:70px 20px 40px;color:var(--mute)}
+.empty .ico{width:90px;margin:0 auto 18px;opacity:.85;animation:floaty2 3s ease-in-out infinite}
+@keyframes floaty2{50%{transform:translateY(-10px)}}
+.empty h6{font-size:17px;color:#fff;font-weight:700}
+.empty p{font-size:12px;line-height:1.7;margin-top:14px;max-width:620px;margin-inline:auto}
+.empty .cdn{font-size:30px;font-weight:900;margin-top:14px;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(max-width:960px){.t-grid{grid-template-columns:1fr}.rtabs{grid-template-columns:1fr}.th,.tr{grid-template-columns:44px 1fr 90px 110px}.stage-time{margin-left:0;width:100%}}
+
+/* ---------- rules / footer ---------- */
+.rules{padding:80px 0 40px}
+.rules h2{font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.03em;margin-bottom:34px}
+.rules ol{list-style:none;counter-reset:r;display:grid;gap:14px}
+.rules li{counter-increment:r;display:grid;grid-template-columns:40px 1fr;gap:14px;font-size:13.5px;line-height:1.65;color:#cfcaea;padding:16px 18px;border-radius:16px;background:var(--glass);border:1px solid var(--line);transition:.25s}
+.rules li:hover{border-color:rgba(138,92,255,.5);background:rgba(138,92,255,.08)}
+.rules li::before{content:counter(r);width:32px;height:32px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:13px;font-weight:800;color:#fff}
+footer{border-top:1px solid var(--line);padding:34px 0 90px;color:#7b7696;font-size:11.5px;line-height:1.7}
+footer h6{color:#a29dc4;font-size:12.5px;margin:16px 0 8px}
+.demo-note{font-size:10.5px;color:#6a6585;margin-top:14px}
+
+/* ---------- modal / toast / misc ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(4,2,12,.8);backdrop-filter:blur(8px);z-index:100;display:none;place-items:center;padding:20px}
+.modal-bg.on{display:grid;animation:fadein .25s}
+.modal{width:min(440px,100%);background:linear-gradient(180deg,#1a1240,#0b0720);border:1px solid rgba(138,92,255,.6);border-radius:28px;padding:36px 30px;text-align:center;box-shadow:0 0 90px rgba(82,39,254,.55);position:relative;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.6) rotate(-4deg);opacity:0}}
+.modal h3{font-size:24px;margin-bottom:6px;font-weight:900}
+.modal p{font-size:13.5px;color:#c5c0e6;line-height:1.6;margin:8px 0 20px}
+.modal .big-prize{margin:16px auto;width:190px;aspect-ratio:1;border-radius:28px;background:radial-gradient(circle at 50% 30%,#4a2bd8,#150b3d);border:1px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 0 60px rgba(138,92,255,.8);animation:glowp 1.6s infinite}
+@keyframes glowp{50%{box-shadow:0 0 100px rgba(194,75,255,1)}}
+.modal .big-prize svg{width:70px;height:48px}
+.modal .big-prize b{font-size:32px;font-weight:900}
+.modal .big-prize span{font-size:12px;color:#d6d1f5;padding:0 12px}
+.modal .x{position:absolute;right:16px;top:12px;font-size:24px;color:#8a85a8}
+.modal .act{width:100%;background:var(--grad);border:0;padding:17px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,40px);background:rgba(20,14,48,.92);border:1px solid var(--brand2);color:#fff;padding:14px 22px;border-radius:14px;font-size:13.5px;opacity:0;transition:.35s;z-index:120;pointer-events:none;box-shadow:0 0 40px rgba(82,39,254,.5);max-width:90vw;text-align:center;backdrop-filter:blur(10px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.support{position:fixed;right:22px;bottom:24px;width:50px;height:50px;border-radius:16px;background:var(--brand);display:grid;place-items:center;z-index:60;box-shadow:0 8px 30px rgba(82,39,254,.7);animation:emb 4s ease-in-out infinite}
+.confetti{position:fixed;top:-20px;width:9px;height:14px;z-index:130;pointer-events:none;animation:fall linear forwards;border-radius:2px}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a7bff"/><stop offset="1" stop-color="#5227FE"/></linearGradient>
+    <symbol id="ticket" viewBox="0 0 44 30"><path d="M3 3h38v7a5 5 0 0 0 0 10v7H3v-7a5 5 0 0 0 0-10z" fill="url(#vg)" stroke="#d9ceff" stroke-width="1.2"/><text x="22" y="21" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Inter">$</text></symbol>
+    <symbol id="coinic" viewBox="0 0 44 30"><circle cx="22" cy="15" r="13" fill="url(#vg)" stroke="#d9ceff" stroke-width="1.2"/><circle cx="22" cy="15" r="9.5" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"/><path transform="translate(2.28 -4.96) scale(.025)" fill="#fff" d="M710 352H1158V638H710Z M420 638H710V900Q710 953 770 953H1158V1245H770C560 1245 420 1100 420 900Z"/></symbol>
+    <symbol id="cmark" viewBox="0 0 1600 1600"><path fill="#fff" d="M710 352H1158V638H710Z M420 638H710V900Q710 953 770 953H1158V1245H770C560 1245 420 1100 420 900Z"/></symbol>
+  </defs>
+</svg>
+<style>
+/* ================= partner-page extras ================= */
+.hero.p{min-height:680px}
+.p .hero-grid{min-height:640px;padding:56px 0 30px;grid-template-columns:1fr 1fr}
+.lockup{display:inline-flex;align-items:center;gap:14px;padding:10px 18px 10px 12px;border-radius:18px;background:var(--glass);border:1px solid rgba(138,92,255,.4);backdrop-filter:blur(10px)}
+.lockup .lg{width:38px;height:38px;border-radius:11px;box-shadow:0 0 22px rgba(82,39,254,.8)}
+.lockup .x{font-size:18px;color:var(--mute);font-weight:300}
+.lockup .pa{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#c24bff,#ff7ad9);display:grid;place-items:center;font-weight:900;font-size:17px;box-shadow:0 0 22px rgba(194,75,255,.7)}
+.lockup .pt{font-size:13px;font-weight:700;line-height:1.2}.lockup .pt small{display:block;font-size:10.5px;color:var(--mute);font-weight:500}
+.p h1{font-size:clamp(34px,4.6vw,66px);line-height:1.02;letter-spacing:-.035em;font-weight:900;margin-top:24px;white-space:normal}
+.p h1 .pn{background:linear-gradient(100deg,#c24bff,#ff7ad9,#c24bff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gx 5s linear infinite;display:inline-block}
+.p .lead b{color:#fff}
+.hero-facts{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.hero-facts div{font-size:12px;color:var(--mute)}.hero-facts b{display:block;font-size:26px;color:#fff;font-weight:900;letter-spacing:-.02em}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mint)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--mint);animation:ping 1.6s infinite}
+
+/* blades duel */
+.duel{position:relative;height:540px;perspective:1100px}
+.slab{position:absolute;bottom:92px;left:50%;width:46px;height:330px;border-radius:8px;transform-origin:50% 100%;
+  transform:translateX(-50%) rotate(var(--r)) translateY(var(--ty,0));
+  background:linear-gradient(100deg,var(--c1) 0%,var(--c2) 45%,var(--c1) 100%);box-shadow:0 0 40px var(--glow),inset 0 0 0 1.5px rgba(255,255,255,.55);animation:slabIn 1.1s cubic-bezier(.2,1.1,.3,1) both,slabIdle 4.6s ease-in-out infinite;animation-delay:var(--d),calc(var(--d) + 1.1s)}
+.slab::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.7),transparent 40%);opacity:.5}
+.slab.L{--c1:#3b17c8;--c2:#9a7bff;--glow:rgba(82,39,254,.8)}
+.slab.R{--c1:#a422e8;--c2:#ff9be6;--glow:rgba(194,75,255,.8)}
+@keyframes slabIn{from{opacity:0;transform:translateX(-50%) rotate(0deg) translateY(120px) scaleY(.3)}to{opacity:1}}
+@keyframes slabIdle{50%{transform:translateX(-50%) rotate(calc(var(--r) * 1.06)) translateY(-10px);filter:brightness(1.25)}}
+.beam{position:absolute;bottom:150px;left:50%;width:160px;height:380px;margin-left:-80px;background:linear-gradient(0deg,rgba(138,92,255,.55),transparent);clip-path:polygon(35% 100%,65% 100%,100% 0,0 0);filter:blur(12px);animation:pulse 3.2s ease-in-out infinite}
+.ped{position:absolute;left:50%;bottom:20px;width:260px;height:150px;margin-left:-130px;transform-style:preserve-3d}
+.ped .top{position:absolute;left:0;right:0;top:0;height:92px;border-radius:22px;background:linear-gradient(180deg,#3a1fb8,#1a0c5c);border:1.5px solid #8a6dff;box-shadow:0 0 50px rgba(82,39,254,.9),inset 0 0 30px rgba(138,92,255,.5);display:grid;place-items:center;animation:cfloat 4.4s ease-in-out infinite}
+.ped .top svg{width:56px;height:56px;filter:drop-shadow(0 0 12px #fff)}
+.ped .base{position:absolute;left:-20px;right:-20px;bottom:0;height:70px;border-radius:50%;background:radial-gradient(ellipse,rgba(138,92,255,.7),rgba(82,39,254,.15) 60%,transparent 72%);animation:cshadow 4.4s ease-in-out infinite}
+.mini{position:absolute;bottom:40px;z-index:4;animation:cfloat 5s ease-in-out infinite}
+.mini.l{left:2%;animation-delay:-1s}.mini.r{right:2%;animation-delay:-3s}
+.mini .sc{width:150px;height:150px;transform:scale(1.2);transform-origin:50% 50%;transform-style:preserve-3d}
+.mini .coin3d{width:150px;height:150px;animation-duration:7s}
+.mini .coin3d .face{box-shadow:inset 0 0 0 6px #3b1bd0,inset 0 0 0 8px #8a6bff,inset 0 0 40px rgba(0,0,0,.45)}
+.mini.r .coin3d .face{background:radial-gradient(circle at 30% 25%,#ffb3f0 0%,#c24bff 45%,#6a10a8 100%);box-shadow:inset 0 0 0 6px #8e1fd0,inset 0 0 0 8px #ff9be6,inset 0 0 40px rgba(0,0,0,.4)}
+.mini.r .coin3d .edge{background:#8e1fd0;border-color:#ff9be6}
+.mini .face svg{width:56%;height:56%}
+.vs{position:absolute;left:50%;top:14%;transform:translateX(-50%);font-weight:900;font-size:64px;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.5);z-index:3;animation:vsp 2.4s ease-in-out infinite}
+@keyframes vsp{50%{-webkit-text-stroke-color:#fff;filter:drop-shadow(0 0 22px #8a6dff)}}
+
+/* tabs 3 */
+.tabs3{grid-template-columns:repeat(3,1fr);max-width:860px}
+.tabs3::before{width:calc(33.333% - 4px)}
+.tabs3.t1::before{transform:translateX(100%)}.tabs3.t2::before{transform:translateX(200%)}
+.tabs3 .tab{font-size:14px;padding:15px 8px}
+@media(max-width:700px){.tabs3 .tab{font-size:11px;padding:12px 4px}}
+
+/* my card */
+.me{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:14px;align-items:center;padding:24px 28px;border-radius:24px;background:linear-gradient(135deg,rgba(82,39,254,.4),rgba(194,75,255,.12));border:1px solid rgba(138,92,255,.55);position:relative;overflow:hidden}
+.me::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.1) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 5s ease-in-out infinite}
+.me small{display:block;font-size:11.5px;color:#cbc4f5;margin-bottom:6px;font-weight:600}
+.me b{font-size:26px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.me .hint{grid-column:1/-1;font-size:12.5px;color:#d8d2ff;padding-top:12px;border-top:1px solid rgba(255,255,255,.12)}
+.me .hint em{font-style:normal;color:#fff;font-weight:800}
+.me .act{background:var(--grad);border:0}
+.me .rk-up{animation:bump .6s}
+@media(max-width:760px){.me{grid-template-columns:1fr 1fr}.me .act{grid-column:1/-1}}
+
+/* board */
+.b-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:36px 0 6px}
+.b-head h3{font-size:clamp(22px,2.4vw,30px);font-weight:900;letter-spacing:-.03em;flex:1}
+.b-note{font-size:12.5px;color:var(--mute);line-height:1.6;max-width:760px}
+.board{margin-top:18px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--line);padding:10px 14px 18px}
+.brow{display:grid;grid-template-columns:70px 1fr 160px 190px;gap:10px;padding:15px 14px;align-items:center;border-radius:14px;transition:background .25s,transform .25s;position:relative}
+.brow.h{font-size:11.5px;color:var(--mute);font-weight:600}
+.brow:not(.h):hover{background:rgba(138,92,255,.12);transform:translateX(4px)}
+.brow .r{font-weight:900;color:var(--brand3);display:flex;align-items:center}
+.brow .v,.brow .e{text-align:right;font-variant-numeric:tabular-nums}
+.brow .e{color:var(--brand3);font-weight:700}
+.brow .u{font-weight:600;display:flex;align-items:center;gap:10px;min-width:0}
+.brow .u i{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#5227FE,#c24bff);flex:none;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800}
+.brow.g1{background:linear-gradient(100deg,rgba(255,200,80,.18),transparent 70%)}.brow.g2{background:linear-gradient(100deg,rgba(200,210,255,.14),transparent 70%)}.brow.g3{background:linear-gradient(100deg,rgba(255,150,100,.14),transparent 70%)}
+.medalc{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:900;color:#1a1000}
+.g1 .medalc{background:linear-gradient(135deg,#fff0a8,#ffb400);box-shadow:0 0 18px rgba(255,190,0,.6)}.g2 .medalc{background:linear-gradient(135deg,#fff,#aeb7d6)}.g3 .medalc{background:linear-gradient(135deg,#ffcfa8,#d9803a)}
+.brow.me-row{background:linear-gradient(100deg,rgba(82,39,254,.55),rgba(194,75,255,.2));border:1px solid var(--brand2);box-shadow:0 0 30px rgba(82,39,254,.5)}
+.brow.flash .v{animation:flashv .9s}
+@keyframes flashv{20%{color:#fff;text-shadow:0 0 14px #8a6dff;transform:scale(1.06)}}
+.brow{animation:fadein .45s both}
+.pag{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.pag button{min-width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--glass);font-weight:700;font-size:13px;color:var(--mute);transition:.2s}
+.pag button:hover{color:#fff;border-color:var(--brand2)}
+.pag button.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(82,39,254,.5)}
+.disclaimer{margin-top:14px;font-size:11.5px;color:#7b7696;text-align:center}
+@media(max-width:760px){.brow{grid-template-columns:40px 1fr 96px;gap:6px;padding:13px 8px}.brow .e{display:none}.brow.h .e{display:none}.brow .v{font-size:12.5px}}
+
+/* pool */
+.pool{margin-top:60px;border-radius:30px;padding:40px;background:radial-gradient(ellipse at 20% 0%,rgba(82,39,254,.5),transparent 55%),linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015));border:1px solid rgba(138,92,255,.4);position:relative;overflow:hidden}
+.pool h3{font-size:clamp(24px,2.8vw,36px);font-weight:900;letter-spacing:-.03em}
+.pool .sub{color:#cbc4f5;font-size:14px;margin-top:8px}
+.pool-nums{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+.pn small{display:block;font-size:12px;color:var(--mute);margin-bottom:6px;font-weight:600}
+.pn b{font-size:clamp(34px,4.4vw,60px);font-weight:900;letter-spacing:-.04em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#b9a8ff);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1.05}
+.pn.big b{filter:drop-shadow(0 0 24px rgba(124,92,255,.7))}
+.track{position:relative;margin:56px 14px 18px;height:10px;border-radius:6px;background:rgba(255,255,255,.1)}
+.track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,#5227FE,#c24bff,#27d8ff);transition:width 1.2s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 24px rgba(138,92,255,.9)}
+.track .fill::after{content:"";position:absolute;right:-7px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(138,92,255,.5),0 0 24px #8a6dff;animation:ping2 1.6s infinite}
+@keyframes ping2{50%{box-shadow:0 0 0 12px rgba(138,92,255,0),0 0 24px #8a6dff}}
+.node{position:absolute;top:50%;transform:translate(-50%,-50%);text-align:center}
+.node i{display:block;width:22px;height:22px;border-radius:50%;background:#1a1440;border:2px solid rgba(255,255,255,.25);margin:0 auto;transition:.5s}
+.node.on i{background:var(--brand);border-color:#fff;box-shadow:0 0 20px #8a6dff}
+.node .lv{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:13px;font-weight:900;color:var(--mute);transition:.5s}
+.node.on .lv{color:#fff}
+.node .rw{position:absolute;top:36px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:700;color:var(--mute)}
+.node.on .rw{color:var(--brand3)}
+.node.pop i{animation:nodepop .8s}
+@keyframes nodepop{40%{transform:scale(1.9)}}
+.dist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:62px}
+.dcard{padding:22px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--line);position:relative;overflow:hidden;transition:.3s}
+.dcard:hover{transform:translateY(-5px);border-color:var(--brand2)}
+.dcard .t{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--brand3)}
+.dcard b{display:block;font-size:30px;font-weight:900;margin:8px 0 12px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.dcard .bar2{height:6px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
+.dcard .bar2 i{display:block;height:100%;width:0;border-radius:4px;background:var(--grad);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.dcard .pc{position:absolute;right:16px;top:14px;font-size:28px;font-weight:900;color:rgba(255,255,255,.12)}
+.dcard.g1 .t{color:#ffd45c}.dcard.g1{background:linear-gradient(160deg,rgba(255,200,80,.14),rgba(255,255,255,.03))}
+@media(max-width:760px){.pool{padding:24px}.pool-nums,.dist{grid-template-columns:1fr}.track{margin-left:30px;margin-right:30px}}
+
+/* podium (newbies) */
+.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;align-items:end;margin-top:26px}
+.pod{padding:26px 18px;text-align:center;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015));border:1px solid var(--line);transition:.3s;position:relative;overflow:hidden}
+.pod:hover{transform:translateY(-8px);border-color:var(--brand2)}
+.pod .n{width:46px;height:46px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-weight:900;color:#1a1000;font-size:18px}
+.pod.p1{padding:38px 18px;background:linear-gradient(160deg,rgba(82,39,254,.55),rgba(194,75,255,.15));border-color:rgba(138,92,255,.7);box-shadow:0 20px 60px rgba(82,39,254,.4)}
+.pod.p1 .n{background:linear-gradient(135deg,#fff0a8,#ffb400);box-shadow:0 0 24px rgba(255,190,0,.6)}.pod.p2 .n{background:linear-gradient(135deg,#fff,#aeb7d6)}.pod.p3 .n{background:linear-gradient(135deg,#ffcfa8,#d9803a)}
+.pod b{display:block;font-size:34px;font-weight:900;letter-spacing:-.03em}.pod span{font-size:12px;color:var(--mute)}
+.pod.p1::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 4s ease-in-out infinite}
+@media(max-width:700px){.podium{grid-template-columns:1fr}}
+
+/* schedule */
+.sched{display:grid;grid-template-columns:repeat(3,1fr);position:relative;margin-top:30px;gap:10px}
+.sched::before{content:"";position:absolute;left:16%;right:16%;top:21px;height:3px;background:rgba(255,255,255,.12);border-radius:2px}
+.sched .pr{position:absolute;left:16%;top:21px;height:3px;border-radius:2px;background:var(--grad);box-shadow:0 0 14px #8a6dff;transition:width 1.4s cubic-bezier(.2,.8,.2,1);width:0}
+.st{text-align:center;position:relative}
+.st i{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;margin:0 auto 14px;background:#150f3a;border:2px solid rgba(255,255,255,.2);font-style:normal;font-weight:900;transition:.5s;position:relative}
+.st.on i{background:var(--brand);border-color:#fff;box-shadow:0 0 28px #8a6dff}
+.st.cur i::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--brand2);animation:ping3 1.8s infinite}
+@keyframes ping3{from{transform:scale(.8);opacity:1}to{transform:scale(1.4);opacity:0}}
+.st b{display:block;font-size:14px;font-weight:800}.st span{font-size:13px;color:var(--brand3);margin-top:4px;display:block;font-variant-numeric:tabular-nums}
+.sec-card{margin-top:50px}
+.sec-card h3{font-size:clamp(22px,2.4vw,30px);font-weight:900;letter-spacing:-.03em}
+.sec-card .sub{font-size:13.5px;color:#bdb7e0;margin-top:8px}
+.ppane{display:none;padding:50px 0 20px}.ppane.on{display:block;animation:paneIn .6s cubic-bezier(.2,.8,.2,1)}
+.cta.sm{padding:16px 30px;font-size:15px}
+@media(max-width:960px){.p .hero-grid{grid-template-columns:1fr}.duel{height:420px;transform:scale(.75);margin:-40px -30px}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><svg viewBox="0 0 1600 1600"><rect width="1600" height="1600" fill="#5227FE"/><use href="#cmark"/></svg><span>CoinW</span></a>
+    <nav><a>Купить крипту</a><a>Рынки</a><a>Спот</a><a>Фьючерсы</a><a>TradFi</a><a>Боты</a><a>Копи-трейдинг</a><a>Earn</a><a>Центр наград</a></nav>
+    <div class="hdr-r"><span id="hdrUser" style="cursor:pointer">Войти</span><button class="btn-reg" id="hdrReg">Регистрация</button></div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero p" id="hero">
+  <div class="aurora"><i></i><i></i><i></i></div>
+  <div class="grid-floor"></div>
+  <div class="giant">ТУРНИР · ТУРНИР · ТУРНИР · ТУРНИР ·&nbsp;</div>
+  <canvas id="fx"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="lockup"><svg class="lg" viewBox="0 0 1600 1600"><rect width="1600" height="1600" fill="#5227FE"/><use href="#cmark"/></svg><span class="x">×</span><span class="pa">П</span><div class="pt">Партнёр<small>официальный партнёр CoinW</small></div></div>
+      <h1>Турнир для подписчиков <span class="pn">Партнёр</span></h1>
+      <p class="lead">Принимайте участие и выигрывайте реальные <b>USDT</b> вместе с партнёром!</p>
+      <div class="hero-facts"><div><b data-count="2500" data-pre="до " data-suf=" USDT">до 2 500 USDT</b>призовой фонд</div><div><b data-count="10">10</b>дней турнира</div><div><b>TOP 3</b>делят награды</div></div>
+      <div class="cta-row">
+        <button class="cta" id="heroReg"><span class="tip">Участие бесплатное</span><span id="heroRegTxt">Зарегистрироваться</span></button>
+        <button class="round-btn" id="shareBtn" title="Поделиться"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4M8.6 13.4l6.8 4"/></svg></button>
+      </div>
+      <div class="cd-wrap"><small id="cdLabel">ДО НАЧАЛА ТУРНИРА</small><div class="cd" id="cd"><!--S:cd--><div class="cdt tick"><b>15</b><small>дней</small></div><div class="cdt tick"><b>09</b><small>часов</small></div><div class="cdt tick"><b>37</b><small>минут</small></div><div class="cdt tick"><b>45</b><small>секунд</small></div><!--E:cd--></div></div>
+    </div>
+    <div class="duel" id="duel">
+      <div class="slab L" style="--r:-55deg;--d:0.10s;height:340px;width:42px"></div><div class="slab L" style="--r:-46deg;--d:0.19s;height:322px;width:42px"></div><div class="slab L" style="--r:-37deg;--d:0.28s;height:304px;width:42px"></div><div class="slab L" style="--r:-28deg;--d:0.37s;height:286px;width:42px"></div><div class="slab L" style="--r:-19deg;--d:0.46s;height:268px;width:42px"></div><div class="slab R" style="--r:19deg;--d:0.46s;height:268px;width:42px"></div><div class="slab R" style="--r:28deg;--d:0.37s;height:286px;width:42px"></div><div class="slab R" style="--r:37deg;--d:0.28s;height:304px;width:42px"></div><div class="slab R" style="--r:46deg;--d:0.19s;height:322px;width:42px"></div><div class="slab R" style="--r:55deg;--d:0.10s;height:340px;width:42px"></div><div class="beam"></div>
+      <div class="vs">VS</div>
+      <div class="mini l"><div class="sc"><div class="coin3d"><div class="edge" style="transform:translateZ(-8.4px)"></div><div class="edge" style="transform:translateZ(-7.2px)"></div><div class="edge" style="transform:translateZ(-6.0px)"></div><div class="edge" style="transform:translateZ(-4.8px)"></div><div class="edge" style="transform:translateZ(-3.6px)"></div><div class="edge" style="transform:translateZ(-2.4px)"></div><div class="edge" style="transform:translateZ(-1.2px)"></div><div class="edge" style="transform:translateZ(0.0px)"></div><div class="edge" style="transform:translateZ(1.2px)"></div><div class="edge" style="transform:translateZ(2.4px)"></div><div class="edge" style="transform:translateZ(3.6px)"></div><div class="edge" style="transform:translateZ(4.8px)"></div><div class="edge" style="transform:translateZ(6.0px)"></div><div class="edge" style="transform:translateZ(7.2px)"></div><div class="edge" style="transform:translateZ(8.4px)"></div><div class="face front"><svg viewBox="0 0 1600 1600"><use href="#cmark"/></svg></div><div class="face back"><svg viewBox="0 0 1600 1600"><use href="#cmark"/></svg></div></div></div></div>
+      <div class="mini r"><div class="sc"><div class="coin3d"><div class="edge" style="transform:translateZ(-8.4px)"></div><div class="edge" style="transform:translateZ(-7.2px)"></div><div class="edge" style="transform:translateZ(-6.0px)"></div><div class="edge" style="transform:translateZ(-4.8px)"></div><div class="edge" style="transform:translateZ(-3.6px)"></div><div class="edge" style="transform:translateZ(-2.4px)"></div><div class="edge" style="transform:translateZ(-1.2px)"></div><div class="edge" style="transform:translateZ(0.0px)"></div><div class="edge" style="transform:translateZ(1.2px)"></div><div class="edge" style="transform:translateZ(2.4px)"></div><div class="edge" style="transform:translateZ(3.6px)"></div><div class="edge" style="transform:translateZ(4.8px)"></div><div class="edge" style="transform:translateZ(6.0px)"></div><div class="edge" style="transform:translateZ(7.2px)"></div><div class="edge" style="transform:translateZ(8.4px)"></div><div class="face front"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.8-6.3 3.8 1.7-7L2 9.2l7.1-.6z"/></svg></div><div class="face back"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.8-6.3 3.8 1.7-7L2 9.2l7.1-.6z"/></svg></div></div></div></div>
+      <div class="ped"><div class="base"></div><div class="top"><svg viewBox="0 0 1600 1600"><use href="#cmark"/></svg></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TABS ============ -->
+<div class="tabs tabs3 t1" id="tabs">
+  <button class="tab" data-t="about">О событии</button>
+  <button class="tab on" data-t="fut">Объём торгов на фьючерсах</button>
+  <button class="tab" data-t="new">🌟 Рейтинг новичков</button>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="ppane" id="about"><div class="wrap">
+  <div class="sec-card rv" style="margin-top:0"><h3>Расписание</h3><p class="sub">Регистрация открыта до конца турнира — но торговать нужно уже со старта.</p>
+    <div class="sched" id="sched"><!--S:sched--><div class="pr" style="width:calc((100% - 32%) * 0)"></div><div class="st on cur"><i>1</i><b>Зарегистрироваться</b><span>Открыто сейчас</span></div><div class="st  "><i>2</i><b>Начало события</b><span>01.11 00:00</span></div><div class="st  "><i>3</i><b>Конец события</b><span>10.11 23:59</span></div><!--E:sched--></div></div>
+  <div class="sec-card rv"><h3>Награды за объём торгов на фьючерсах</h3><p class="sub">Чем больше объём торгов, тем больше призовой фонд — до 2 500,00 USDT</p><button class="cta sm" style="margin-top:18px" id="toPool">Смотреть призовой фонд в реальном времени</button></div>
+  <div class="sec-card rv"><h3>Новички — награды за объём торгов на фьючерсах</h3><p class="sub">Топ-3 пользователей в рейтинге (объём торгов на фьючерсах) получат следующие награды</p>
+    <div class="podium">
+      <div class="pod p2"><div class="n">2</div><b data-count="40" data-suf=" USDT">40 USDT</b><span>TOP 2</span></div>
+      <div class="pod p1"><div class="n">1</div><b data-count="50" data-suf=" USDT">50 USDT</b><span>TOP 1</span></div>
+      <div class="pod p3"><div class="n">3</div><b data-count="20" data-suf=" USDT">20 USDT</b><span>TOP 3</span></div>
+    </div></div>
+</div></section>
+
+<!-- ============ FUTURES ============ -->
+<section class="ppane on" id="fut"><div class="wrap">
+  <div class="me rv" id="meFut"><!--S:meFut--><div><small>UID</small><b>--</b></div><div><small>Рейтинг</small><b>--</b></div><div><small>Объём торгов (USDT)</small><b>--</b></div><button class="act" data-a="login">Войти</button><div class="hint">Вы не вошли. Попадите в рейтинг, достигнув объёма в <em>10 000 USDT</em></div><!--E:meFut--></div>
+  <div class="b-head rv"><h3>Рейтинг объёма торгов на фьючерсах</h3><span class="live"><i></i>LIVE · демо-данные</span></div>
+  <p class="b-note rv">Статистика включает бессрочные фьючерсы USDⓈ-M и Coin-M. Отображение фактической прибыли зависит от колебаний цен на криптовалюты.</p>
+  <div class="board rv"><div class="brow h"><span>Рейтинг</span><span>Пользователь</span><span style="text-align:right" class="e">Ожид. награда (USDT)</span><span style="text-align:right">Объём торгов (USDT)</span></div>
+    <div id="boardFut"><!--S:boardFut--><div class="brow g1" data-k="fut" data-n="Alex_Trader" style="animation: auto ease 0s 1 normal none running none;"><span class="r"><span class="medalc">1</span></span><span class="u"><i>A</i><span style="overflow:hidden;text-overflow:ellipsis">Alex_Trader</span></span><span class="e">250,00</span><span class="v">691 108,34</span></div><div class="brow g2" data-k="fut" data-n="ch***7@icloud.com" style="animation: auto ease 0s 1 normal none running none;"><span class="r"><span class="medalc">2</span></span><span class="u"><i>C</i><span style="overflow:hidden;text-overflow:ellipsis">ch***7@icloud.com</span></span><span class="e">150,00</span><span class="v">624 949,08</span></div><div class="brow g3" data-k="fut" data-n="NightWolf" style="animation: auto ease 0s 1 normal none running none;"><span class="r"><span class="medalc">3</span></span><span class="u"><i>N</i><span style="overflow:hidden;text-overflow:ellipsis">NightWolf</span></span><span class="e">100,00</span><span class="v">331 944,04</span></div><div class="brow" data-k="fut" data-n="sa***1@gmail.com" style="animation: auto ease 0s 1 normal none running none;"><span class="r">4</span><span class="u"><i>S</i><span style="overflow:hidden;text-overflow:ellipsis">sa***1@gmail.com</span></span><span class="e">0,00</span><span class="v">263 795,53</span></div><div class="brow" data-k="fut" data-n="you vs you" style="animation: auto ease 0s 1 normal none running none;"><span class="r">5</span><span class="u"><i>Y</i><span style="overflow:hidden;text-overflow:ellipsis">you vs you</span></span><span class="e">0,00</span><span class="v">213 026,57</span></div><div class="brow" data-k="fut" data-n="*******321" style="animation: auto ease 0s 1 normal none running none;"><span class="r">6</span><span class="u"><i>U</i><span style="overflow:hidden;text-overflow:ellipsis">*******321</span></span><span class="e">0,00</span><span class="v">206 146,75</span></div><div class="brow" data-k="fut" data-n="vl***v@mail.ru" style="animation: auto ease 0s 1 normal none running none;"><span class="r">7</span><span class="u"><i>V</i><span style="overflow:hidden;text-overflow:ellipsis">vl***v@mail.ru</span></span><span class="e">0,00</span><span class="v">147 204,56</span></div><div class="brow" data-k="fut" data-n="CryptoBear" style="animation: auto ease 0s 1 normal none running none;"><span class="r">8</span><span class="u"><i>C</i><span style="overflow:hidden;text-overflow:ellipsis">CryptoBear</span></span><span class="e">0,00</span><span class="v">88 233,14</span></div><div class="brow" data-k="fut" data-n="hi***t@gmail.com" style="animation: auto ease 0s 1 normal none running none;"><span class="r">9</span><span class="u"><i>H</i><span style="overflow:hidden;text-overflow:ellipsis">hi***t@gmail.com</span></span><span class="e">0,00</span><span class="v">84 210,64</span></div><div class="brow" data-k="fut" data-n="1a***v@gmail.com" style="animation: auto ease 0s 1 normal none running none;"><span class="r">10</span><span class="u"><i>A</i><span style="overflow:hidden;text-overflow:ellipsis">1a***v@gmail.com</span></span><span class="e">0,00</span><span class="v">63 020,32</span></div><!--E:boardFut--></div><div class="pag" id="pagFut"><!--S:pagFut--><button data-p="1">‹</button><button class="on" data-p="1">1</button><button class="" data-p="2">2</button><button class="" data-p="3">3</button><button class="" data-p="4">4</button><button data-p="2">›</button><!--E:pagFut--></div></div>
+  <p class="disclaimer">Прошлые результаты не являются гарантией результатов в будущем. Пожалуйста, не доверяйте тем, кто предлагает управлять вашим аккаунтом или средствами.</p>
+
+  <div class="pool rv">
+    <h3>Награды за объём торгов на фьючерсах</h3><p class="sub">Чем больше объём торгов, тем больше призовой фонд — до 2 500,00 USDT</p>
+    <div class="pool-nums"><div class="pn big"><small>Текущий призовой фонд (USDT)</small><b id="poolNow">500,00</b></div><div class="pn"><small>Общий объём торгов (USDT)</small><b id="poolVol">19 820 000</b></div></div>
+    <div class="track" id="track"><!--S:track--><div class="fill" id="fill" style="width:71%"></div><div class="node on" data-i="0" style="left:25%"><span class="lv">1M</span><i></i><span class="rw">200 USDT</span></div><div class="node on" data-i="1" style="left:50%"><span class="lv">10M</span><i></i><span class="rw">500 USDT</span></div><div class="node" data-i="2" style="left:75%"><span class="lv">20M</span><i></i><span class="rw">1 000 USDT</span></div><div class="node" data-i="3" style="left:100%"><span class="lv">50M+</span><i></i><span class="rw">2 500 USDT</span></div><!--E:track--></div>
+    <div class="dist" id="dist"><!--S:dist--><div class="dcard g1"><div class="pc">50%</div><div class="t">TOP 1</div><b data-i="0">250,00</b><div class="bar2"><i data-w="50" style="width:50%"></i></div></div><div class="dcard"><div class="pc">30%</div><div class="t">TOP 2</div><b data-i="1">150,00</b><div class="bar2"><i data-w="30" style="width:30%"></i></div></div><div class="dcard"><div class="pc">20%</div><div class="t">TOP 3</div><b data-i="2">100,00</b><div class="bar2"><i data-w="20" style="width:20%"></i></div></div><!--E:dist--></div>
+  </div>
+</div></section>
+
+<!-- ============ NEWBIES ============ -->
+<section class="ppane" id="new"><div class="wrap">
+  <div class="me rv" id="meNew"><!--S:meNew--><div><small>UID</small><b>--</b></div><div><small>Рейтинг</small><b>--</b></div><div><small>Объём торгов (USDT)</small><b>--</b></div><button class="act" data-a="login">Войти</button><div class="hint">Вы не вошли. Попадите в рейтинг, достигнув объёма в <em>1 400 USDT</em></div><!--E:meNew--></div>
+  <div class="b-head rv"><h3>🌟 Рейтинг новичков на фьючерсах</h3><span class="live"><i></i>LIVE · демо-данные</span></div>
+  <p class="b-note rv">В рейтинг попадают пользователи, зарегистрировавшиеся на платформе в период турнира. Топ-3 получают награды.</p>
+  <div class="podium rv">
+    <div class="pod p2"><div class="n">2</div><b>40 USDT</b><span>TOP 2</span></div>
+    <div class="pod p1"><div class="n">1</div><b>50 USDT</b><span>TOP 1</span></div>
+    <div class="pod p3"><div class="n">3</div><b>20 USDT</b><span>TOP 3</span></div>
+  </div>
+  <div class="board rv"><div class="brow h"><span>Рейтинг</span><span>Пользователь</span><span style="text-align:right" class="e">Ожид. награда (USDT)</span><span style="text-align:right">Объём торгов (USDT)</span></div>
+    <div id="boardNew"><!--S:boardNew--><div class="brow g1" data-k="new" data-n="Gold_T100" style="animation-delay:0.035s"><span class="r"><span class="medalc">1</span></span><span class="u"><i>G</i><span style="overflow:hidden;text-overflow:ellipsis">Gold_T100</span></span><span class="e">50,00</span><span class="v">96 755,17</span></div><div class="brow g2" data-k="new" data-n="kr***9@yandex.ru" style="animation-delay:0.07s"><span class="r"><span class="medalc">2</span></span><span class="u"><i>K</i><span style="overflow:hidden;text-overflow:ellipsis">kr***9@yandex.ru</span></span><span class="e">40,00</span><span class="v">87 492,87</span></div><div class="brow g3" data-k="new" data-n="Akimoto777" style="animation-delay:0.10500000000000001s"><span class="r"><span class="medalc">3</span></span><span class="u"><i>A</i><span style="overflow:hidden;text-overflow:ellipsis">Akimoto777</span></span><span class="e">20,00</span><span class="v">46 472,17</span></div><div class="brow" data-k="new" data-n="manzyy" style="animation-delay:0.14s"><span class="r">4</span><span class="u"><i>M</i><span style="overflow:hidden;text-overflow:ellipsis">manzyy</span></span><span class="e">0,00</span><span class="v">36 931,37</span></div><div class="brow" data-k="new" data-n="DOOOLT" style="animation-delay:0.17500000000000002s"><span class="r">5</span><span class="u"><i>D</i><span style="overflow:hidden;text-overflow:ellipsis">DOOOLT</span></span><span class="e">0,00</span><span class="v">29 823,72</span></div><div class="brow" data-k="new" data-n="Mayu888" style="animation-delay:0.21000000000000002s"><span class="r">6</span><span class="u"><i>M</i><span style="overflow:hidden;text-overflow:ellipsis">Mayu888</span></span><span class="e">0,00</span><span class="v">28 860,55</span></div><div class="brow" data-k="new" data-n="pi***5@bk.ru" style="animation-delay:0.24500000000000002s"><span class="r">7</span><span class="u"><i>P</i><span style="overflow:hidden;text-overflow:ellipsis">pi***5@bk.ru</span></span><span class="e">0,00</span><span class="v">20 608,64</span></div><div class="brow" data-k="new" data-n="sparkyfarky" style="animation-delay:0.28s"><span class="r">8</span><span class="u"><i>S</i><span style="overflow:hidden;text-overflow:ellipsis">sparkyfarky</span></span><span class="e">0,00</span><span class="v">12 352,64</span></div><div class="brow" data-k="new" data-n="banhbo" style="animation-delay:0.31500000000000006s"><span class="r">9</span><span class="u"><i>B</i><span style="overflow:hidden;text-overflow:ellipsis">banhbo</span></span><span class="e">0,00</span><span class="v">11 789,49</span></div><div class="brow" data-k="new" data-n="Stana312" style="animation-delay:0s"><span class="r">10</span><span class="u"><i>S</i><span style="overflow:hidden;text-overflow:ellipsis">Stana312</span></span><span class="e">0,00</span><span class="v">8 822,84</span></div><!--E:boardNew--></div><div class="pag" id="pagNew"><!--S:pagNew--><button data-p="1">‹</button><button class="on" data-p="1">1</button><button class="" data-p="2">2</button><button class="" data-p="3">3</button><button class="" data-p="4">4</button><button data-p="2">›</button><!--E:pagNew--></div></div>
+</div></section>
+
+<!-- ============ RULES ============ -->
+<section class="rules" id="rules"><div class="wrap">
+  <h2 class="rv">Правила события</h2>
+  <ol id="rulesList"><!--S:rulesList--><li><span>Время начала турнира: 00:00 01.11.2026 (UTC+3). Время завершения турнира: 23:59 10.11.2026 (UTC+3).</span></li><li><span>Принять участие в турнире могут только пользователи с чистой суммой начальных активов (чистая стоимость активов) не менее 50 USDT. Вы можете принять участие, если это условие соблюдено.</span></li><li><span>Минимальная сумма торговли для попадания в список составляет 10000 USDT.</span></li><li><span>Во время акции новые зарегистрированные пользователи также могут разблокировать дополнительный рейтинг новых пользователей.</span></li><li><span>Акция представляет собой турнир, в котором победители определяются на основе объема сделок. В рамках конкурса учитывается торговля как стандартными, так и бессрочными фьючерсами.</span></li><li><span>Для Стандартных Фьючерсов учитывается торговля только для криптоактивов.</span></li><li><span>Призы будут выданы в соответствии с рейтингом, составленным после завершения турнира, в течение 72 часов с момента завершения турнира.</span></li><li><span>Участники, вовлеченные в незаконную деятельность, в том числе использующие несколько аккаунтов, подделывающие показатели объема торгов или заподозренные в вош-трейдинге, будут дисквалифицированы.</span></li><li><span>В статистику по данной акции включаются только позиции, открытые более чем на одну минуту.</span></li><li><span>CoinW оставляет за собой право на окончательное толкование данной акции.</span></li><!--E:rulesList--></ol>
+</div></section>
+
+<footer><div class="wrap">
+  © 2018-2026 CoinW. All rights reserved.
+  <h6>Предупреждение о риске</h6>
+  Криптовалюты и производные от них инструменты — это инновационные финансовые продукты с большой волатильностью и высокими инвестиционными рисками.<br>
+  CoinW стремится предоставлять пользователям простые в использовании торговые инструменты, однако сама торговля по-прежнему требует определенных навыков. Торговля цифровыми активами и их производными инструментами является высокорискованной деятельностью и может привести к частичной или полной потере средств. Вы должны тщательно оценить свое финансовое положение и вышеупомянутые риски перед тем как использовать услуги CoinW. Вы несете ответственность за возможные убытки. Если необходимо, пожалуйста, проконсультируйтесь с соответствующими специалистами, прежде чем инвестировать свои средства.<br><br>
+  Торговля путем следования или копирования сделок других трейдеров сопряжена с высоким уровнем риска, даже если вы следуете или копируете лучших трейдеров. Прошлые результаты членов сообщества CoinW не являются надежным показателем их будущих результатов. Контент на торговой платформе CoinW создается членами ее сообщества и не содержит советов или рекомендаций от имени CoinW.
+  <p class="demo-note">Прототип страницы. Рейтинги, объёмы и призовой фонд — демо-данные. <a href="#" id="resetDemo" style="color:#9a85ff">Сбросить демо-состояние</a></p>
+</div></footer>
+
+<button class="support" aria-label="Поддержка"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="12" width="4" height="6" rx="1.5"/><rect x="17" y="12" width="4" height="6" rx="1.5"/><path d="M19 18c0 2-3 3-6 3"/></svg></button>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ');
+const fmt2=n=>(Math.round(n*100)/100).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/ /g,' ');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- config ---------- */
+const PARTNER='Партнёр';
+const START_TS=Date.UTC(2026,9,31,21,0,0);   // 00:00 01.11.2026 UTC+3
+const END_TS=Date.UTC(2026,10,10,20,59,0);   // 23:59 10.11.2026 UTC+3
+const TIERS=[[1e6,200,'1M'],[1e7,500,'10M'],[2e7,1000,'20M'],[5e7,2500,'50M+']];
+const SPLIT=[['TOP 1',.5],['TOP 2',.3],['TOP 3',.2]];
+const NEW_PRIZE=[50,40,20];
+const MIN_VOL=10000;
+const RULES=[
+ 'Время начала турнира: 00:00 01.11.2026 (UTC+3). Время завершения турнира: 23:59 10.11.2026 (UTC+3).',
+ 'Принять участие в турнире могут только пользователи с чистой суммой начальных активов (чистая стоимость активов) не менее 50 USDT. Вы можете принять участие, если это условие соблюдено.',
+ 'Минимальная сумма торговли для попадания в список составляет 10000 USDT.',
+ 'Во время акции новые зарегистрированные пользователи также могут разблокировать дополнительный рейтинг новых пользователей.',
+ 'Акция представляет собой турнир, в котором победители определяются на основе объема сделок. В рамках конкурса учитывается торговля как стандартными, так и бессрочными фьючерсами.',
+ 'Для Стандартных Фьючерсов учитывается торговля только для криптоактивов.',
+ 'Призы будут выданы в соответствии с рейтингом, составленным после завершения турнира, в течение 72 часов с момента завершения турнира.',
+ 'Участники, вовлеченные в незаконную деятельность, в том числе использующие несколько аккаунтов, подделывающие показатели объема торгов или заподозренные в вош-трейдинге, будут дисквалифицированы.',
+ 'В статистику по данной акции включаются только позиции, открытые более чем на одну минуту.',
+ 'CoinW оставляет за собой право на окончательное толкование данной акции.'
+];
+const NAMES=['Alex_Trader','ch***7@icloud.com','NightWolf','sa***1@gmail.com','you vs you','*******321','vl***v@mail.ru','CryptoBear','hi***t@gmail.com','1a***v@gmail.com','winterforever','Gold_T100','kr***9@yandex.ru','Akimoto777','manzyy','DOOOLT','Mayu888','pi***5@bk.ru','sparkyfarky','banhbo','Stana312','T2P newbie','Monster..','gaa88','dy***6@gmail.com','*******217','in***5@gmail.com','an***0@gmail.com','de***8@gmail.com','fi***i@gmail.com','b3***7@gmail.com','ki***1@gmail.com','ba***r@gmail.com','ed***o@gmail.com','Wo***7@gmail.com','26***3@gmail.com','ma***o@gmail.com','sa***h@yandex.ru','p3***3@naver.com','BharatGohil'];
+
+/* ---------- state ---------- */
+const KEY='cw_partner_demo_v1';let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S)S={logged:false,reg:false,vol:0};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ---------- helpers: toast / modal / confetti ---------- */
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),3200)}
+function modal(h){$('#modal').innerHTML='<button class="x" onclick="closeModal()">×</button>'+h;$('#modalBg').classList.add('on')}
+function closeModal(){$('#modalBg').classList.remove('on')}
+$('#modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal()});
+function confetti(){const c=['#9d85ff','#c24bff','#5227FE','#27d8ff','#fff'];for(let i=0;i<70;i++){const e=document.createElement('i');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=c[i%5];e.style.animationDuration=(1.8+Math.random()*2)+'s';e.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),4500)}}
+
+/* ---------- demo data ---------- */
+function mulberry(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rnd=mulberry(20261101);
+const TOP10=[691108.34,624949.08,331944.04,263795.53,213026.57,206146.75,147204.56,88233.14,84210.64,63020.32];
+function mkRows(scale,off){const r=[];for(let i=0;i<40;i++){const v=i<10?TOP10[i]*scale:TOP10[9]*scale*Math.pow(.955,i-9)*(.97+rnd()*.06);r.push({n:NAMES[(i+off)%NAMES.length],v:Math.max(v,MIN_VOL*scale*.9)})}return r}
+const ROWS={fut:mkRows(1,0),new:mkRows(.14,11)};
+const PAGE={fut:1,new:1};
+let totalVol=19.82e6;
+const myRank=(k)=>{if(!S.reg||S.vol<MIN_VOL*(k==='new'?.14:1))return 0;const sorted=[...ROWS[k].map(r=>r.v),S.vol].sort((a,b)=>b-a);return sorted.indexOf(S.vol)+1};
+const poolAmt=()=>{let a=0;TIERS.forEach(([lim,r])=>{if(totalVol>=lim)a=r});return a};
+
+/* ---------- countdown ---------- */
+function tick(){
+  const now=Date.now(),pre=now<START_TS,over=now>END_TS;const d=Math.max(0,(pre?START_TS:END_TS)-now);
+  const D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60,Sx=Math.floor(d/1e3)%60;
+  const cd=$('#cd');if(!cd.querySelector('.cdt'))cd.innerHTML=['дней','часов','минут','секунд'].map(l=>`<div class="cdt"><b>0</b><small>${l}</small></div>`).join('');
+  [D,H,M,Sx].forEach((v,i)=>{const b=cd.children[i].querySelector('b');const t=i?String(v).padStart(2,'0'):String(v);if(b.textContent!==t){b.textContent=t;const p=b.parentNode;p.classList.remove('tick');void p.offsetWidth;p.classList.add('tick')}});
+  $('#cdLabel').textContent=over?'ТУРНИР ЗАВЕРШЁН':pre?'ДО НАЧАЛА ТУРНИРА':'ДО ОКОНЧАНИЯ ТУРНИРА';
+  renderSched(true);
+}
+setInterval(tick,1000);
+
+/* ---------- schedule ---------- */
+function renderSched(soft){
+  const now=Date.now(),a=S.reg,b=now>=START_TS,c=now>END_TS;
+  const cur=c?2:b?1:a?0:0;
+  const steps=[['1','Зарегистрироваться','Открыто сейчас',true],['2','Начало события','01.11 00:00',b],['3','Конец события','10.11 23:59',c]];
+  const pr=c?100:b?50+Math.min(50,(now-START_TS)/(END_TS-START_TS)*50):a?18:0;
+  const el=$('#sched');
+  if(soft&&el.children.length){[...el.querySelectorAll('.st')].forEach((s,i)=>{s.classList.toggle('on',steps[i][3]);s.classList.toggle('cur',i===(c?2:b?1:0))});el.querySelector('.pr').style.width=`calc((100% - 32%) * ${pr/100})`;return}
+  el.innerHTML=`<div class="pr" style="width:calc((100% - 32%) * ${pr/100})"></div>`+steps.map((s,i)=>`<div class="st ${s[3]?'on':''} ${i===(c?2:b?1:0)?'cur':''}"><i>${s[0]}</i><b>${s[1]}</b><span>${s[2]}</span></div>`).join('');
+}
+
+/* ---------- boards ---------- */
+function rowHtml(k,i,r,me){const rank=i;const g=rank<=3?` g${rank}`:'';
+  const reward=k==='fut'?(rank<=3?poolAmt()*SPLIT[rank-1][1]:0):(rank<=3?NEW_PRIZE[rank-1]:0);
+  const mark=rank<=3?`<span class="medalc">${rank}</span>`:rank;
+  const nm=me?'Вы (демо)':r.n;
+  return `<div class="brow${g}${me?' me-row':''}" data-k="${k}" data-n="${nm}" style="animation-delay:${(i%10)*.035}s"><span class="r">${mark}</span><span class="u"><i>${nm.replace(/[^A-Za-zА-Яа-я]/g,'').charAt(0).toUpperCase()||'U'}</i><span style="overflow:hidden;text-overflow:ellipsis">${nm}</span></span><span class="e">${fmt2(reward)}</span><span class="v">${fmt2(r.v)}</span></div>`}
+function renderBoard(k){
+  const rows=[...ROWS[k]].sort((a,b)=>b.v-a.v);
+  const mr=myRank(k);let list=rows.map(r=>({...r}));
+  if(mr&&mr<=rows.length+1)list.splice(mr-1,0,{n:'me',v:S.vol,me:1});
+  list=list.slice(0,40);
+  const p=PAGE[k],per=10,pages=Math.ceil(list.length/per);
+  $('#board'+(k==='fut'?'Fut':'New')).innerHTML=list.slice((p-1)*per,p*per).map((r,i)=>rowHtml(k,(p-1)*per+i+1,r,r.me)).join('');
+  $('#pag'+(k==='fut'?'Fut':'New')).innerHTML=`<button data-p="${Math.max(1,p-1)}">‹</button>`+Array.from({length:pages},(_,i)=>`<button class="${i+1===p?'on':''}" data-p="${i+1}">${i+1}</button>`).join('')+`<button data-p="${Math.min(pages,p+1)}">›</button>`;
+}
+['Fut','New'].forEach(K=>$('#pag'+K).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const k=K.toLowerCase();PAGE[k]=+b.dataset.p;renderBoard(k)}));
+function renderMe(k){
+  const el=$('#me'+(k==='fut'?'Fut':'New')),min=k==='new'?MIN_VOL*.14:MIN_VOL;
+  if(!S.logged){el.innerHTML=`<div><small>UID</small><b>--</b></div><div><small>Рейтинг</small><b>--</b></div><div><small>Объём торгов (USDT)</small><b>--</b></div><button class="act" data-a="login">Войти</button><div class="hint">Вы не вошли. Попадите в рейтинг, достигнув объёма в <em>${fmt(min)} USDT</em></div>`;return}
+  const r=myRank(k);
+  el.innerHTML=`<div><small>UID</small><b>90417${k==='new'?'28':'35'}</b></div><div><small>Рейтинг</small><b id="myr${k}">${r||'--'}</b></div><div><small>Объём торгов (USDT)</small><b>${fmt2(S.vol)}</b></div><button class="act" data-a="trade">${S.reg?'Торговать (демо) +2 500':'Участвовать'}</button><div class="hint">${r?`Вы на <em>${r}</em> месте${r<=3?' — вы в призовой тройке! 🏆':''}`:`Попадите в рейтинг, достигнув объёма в <em>${fmt(min)} USDT</em>. Осталось <em>${fmt(Math.max(0,min-S.vol))} USDT</em>`}</div>`;
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;if(b.dataset.a==='login')login();if(b.dataset.a==='trade'){if(!S.reg)return register();trade(2500)}});
+function trade(n){const before=[myRank('fut'),myRank('new')];S.vol+=n;save();['fut','new'].forEach(k=>{renderMe(k);renderBoard(k)});toast(`Демо: засчитан объём ${fmt(n)} USDT`);
+  const after=myRank('fut');if(after&&(!before[0]||after<before[0])){const e=$('#myrfut');e&&e.classList.add('rk-up');if(after<=3){confetti()}}}
+
+/* ---------- pool ---------- */
+function buildTrack(){
+  const t=$('#track');
+  t.innerHTML='<div class="fill" id="fill" style="width:71%"></div>'+TIERS.map(([lim,r,l],i)=>`<div class="node" data-i="${i}" style="left:${(i+1)/4*100-0}%"><span class="lv">${l}</span><i></i><span class="rw">${fmt(r)} USDT</span></div>`).join('');
+  $('#dist').innerHTML=SPLIT.map(([t,p],i)=>`<div class="dcard${i?'':' g1'}"><div class="pc">${p*100}%</div><div class="t">${t}</div><b data-i="${i}">0,00</b><div class="bar2"><i data-w="${p*100}"></i></div></div>`).join('');
+}
+function fillPct(v){let pct=0,prev=0;const stops=[0,...TIERS.map(t=>t[0])];for(let i=1;i<stops.length;i++){if(v>=stops[i])pct=i/4*100;else{pct=((i-1)+(v-stops[i-1])/(stops[i]-stops[i-1]))/4*100;break}}return Math.min(100,pct)}
+let lastPool=-1,poolShown=0;
+function updatePool(initial){
+  const pool=poolAmt();
+  $('#poolVol').textContent=fmt(totalVol);
+  const f=$('#fill');if(f)f.style.width=fillPct(totalVol)*0.96+'%';
+  $$('.node').forEach((n,i)=>{const on=totalVol>=TIERS[i][0];if(on&&!n.classList.contains('on')&&!initial){n.classList.add('pop');confetti();toast(`Новый уровень! Призовой фонд — ${fmt(TIERS[i][1])} USDT`)}n.classList.toggle('on',on)});
+  if(pool!==lastPool){const from=poolShown;lastPool=pool;const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1200),e=1-Math.pow(1-p,4);poolShown=from+(pool-from)*e;$('#poolNow').textContent=fmt2(poolShown);$$('.dcard b').forEach((b,i)=>b.textContent=fmt2(poolShown*SPLIT[i][1]));if(p<1)requestAnimationFrame(f)})(t0)}
+  $$('.dcard .bar2 i').forEach(b=>b.style.width=(pool?b.dataset.w:0)+'%');
+}
+/* live simulation */
+setInterval(()=>{
+  if(document.hidden)return;
+  totalVol+=2000+Math.random()*9000;
+  ['fut','new'].forEach(k=>{const n=1+Math.floor(Math.random()*3);for(let j=0;j<n;j++){const r=ROWS[k][Math.floor(Math.random()*ROWS[k].length)];r.v+=(120+Math.random()*3800)*(k==='new'?.2:1)}});
+  updatePool();
+  const k=$('#fut').classList.contains('on')?'fut':$('#new').classList.contains('on')?'new':null;
+  if(k){const prev=[...$$('#board'+(k==='fut'?'Fut':'New')+' .brow .v')].map(e=>e.textContent);renderBoard(k);$$('#board'+(k==='fut'?'Fut':'New')+' .brow').forEach((row,i)=>{row.style.animation='none';if(prev[i]!==row.querySelector('.v').textContent)row.classList.add('flash')});}
+},3000);
+
+/* ---------- auth / actions ---------- */
+function login(){modal(`<h3>Вход в CoinW</h3><p>Это демо-страница: данные не вводятся и никуда не отправляются.</p><button class="act" id="mLogin">Продолжить как демо-пользователь</button>`);$('#mLogin').onclick=()=>{S.logged=true;save();closeModal();upd();toast('Вы вошли в демо-аккаунт')}}
+function register(){if(!S.logged)return login();if(S.reg)return toast('Вы уже участвуете в турнире');S.reg=true;save();upd();confetti();
+  modal(`<h3>Вы в турнире! 🏆</h3><p>Регистрация прошла успешно. Торгуйте на фьючерсах от <b style="color:#cbbaff">${fmt(MIN_VOL)} USDT</b>, чтобы попасть в рейтинг, и боритесь за призовой фонд вместе с <b>${PARTNER}</b>.</p><button class="act" onclick="closeModal()">Отлично</button>`)}
+function upd(){$('#heroRegTxt').textContent=S.reg?'Вы участвуете ✓':'Зарегистрироваться';$('#hdrUser').textContent=S.logged?'demo_user':'Войти';$('#hdrReg').style.display=S.logged?'none':'';['fut','new'].forEach(k=>{renderMe(k);renderBoard(k)});renderSched()}
+$('#heroReg').onclick=register;$('#hdrReg').onclick=login;$('#hdrUser').onclick=()=>{if(!S.logged)login()};
+$('#shareBtn').onclick=()=>{try{navigator.clipboard.writeText('https://www.coinw.com/tournament?ref=DEMO')}catch(e){}toast('Ссылка на турнир скопирована')};
+$('#resetDemo').onclick=e=>{e.preventDefault();try{localStorage.removeItem(KEY)}catch(x){};location.reload()};
+
+/* ---------- tabs ---------- */
+const TI={about:0,fut:1,new:2};
+$$('.tab').forEach(t=>t.onclick=()=>{const id=t.dataset.t;$$('.tab').forEach(x=>x.classList.toggle('on',x===t));$$('.ppane').forEach(p=>p.classList.toggle('on',p.id===id));const tb=$('#tabs');tb.classList.remove('t0','t1','t2');tb.classList.add('t'+TI[id]);
+  $$('#'+id+' .rv').forEach(el=>io.observe(el));if(id==='fut')updatePool(true);if(id==='about')$$('.pod b[data-count]').forEach(el=>cu(el,+el.dataset.count,1200,'',el.dataset.suf||''));
+  window.scrollTo({top:$('#tabs').offsetTop-70,behavior:'smooth'})});
+
+/* ---------- count-up, effects ---------- */
+function cu(el,to,ms=1600,pre='',suf=''){const t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/ms),e=1-Math.pow(1-p,4);el.textContent=pre+fmt(to*e)+suf;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target;cu(el,+el.dataset.count,1600,el.dataset.pre||'',el.dataset.suf||'');sio.unobserve(el)}}),{threshold:.5});
+$$('.hero-facts [data-count]').forEach(el=>sio.observe(el));
+function edges(c,step=2,n=7){for(let i=-n;i<=n;i++){const e=document.createElement('div');e.className='edge';e.style.transform=`translateZ(${i*step}px)`;c.insertBefore(e,c.firstChild)}}
+(function(){if(reduce)return;const h=$('#hero'),du=$('#duel');h.addEventListener('mousemove',e=>{const r=h.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;du.style.transform=`rotateY(${x*10}deg) rotateX(${-y*6}deg)`});h.addEventListener('mouseleave',()=>du.style.transform='')})();
+(function(){if(reduce)return;const cv=$('#fx'),h=$('#hero'),x=cv.getContext('2d');let W,H,P=[],mx=-999,my=-999;
+ function size(){W=cv.width=h.clientWidth;H=cv.height=h.clientHeight}size();addEventListener('resize',size);
+ h.addEventListener('mousemove',e=>{const r=h.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+ const cols=['184,168,255','255,255,255','194,75,255','39,216,255','124,92,255'];
+ for(let i=0;i<90;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:.6+Math.random()*2.2,v:.15+Math.random()*.6,c:cols[i%5],a:.2+Math.random()*.6,ph:Math.random()*6});
+ (function loop(t){x.clearRect(0,0,W,H);for(const p of P){p.y-=p.v;p.x+=Math.sin(t/1400+p.ph)*.25;const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d<110){p.x+=dx/d*2.2;p.y+=dy/d*2.2}
+  if(p.y<-8){p.y=H+8;p.x=Math.random()*W}x.beginPath();x.fillStyle=`rgba(${p.c},${p.a*(.6+.4*Math.sin(t/700+p.ph))})`;x.shadowColor=`rgb(${p.c})`;x.shadowBlur=10;x.arc(p.x,p.y,p.r,0,7);x.fill()}
+  requestAnimationFrame(loop)})(0)})();
+$$('.cta').forEach(b=>{if(reduce)return;b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.translate=`${(e.clientX-r.left-r.width/2)*.08}px ${(e.clientY-r.top-r.height/2)*.18}px`});b.addEventListener('mouseleave',()=>b.style.translate='')});
+
+$('#toPool').onclick=()=>{$('.tab[data-t=fut]').click();setTimeout(()=>$('.pool').scrollIntoView({behavior:'smooth',block:'center'}),450)};
+/* ---------- init ---------- */
+$('#rulesList').innerHTML=RULES.map(r=>`<li><span>${r}</span></li>`).join('');
+$$('.rv').forEach(el=>io.observe(el));
+buildTrack();renderSched();upd();tick();updatePool(true);
+</script>
+
+</body>
+</html>
